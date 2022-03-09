@@ -1,0 +1,39 @@
+.new-arrivals-section{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+.card{
+    max-width: 50rem;
+}
+.card-hover{
+    cursor: pointer;
+    transition: 0.3s;
+}
+.card-hover:hover{
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+.card-new-arrival{
+    cursor: pointer;
+    transition: 0.3s;
+    margin: 1rem 1rem;
+}
+.card-new-arrival .text-overlay{
+    background-color: rgba(33,37,41,0.2);
+}
+.card-only-image {
+    max-width: 600px;
+    height: fit-content;
+}
+.text-overlay-text-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 80%;
+    height: 50%;
+    background-color: white;
+}
+.card-new-arrival:hover{
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
