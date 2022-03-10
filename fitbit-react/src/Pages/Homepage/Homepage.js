@@ -1,9 +1,6 @@
 import React from "react";
-import Footer from "../../Components/Footer/Footer";
-import Navbar from "../../Components/Navbar/Navbar";
-import HeroSection from "./HeroSection/HeroSection";
-import NewArrivalsSection from "./NewArrivals/NewArrivalsSection";
-import "./homepage.css";
+import { Navbar, Footer } from "./index";
+
 function Homepage() {
   return (
     <div>

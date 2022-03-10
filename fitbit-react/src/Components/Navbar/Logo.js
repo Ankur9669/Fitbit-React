@@ -4,7 +4,7 @@ function Logo() {
   return (
     <div className="logo-container" aria-label="fitbit-logo">
       <div className="logo">
-        <img className="logo-image" alt="logo-image" src="images/neatUI.svg" />
+        <img className="logo-image" alt="logo" src="images/neatUI.svg" />
         <span className="logo-text">FiT</span>
         BiT
       </div>
