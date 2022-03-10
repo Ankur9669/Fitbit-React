@@ -1,10 +1,6 @@
 import React from "react";
-import { BsFillHeartFill } from "react-icons/bs";
-import { AiOutlineHeart } from "react-icons/ai";
-import { AiFillHeart } from "react-icons/ai";
-import { FaShoppingCart } from "react-icons/fa";
+import { AiOutlineHeart, FaShoppingCart, FaUser } from "../../Assets/icons";
 
-import { FaUser } from "react-icons/fa";
 function NavbarIcons() {
   return (
     <div className="navbar-icons-container">

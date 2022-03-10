@@ -1,8 +1,6 @@
 import React from "react";
 import "./footer.css";
-import { BsGithub } from "react-icons/bs";
-import { BsLinkedin } from "react-icons/bs";
-import { BsTwitter } from "react-icons/bs";
+import { BsGithub, BsLinkedin, BsTwitter } from "../../Assets/icons";
 
 function Footer() {
   return (

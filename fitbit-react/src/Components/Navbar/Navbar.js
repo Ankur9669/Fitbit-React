@@ -1,10 +1,6 @@
 import React from "react";
-import { GrMenu } from "react-icons/gr";
 import "./navbar.css";
-import SearchBar from "./SearchBar";
-import PrimaryButton from "../Buttons/PrimaryButton";
-import Logo from "./Logo";
-import NavbarIcons from "./NavbarIcons";
+import { SearchBar, PrimaryButton, Logo, NavbarIcons, GrMenu } from "./index";
 
 function Navbar() {
   return (
