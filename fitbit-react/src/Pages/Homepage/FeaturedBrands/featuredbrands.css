@@ -1,0 +1,10 @@
+.featured-brands-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+.featured-brands-container img{
+    width: 18.75rem;
+    height: 11.25rem;
+    object-fit: cover;
+}
