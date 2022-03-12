@@ -3,9 +3,9 @@ import "./featuredbrands.css";
 function FeaturedBrands() {
   return (
     <div>
-      <h2 class="h3 centered-text home-section-heading">Featured Brands</h2>
-      <div class="spacer-3"></div>
-      <section class="home-section-width featured-brands-container">
+      <h2 className="h3 centered-text home-section-heading">Featured Brands</h2>
+      <div className="spacer-3"></div>
+      <section className="home-section-width featured-brands-container">
         <img
           alt="helsinki"
           src="https://cdn.shopify.com/s/files/1/0068/8481/9003/files/abo-02.png?v=1635838337"
