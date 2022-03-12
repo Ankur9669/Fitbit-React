@@ -22,3 +22,14 @@ ul{
     margin: 0px;
     padding: 0px;
 }
+.inline{
+    display: inline;
+}
+.inline-block{
+    display: inline-block;
+}
+.flex-center-horizontal-vertical{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
