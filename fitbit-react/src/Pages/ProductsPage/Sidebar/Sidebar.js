@@ -162,6 +162,38 @@ function Sidebar() {
             </li>
           </ul>
         </div>
+        {/* Ratings Filter End  */}
+        <div className="filter-type" aria-label="filter-type">
+          <p className="weight-semi-bold font-medium">Others</p>
+          <div className="margin-vertical-lg"></div>
+          <ul className="list-style-none filter-list">
+            <li className="sidebar-filter-item">
+              <input
+                type="checkbox"
+                name="include-out-of-stock"
+                id="include-out-of-stock"
+                className="sidebar-filter-input"
+              />
+              <label
+                htmlFor="include-out-of-stock"
+                className="sidebar-filter-label"
+              >
+                Include Out Of Stock
+              </label>
+            </li>
+            <li className="sidebar-filter-item">
+              <input
+                type="checkbox"
+                name="fast-delivery"
+                id="fast-delivery"
+                className="sidebar-filter-input"
+              />
+              <label htmlFor="fast-delivery" className="sidebar-filter-label">
+                Fast Delivery
+              </label>
+            </li>
+          </ul>
+        </div>
       </div>
     </aside>
   );
