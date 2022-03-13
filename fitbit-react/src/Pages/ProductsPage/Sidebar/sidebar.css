@@ -1,0 +1,37 @@
+.sidebar{
+    position: absolute;
+    top: 0px;
+    height: 100%;
+}
+.sidebar-filter-label{
+    margin-left: 6px;
+}
+.filters{
+    color: var(--color-white);
+    margin: 2.5rem 1rem 0rem 1rem;
+}
+.filter-type{
+    border-bottom: 1px solid var(--color-white);
+    margin-bottom: 1rem;
+}
+.filter-list li{
+    margin: 0.5rem 0rem;
+}
+.filter-heading{
+    display: flex;
+    justify-content: space-between;
+}
+.filter-heading span{
+    cursor: pointer;
+}
+.filter-heading span:hover{
+    font-weight: 500;
+}
+.sidebar-filter-item{
+    display: flex;
+    align-items: center;
+}
+.sidebar-filter-input{
+    width: 1.1rem;
+    height: 1.1rem;
+}
