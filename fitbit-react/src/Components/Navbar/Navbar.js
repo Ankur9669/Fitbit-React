@@ -1,7 +1,7 @@
 import React from "react";
 import "./navbar.css";
 import { SearchBar, PrimaryButton, Logo, NavbarIcons, GrMenu } from "./index";
-
+import { Link } from "react-router-dom";
 function Navbar() {
   return (
     <nav className="navbar">
