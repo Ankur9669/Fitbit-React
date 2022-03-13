@@ -5,6 +5,7 @@ import { GrMenu } from "react-icons/gr";
 import { BsGithub, BsLinkedin, BsTwitter } from "react-icons/bs";
 import { MdAddShoppingCart } from "react-icons/md";
 
+
 export {
   AiOutlineHeart,
   FaShoppingCart,
@@ -14,4 +15,6 @@ export {
   BsLinkedin,
   BsTwitter,
   MdAddShoppingCart,
+  BsFillHeartFill,
+
 };
