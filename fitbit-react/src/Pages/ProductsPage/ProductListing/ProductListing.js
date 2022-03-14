@@ -16,6 +16,7 @@ function ProductListing() {
         }) => (
           <VerticalCard
             key={productId}
+            productId={productId}
             productTitle={productTitle}
             discountedPrice={discountedPrice}
             realPrice={realPrice}

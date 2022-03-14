@@ -1,19 +1,42 @@
 import React from "react";
+import { useCart } from "../../Context/cart-context";
 import "./verticalcard.css";
 import { MdAddShoppingCart } from "../../Assets/icons";
 import { PrimaryButton } from "../Navbar";
 import SecondaryButton from "../Buttons/SecondaryButton";
-// productTitle={productTitle}
-//             discountedPrice={discountedPrice}
-//             realPrice={realPrice}
-//             discountPercent={discountPercent}
+import { useReducer } from "react";
 function VerticalCard({
+  productId,
   productTitle,
   discountedPrice,
   realPrice,
   discountPercent,
   productImageUrl,
 }) {
+  const { cartReducer } = useCart();
+
+  const [cart, dispatch] = useReducer(cartReducer, []);
+  const addToCart = () => {
+    dispatch({
+      type: "ADD_TO_CART",
+      payload: {
+        productId: productId,
+        productTitle: productTitle,
+        discountedPrice: discountedPrice,
+        realPrice: realPrice,
+        discountPercent: discountPercent,
+        productImageUrl: productImageUrl,
+      },
+    });
+  };
+  const removefromCart = () => {
+    dispatch({
+      type: "REMOVE_FROM_CART",
+      payload: {
+        productId: productId,
+      },
+    });
+  };
   return (
     <a className="card card-vertical card-hover">
       <div className="image-container">
@@ -54,7 +77,7 @@ function VerticalCard({
               />
             }
           />
-          <SecondaryButton buttonText={"Add to cart"} />
+          <SecondaryButton buttonText={"Add to cart"} onClick={addToCart} />
         </div>
       </div>
     </a>
