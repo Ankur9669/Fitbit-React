@@ -1,5 +1,6 @@
 import React from "react";
 import "./herosection.css";
+import { Link } from "react-router-dom";
 function HeroSection() {
   return (
     <section className="hero-section">
@@ -15,7 +16,9 @@ function HeroSection() {
         <h1 className="h1 weight-semi-bold primary-text-color margin-vertical-xs">
           Fitness Club
         </h1>
-        <button className="button button-primary shop-btn">Shop now</button>
+        <Link to="/products" className="button button-primary shop-btn">
+          Shop now
+        </Link>
       </div>
     </section>
   );

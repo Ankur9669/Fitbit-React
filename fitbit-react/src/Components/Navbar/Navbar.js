@@ -8,7 +8,10 @@ function Navbar() {
       <div aria-label="menu-icon">
         <GrMenu className="hamburger-icon" />
       </div>
-      <Logo />
+      <Link to="/">
+        <Logo />
+      </Link>
+
       <div className="nav-items-container-end">
         <div className="login-search-bar-container">
           <PrimaryButton buttonText={"Login"} />
