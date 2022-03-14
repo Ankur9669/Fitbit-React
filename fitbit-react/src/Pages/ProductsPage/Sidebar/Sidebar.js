@@ -1,6 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import "./sidebar.css";
+import { productReducer } from "../../../Reducers/products-reducer";
+import { useProduct } from "../../../Context/products-context";
+import { products } from "../../../Temp/products";
+import { useFilter } from "../../../Context/filter-context";
 function Sidebar() {
+  const { filters, dispatch } = useFilter();
   return (
     <aside className="sidebar">
       <div className="filters">
@@ -20,6 +25,10 @@ function Sidebar() {
                 value="price-low-to-high"
                 id="price-low-to-high"
                 className="sidebar-filter-input"
+                checked={filters.sortBy === "lowToHigh"}
+                onClick={() =>
+                  dispatch({ type: "SORT_BY", payload: { value: "lowToHigh" } })
+                }
               />
               <label
                 htmlFor="price-low-to-high"
@@ -35,6 +44,10 @@ function Sidebar() {
                 value="price-high-to-low"
                 id="price-high-to-low"
                 className="sidebar-filter-input"
+                checked={filters.sortBy === "highToLow"}
+                onClick={() =>
+                  dispatch({ type: "SORT_BY", payload: { value: "highToLow" } })
+                }
               />
               <label
                 htmlFor="price-high-to-low"
@@ -55,23 +68,37 @@ function Sidebar() {
             <li className="sidebar-filter-item">
               <input
                 type="checkbox"
-                name="shoes"
-                id="shoes"
+                name="equipment"
+                id="equipment"
                 className="sidebar-filter-input"
+                checked={filters.categories.equipments}
+                onChange={(e) =>
+                  dispatch({
+                    type: "FILTER_BY",
+                    payload: { value: e.target.checked, key: "equipments" },
+                  })
+                }
               />
-              <label htmlFor="shoes" className="sidebar-filter-label">
-                Shoes
+              <label htmlFor="equipment" className="sidebar-filter-label">
+                Equipments
               </label>
             </li>
             <li className="sidebar-filter-item">
               <input
                 type="checkbox"
-                name="bags"
-                id="bags"
+                name="clothes"
+                id="clothes"
                 className="sidebar-filter-input"
+                checked={filters.categories.clothes}
+                onChange={(e) =>
+                  dispatch({
+                    type: "FILTER_BY",
+                    payload: { value: e.target.checked, key: "clothes" },
+                  })
+                }
               />
-              <label htmlFor="bags" className="sidebar-filter-label">
-                Bags
+              <label htmlFor="clothes" className="sidebar-filter-label">
+                Clothes
               </label>
             </li>
             <li className="sidebar-filter-item">
@@ -80,6 +107,13 @@ function Sidebar() {
                 name="hand-gloves"
                 id="hand-gloves"
                 className="sidebar-filter-input"
+                checked={filters.categories.handGloves}
+                onChange={(e) =>
+                  dispatch({
+                    type: "FILTER_BY",
+                    payload: { value: e.target.checked, key: "handGloves" },
+                  })
+                }
               />
               <label htmlFor="hand-gloves" className="sidebar-filter-label">
                 Hand Gloves
@@ -91,6 +125,13 @@ function Sidebar() {
                 name="dumbells"
                 id="dumbells"
                 className="sidebar-filter-input"
+                checked={filters.categories.dumbells}
+                onChange={(e) =>
+                  dispatch({
+                    type: "FILTER_BY",
+                    payload: { value: e.target.checked, key: "dumbells" },
+                  })
+                }
               />
               <label htmlFor="dumbells" className="sidebar-filter-label">
                 Dumbells
