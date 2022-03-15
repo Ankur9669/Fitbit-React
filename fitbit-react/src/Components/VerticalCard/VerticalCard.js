@@ -2,6 +2,7 @@ import React from "react";
 import "./verticalcard.css";
 import {
   MdAddShoppingCart,
+  AiFillHeart,
   PrimaryButton,
   SecondaryButton,
   useReducer,
@@ -10,16 +11,18 @@ import {
 } from "./index";
 
 function VerticalCard({
-  productId,
-  productTitle,
-  discountedPrice,
-  realPrice,
-  discountPercent,
-  productImageUrl,
-  category,
-  inStock,
-  fastDelivery,
-  rating,
+  product: {
+    productId,
+    productTitle,
+    discountedPrice,
+    realPrice,
+    discountPercent,
+    productImageUrl,
+    category,
+    inStock,
+    fastDelivery,
+    rating,
+  },
 }) {
   const { cartReducer } = useCart();
 
@@ -59,10 +62,7 @@ function VerticalCard({
         <div className="text-container">
           <h5 className="font-medium-large weight-semi-bold primary-text-color card-vertical-heading">
             {productTitle}
-            <i
-              className="fa fa-heart card-vertical-like-icon"
-              aria-hidden="true"
-            ></i>
+            <AiFillHeart style={{ fontSize: "1.7rem" }} />
           </h5>
           <div className="price-container">
             <p className="font-medium inline-block weight-semi-bold primary-text-color">

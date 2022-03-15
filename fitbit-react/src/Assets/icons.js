@@ -1,4 +1,9 @@
-import { AiOutlineHeart, AiFillStar, AiFillMinusCircle } from "react-icons/ai";
+import {
+  AiOutlineHeart,
+  AiFillStar,
+  AiFillMinusCircle,
+  AiFillHeart,
+} from "react-icons/ai";
 import { FaShoppingCart } from "react-icons/fa";
 import { FaUser } from "react-icons/fa";
 import { GrMenu } from "react-icons/gr";
@@ -15,6 +20,7 @@ export {
   AiOutlineHeart,
   AiFillStar,
   AiFillMinusCircle,
+  AiFillHeart,
   FaShoppingCart,
   FaUser,
   GrMenu,
