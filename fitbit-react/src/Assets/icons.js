@@ -1,4 +1,4 @@
-import { AiOutlineHeart, AiFillStar } from "react-icons/ai";
+import { AiOutlineHeart, AiFillStar, AiFillMinusCircle } from "react-icons/ai";
 import { FaShoppingCart } from "react-icons/fa";
 import { FaUser } from "react-icons/fa";
 import { GrMenu } from "react-icons/gr";
@@ -8,11 +8,13 @@ import {
   BsTwitter,
   BsFillHeartFill,
 } from "react-icons/bs";
-import { MdAddShoppingCart } from "react-icons/md";
+import { MdAddShoppingCart, MdAddBox } from "react-icons/md";
+import { IoMdAddCircle } from "react-icons/io";
 
 export {
   AiOutlineHeart,
   AiFillStar,
+  AiFillMinusCircle,
   FaShoppingCart,
   FaUser,
   GrMenu,
@@ -20,5 +22,7 @@ export {
   BsLinkedin,
   BsTwitter,
   MdAddShoppingCart,
+  MdAddBox,
   BsFillHeartFill,
+  IoMdAddCircle,
 };

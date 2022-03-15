@@ -1,0 +1,29 @@
+.my-cart-card{
+    /* This padding is to override the css coming from CL */
+    padding: 0rem 0rem;
+    max-width: 38rem;
+    border-radius: 3px;
+    margin: 2rem 0rem;
+}
+.my-cart-card .image-container{
+    min-width: 10rem;
+    max-width: 16rem;
+}
+.my-cart-card .image-container img{
+    border-radius: 3px;
+}
+.my-cart-card .wrapper{
+    margin: 1rem 1rem;
+}
+
+.my-cart-cta-btn-container{
+    max-width: 32rem;
+    width: 100%;    
+}
+.my-cart-cta-btn-container button{
+    margin: 0.4rem 0rem;
+}
+.my-cart-cta-btn{
+    display: block;
+    width: 100%;
+}
