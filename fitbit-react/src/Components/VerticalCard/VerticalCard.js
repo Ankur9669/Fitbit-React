@@ -1,10 +1,14 @@
 import React from "react";
-import { useCart } from "../../Context/cart-context";
 import "./verticalcard.css";
-import { MdAddShoppingCart } from "../../Assets/icons";
-import { PrimaryButton } from "../Navbar";
-import SecondaryButton from "../Buttons/SecondaryButton";
-import { useReducer } from "react";
+import {
+  MdAddShoppingCart,
+  PrimaryButton,
+  SecondaryButton,
+  useReducer,
+  RatingBar,
+  useCart,
+} from "./index";
+
 function VerticalCard({
   productId,
   productTitle,
@@ -12,6 +16,10 @@ function VerticalCard({
   realPrice,
   discountPercent,
   productImageUrl,
+  category,
+  inStock,
+  fastDelivery,
+  rating,
 }) {
   const { cartReducer } = useCart();
 
@@ -67,6 +75,10 @@ function VerticalCard({
               {discountPercent} % off
             </p>
           </div>
+          <RatingBar rating={rating} style={{ marginLeft: "-3px" }} />
+          <p className="font-medium inline-block weight-semi-bold primary-text-color">
+            {inStock === true ? "InStock" : "Out Of Stock"}
+          </p>
         </div>
         <div className="btn-container">
           <PrimaryButton

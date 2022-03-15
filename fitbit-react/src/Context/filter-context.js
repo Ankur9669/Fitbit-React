@@ -1,21 +1,6 @@
 import { createContext, useContext, useReducer } from "react";
-
+import { filterReducer } from "../Reducers/filter-reducer";
 const FilterContext = createContext();
-
-const filterReducer = (state, action) => {
-  switch (action.type) {
-    case "SORT_BY":
-      return { ...state, sortBy: action.payload.value };
-    case "FILTER_BY":
-      return {
-        ...state,
-        categories: {
-          ...state.categories,
-          [action.payload.key]: action.payload.value,
-        },
-      };
-  }
-};
 const initialState = {
   sortBy: "lowToHigh",
   categories: {
@@ -26,7 +11,9 @@ const initialState = {
   },
   includeOutOfStock: true,
   fastDelivery: false,
+  rating: 1,
 };
+
 const FilterProvider = ({ children }) => {
   const [filters, dispatch] = useReducer(filterReducer, initialState);
   return (

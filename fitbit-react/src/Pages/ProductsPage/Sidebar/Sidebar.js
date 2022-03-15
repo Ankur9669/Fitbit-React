@@ -1,9 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import "./sidebar.css";
-import { productReducer } from "../../../Reducers/products-reducer";
-import { useProduct } from "../../../Context/products-context";
-import { products } from "../../../Temp/products";
 import { useFilter } from "../../../Context/filter-context";
+
 function Sidebar() {
   const { filters, dispatch } = useFilter();
   return (
@@ -11,7 +9,12 @@ function Sidebar() {
       <div className="filters">
         <p className="filter-type weight-semi-bold font-medium-large filter-heading">
           FILTERS
-          <span className="weight-normal font-small">CLEAR</span>
+          <span
+            className="weight-normal font-small"
+            onClick={() => dispatch({ type: "RESET" })}
+          >
+            CLEAR
+          </span>
         </p>
         {/*  Sort By Filter Start   */}
         <div className="filter-type" aria-label="filter-type">
@@ -150,19 +153,17 @@ function Sidebar() {
               <input
                 type="radio"
                 name="rating"
-                id="5-stars"
-                className="sidebar-filter-input"
-              />
-              <label htmlFor="5-stars" className="sidebar-filter-label">
-                5 Stars
-              </label>
-            </li>
-            <li className="sidebar-filter-item">
-              <input
-                type="radio"
-                name="rating"
                 id="4-stars"
                 className="sidebar-filter-input"
+                onClick={() =>
+                  dispatch({
+                    type: "OTHER_FILTERS",
+                    payload: {
+                      value: 4,
+                      key: "rating",
+                    },
+                  })
+                }
               />
               <label htmlFor="4-stars" className="sidebar-filter-label">
                 4 Stars
@@ -174,6 +175,15 @@ function Sidebar() {
                 name="rating"
                 id="3-stars"
                 className="sidebar-filter-input"
+                onClick={() =>
+                  dispatch({
+                    type: "OTHER_FILTERS",
+                    payload: {
+                      value: 3,
+                      key: "rating",
+                    },
+                  })
+                }
               />
               <label htmlFor="3-stars" className="sidebar-filter-label">
                 3 Stars
@@ -185,6 +195,15 @@ function Sidebar() {
                 name="rating"
                 id="2-stars"
                 className="sidebar-filter-input"
+                onClick={() =>
+                  dispatch({
+                    type: "OTHER_FILTERS",
+                    payload: {
+                      value: 2,
+                      key: "rating",
+                    },
+                  })
+                }
               />
               <label htmlFor="2-stars" className="sidebar-filter-label">
                 2 Stars
@@ -196,6 +215,15 @@ function Sidebar() {
                 name="rating"
                 id="1-star"
                 className="sidebar-filter-input"
+                onClick={() =>
+                  dispatch({
+                    type: "OTHER_FILTERS",
+                    payload: {
+                      value: 1,
+                      key: "rating",
+                    },
+                  })
+                }
               />
               <label htmlFor="1-star" className="sidebar-filter-label">
                 1 Star
@@ -214,6 +242,16 @@ function Sidebar() {
                 name="include-out-of-stock"
                 id="include-out-of-stock"
                 className="sidebar-filter-input"
+                checked={filters.includeOutOfStock}
+                onChange={(e) =>
+                  dispatch({
+                    type: "OTHER_FILTERS",
+                    payload: {
+                      value: e.target.checked,
+                      key: "includeOutOfStock",
+                    },
+                  })
+                }
               />
               <label
                 htmlFor="include-out-of-stock"
@@ -228,6 +266,13 @@ function Sidebar() {
                 name="fast-delivery"
                 id="fast-delivery"
                 className="sidebar-filter-input"
+                checked={filters.fastDelivery}
+                onChange={(e) =>
+                  dispatch({
+                    type: "OTHER_FILTERS",
+                    payload: { value: e.target.checked, key: "fastDelivery" },
+                  })
+                }
               />
               <label htmlFor="fast-delivery" className="sidebar-filter-label">
                 Fast Delivery

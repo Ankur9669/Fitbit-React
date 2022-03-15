@@ -1,62 +1,67 @@
 import React from "react";
-import { VerticalCard } from "../index";
-import { products } from "../../../Temp/products";
-import { useProduct } from "../../../Context/products-context";
-import { useFilter } from "../../../Context/filter-context";
-import { useEffect } from "react";
+import {
+  VerticalCard,
+  products,
+  useFilter,
+  filterByCategory,
+  sortByHighToLow,
+  sortByLowToHigh,
+} from "../index";
+
 function ProductListing() {
   const { filters, dispatch } = useFilter();
 
-  useEffect(() => {
-    console.log(filters);
-  }, [filters]);
-  const getSortedData = (state) => {
-    // console.log(state);
-    let updatedData = [...products];
+  const getSortedData = (state, filteredData) => {
+    let updatedData = [...filteredData];
     if (state.sortBy === "highToLow") {
-      updatedData.sort((a, b) => b.discountedPrice - a.discountedPrice);
+      sortByHighToLow(updatedData);
     } else if (state.sortBy === "lowToHigh") {
-      updatedData.sort((a, b) => a.discountedPrice - b.discountedPrice);
+      sortByLowToHigh(updatedData);
     }
     return updatedData;
   };
-  const getFilteredData = (filters, sortedData) => {
-    let updatedData = [...sortedData];
+  const getFilteredData = (filters) => {
+    let updatedData = [...products];
     let equipmentCategory = [];
     let clothesCategory = [];
     let glovesCategory = [];
-    let dumbellsCaegory = [];
+    let dumbellsCategory = [];
+
     if (filters.categories.equipments) {
-      equipmentCategory = updatedData.filter(
-        (data) => data.category === "equipment"
-      );
+      equipmentCategory = filterByCategory(updatedData, "equipment");
     }
     if (filters.categories.clothes) {
-      clothesCategory = updatedData.filter(
-        (data) => data.category === "clothes"
-      );
+      clothesCategory = filterByCategory(updatedData, "clothes");
     }
     if (filters.categories.handGloves) {
-      glovesCategory = updatedData.filter((data) => data.category === "gloves");
+      glovesCategory = filterByCategory(updatedData, "gloves");
     }
-    if (filters.categories.clothes) {
-      dumbellsCaegory = updatedData.filter(
-        (data) => data.category === "dumbells"
-      );
+    if (filters.categories.dumbells) {
+      dumbellsCategory = filterByCategory(updatedData, "dumbells");
     }
-    return [
+    updatedData = [
       ...equipmentCategory,
       ...clothesCategory,
       ...glovesCategory,
-      ...dumbellsCaegory,
+      ...dumbellsCategory,
     ];
+    if (!filters.includeOutOfStock) {
+      updatedData = updatedData.filter((data) => data.inStock === true);
+    }
+    if (filters.fastDelivery) {
+      updatedData = updatedData.filter((data) => data.fastDelivery === true);
+    }
+    updatedData = updatedData.filter(
+      (data) => parseInt(data.rating, 10) >= parseInt(filters.rating, 10)
+    );
+    return updatedData;
   };
-  let sortedData = getSortedData(filters);
-  let filteredData = getFilteredData(filters, sortedData);
+  let filteredData = getFilteredData(filters);
+  let sortedData = getSortedData(filters, filteredData);
   return (
     <div className="products-container">
       <div className="spacer-1"></div>
-      {filteredData?.map(
+      {sortedData?.map(
         ({
           productId,
           productTitle,
@@ -64,6 +69,10 @@ function ProductListing() {
           discountPercent,
           realPrice,
           productImageUrl,
+          category,
+          rating,
+          inStock,
+          fastDelivery,
         }) => (
           <VerticalCard
             key={productId}
@@ -73,6 +82,10 @@ function ProductListing() {
             realPrice={realPrice}
             discountPercent={discountPercent}
             productImageUrl={productImageUrl}
+            category={category}
+            inStock={inStock}
+            rating={rating}
+            fastDelivery={fastDelivery}
           />
         )
       )}

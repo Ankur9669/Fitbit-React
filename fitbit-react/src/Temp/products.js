@@ -139,7 +139,7 @@ const products = [
       "https://cdn.shopify.com/s/files/1/0610/2882/7370/products/product30.jpg?v=1636627042",
     category: "clothes",
     rating: "4",
-    inStock: true,
+    inStock: false,
     fastDelivery: true,
   },
 ];
