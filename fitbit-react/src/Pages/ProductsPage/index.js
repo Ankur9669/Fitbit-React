@@ -3,5 +3,17 @@ import Footer from "../../Components/Footer/Footer";
 import VerticalCard from "../../Components/VerticalCard/VerticalCard";
 import Sidebar from "./Sidebar/Sidebar";
 import { products } from "../../Temp/products";
-
-export { Navbar, Footer, VerticalCard, Sidebar, products };
+import { useFilter } from "../../Context/filter-context";
+import { filterByCategory } from "../../Util/filter";
+import { sortByLowToHigh, sortByHighToLow } from "../../Util/sort";
+export {
+  Navbar,
+  Footer,
+  VerticalCard,
+  Sidebar,
+  products,
+  useFilter,
+  filterByCategory,
+  sortByHighToLow,
+  sortByLowToHigh,
+};

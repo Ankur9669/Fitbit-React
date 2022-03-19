@@ -9,23 +9,23 @@ function Homepage() {
       <Navbar />
       <HeroSection />
 
-      <div class="spacer-3"></div>
-      <div class="spacer-3"></div>
+      <div className="spacer-3"></div>
+      <div className="spacer-3"></div>
 
       <NewArrivalsSection />
 
-      <div class="spacer-3"></div>
-      <div class="spacer-3"></div>
+      <div className="spacer-3"></div>
+      <div className="spacer-3"></div>
 
       <FeaturedProductsSection />
 
-      <div class="spacer-3"></div>
-      <div class="spacer-3"></div>
+      <div className="spacer-3"></div>
+      <div className="spacer-3"></div>
 
       <FeaturedBrands />
 
-      <div class="spacer-3"></div>
-      <div class="spacer-3"></div>
+      <div className="spacer-3"></div>
+      <div className="spacer-3"></div>
 
       <Footer />
     </div>

@@ -5,8 +5,8 @@ import { BsGithub, BsLinkedin, BsTwitter } from "../../Assets/icons";
 function Footer() {
   return (
     <footer>
-      <p class="font-medium-large">Made with ♥ by Ankur Gupta</p>
-      <div class="footer-icons-container">
+      <p className="font-medium-large">Made with ♥ by Ankur Gupta</p>
+      <div className="footer-icons-container">
         <a href="#">
           <BsGithub className="footer-icon" />
         </a>
@@ -17,7 +17,7 @@ function Footer() {
           <BsTwitter className="footer-icon" />
         </a>
       </div>
-      <p class="font-medium-large">&copy;Copyright 2022</p>
+      <p className="font-medium-large">&copy;Copyright 2022</p>
     </footer>
   );
 }
