@@ -61,34 +61,9 @@ function ProductListing() {
   return (
     <div className="products-container">
       <div className="spacer-1"></div>
-      {sortedData?.map(
-        ({
-          productId,
-          productTitle,
-          discountedPrice,
-          discountPercent,
-          realPrice,
-          productImageUrl,
-          category,
-          rating,
-          inStock,
-          fastDelivery,
-        }) => (
-          <VerticalCard
-            key={productId}
-            productId={productId}
-            productTitle={productTitle}
-            discountedPrice={discountedPrice}
-            realPrice={realPrice}
-            discountPercent={discountPercent}
-            productImageUrl={productImageUrl}
-            category={category}
-            inStock={inStock}
-            rating={rating}
-            fastDelivery={fastDelivery}
-          />
-        )
-      )}
+      {sortedData?.map((product) => (
+        <VerticalCard key={product?.productId} product={product} />
+      ))}
     </div>
   );
 }

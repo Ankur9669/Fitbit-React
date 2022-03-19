@@ -10,16 +10,18 @@ import {
 } from "./index";
 
 function VerticalCard({
-  productId,
-  productTitle,
-  discountedPrice,
-  realPrice,
-  discountPercent,
-  productImageUrl,
-  category,
-  inStock,
-  fastDelivery,
-  rating,
+  product: {
+    productId,
+    productTitle,
+    discountedPrice,
+    realPrice,
+    discountPercent,
+    productImageUrl,
+    category,
+    inStock,
+    fastDelivery,
+    rating,
+  },
 }) {
   const { cartReducer } = useCart();
 
