@@ -20,10 +20,7 @@ function Cart() {
           <div className="mycart-items-container">
             {cartProducts.map((cartProduct) => {
               return (
-                <HorizontalCard
-                  product={cartProduct}
-                  key={cartProduct.productId}
-                />
+                <HorizontalCard product={cartProduct} key={cartProduct._id} />
               );
             })}
           </div>

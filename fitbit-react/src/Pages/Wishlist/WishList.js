@@ -15,7 +15,7 @@ function WishList() {
           {wishListProducts.map((wishListProduct) => {
             return (
               <VerticalCard
-                key={wishListProduct?.productId}
+                key={wishListProduct?._id}
                 product={wishListProduct}
               />
             );

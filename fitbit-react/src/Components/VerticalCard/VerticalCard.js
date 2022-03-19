@@ -12,7 +12,7 @@ import {
 
 function VerticalCard({
   product: {
-    productId,
+    _id,
     productTitle,
     discountedPrice,
     realPrice,
@@ -31,7 +31,7 @@ function VerticalCard({
     dispatch({
       type: "ADD_TO_CART",
       payload: {
-        productId: productId,
+        _id: _id,
         productTitle: productTitle,
         discountedPrice: discountedPrice,
         realPrice: realPrice,
@@ -44,7 +44,7 @@ function VerticalCard({
     dispatch({
       type: "REMOVE_FROM_CART",
       payload: {
-        productId: productId,
+        _id: _id,
       },
     });
   };

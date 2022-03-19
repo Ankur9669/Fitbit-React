@@ -4,6 +4,7 @@ import VerticalCard from "../../Components/VerticalCard/VerticalCard";
 import Sidebar from "./Sidebar/Sidebar";
 import { products } from "../../Temp/products";
 import { useFilter } from "../../Context/filter-context";
+import { useProduct } from "../../Context/products-context";
 import { filterByCategory } from "../../Util/filter";
 import { sortByLowToHigh, sortByHighToLow } from "../../Util/sort";
 export {
@@ -13,6 +14,7 @@ export {
   Sidebar,
   products,
   useFilter,
+  useProduct,
   filterByCategory,
   sortByHighToLow,
   sortByLowToHigh,

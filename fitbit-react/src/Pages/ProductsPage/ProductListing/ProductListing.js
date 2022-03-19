@@ -1,15 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
+import Axios from "axios";
 import {
   VerticalCard,
   products,
   useFilter,
+  useProduct,
   filterByCategory,
   sortByHighToLow,
   sortByLowToHigh,
 } from "../index";
+import { fetchProducts } from "../../../Util/fetch-products";
 
 function ProductListing() {
   const { filters, dispatch } = useFilter();
+  const { products: products1, dispatch: dispatchProducts } = useProduct();
 
   const getSortedData = (state, filteredData) => {
     let updatedData = [...filteredData];
@@ -58,11 +62,25 @@ function ProductListing() {
   };
   let filteredData = getFilteredData(filters);
   let sortedData = getSortedData(filters, filteredData);
+
+  useEffect(() => {
+    (async () => {
+      const { data, success, message } = await fetchProducts();
+      if (success) {
+        dispatchProducts({ type: "FETCH", payload: { products: data } });
+      }
+    })();
+  }, []);
+
+  useEffect(() => {
+    console.log(products1.products);
+  }, [products1]);
+
   return (
     <div className="products-container">
       <div className="spacer-1"></div>
       {sortedData?.map((product) => (
-        <VerticalCard key={product?.productId} product={product} />
+        <VerticalCard key={product?._id} product={product} />
       ))}
     </div>
   );

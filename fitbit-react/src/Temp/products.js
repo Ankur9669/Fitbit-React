@@ -1,6 +1,6 @@
 const products = [
   {
-    productId: "101",
+    _id: "101",
     productTitle: "Pedal Resistant Elastic",
     discountedPrice: "200",
     realPrice: "300",
@@ -13,7 +13,7 @@ const products = [
     fastDelivery: true,
   },
   {
-    productId: "108",
+    _id: "108",
     productTitle: "Reebok Resistant Tube",
     discountedPrice: "500",
     realPrice: "799",
@@ -26,7 +26,7 @@ const products = [
     fastDelivery: false,
   },
   {
-    productId: "102",
+    _id: "102",
     productTitle: "Hand Gloves",
     discountedPrice: "320",
     realPrice: "430",
@@ -39,7 +39,7 @@ const products = [
     fastDelivery: true,
   },
   {
-    productId: "103",
+    _id: "103",
     productTitle: "Iron Kettlebell",
     discountedPrice: "450",
     realPrice: "515",
@@ -52,7 +52,7 @@ const products = [
     fastDelivery: false,
   },
   {
-    productId: "104",
+    _id: "104",
     productTitle: "Indoor Cycling Bike",
     discountedPrice: "14999",
     realPrice: "16599",
@@ -65,7 +65,7 @@ const products = [
     fastDelivery: true,
   },
   {
-    productId: "105",
+    _id: "105",
     productTitle: "Abs Exercise Equipment",
     discountedPrice: "16999",
     realPrice: "20000",
@@ -78,7 +78,7 @@ const products = [
     fastDelivery: false,
   },
   {
-    productId: "110",
+    _id: "110",
     productTitle: "Dual Adjustable Pulley",
     discountedPrice: "25799",
     realPrice: "30999",
@@ -91,7 +91,7 @@ const products = [
     fastDelivery: false,
   },
   {
-    productId: "106",
+    _id: "106",
     productTitle: "T-Shirts",
     discountedPrice: "499",
     realPrice: "699",
@@ -104,7 +104,7 @@ const products = [
     fastDelivery: true,
   },
   {
-    productId: "107",
+    _id: "107",
     productTitle: "Sports Suit",
     discountedPrice: "1099",
     realPrice: "3999",
@@ -117,7 +117,7 @@ const products = [
     fastDelivery: false,
   },
   {
-    productId: "111",
+    _id: "111",
     productTitle: "Full T shirt",
     discountedPrice: "1299",
     realPrice: "4999",
@@ -130,7 +130,7 @@ const products = [
     fastDelivery: true,
   },
   {
-    productId: "109",
+    _id: "109",
     productTitle: "Colored Top",
     discountedPrice: "799",
     realPrice: "1099",
