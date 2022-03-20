@@ -8,10 +8,10 @@ function WishList() {
     <div>
       <Navbar />
       <div className="spacer-3"></div>
-      <section class="wishlist-products">
-        <h3 class="h2 centered-text">My WishList</h3>
-        <div class="spacer-3"></div>
-        <div class="wishlist-products-container">
+      <section className="wishlist-products">
+        <h3 className="h2 centered-text">My WishList</h3>
+        <div className="spacer-3"></div>
+        <div className="wishlist-products-container">
           {wishListProducts.map((wishListProduct) => {
             return (
               <VerticalCard
