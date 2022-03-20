@@ -5,18 +5,6 @@ import FeaturedProductsSection from "./FeaturedProducts/FeaturedProductsSection"
 import FeaturedBrands from "./FeaturedBrands/FeaturedBrands";
 import Axios from "axios";
 function Homepage() {
-  const temp = async () => {
-    try {
-      const response = await Axios.post("api/auth/login", {
-        email: "adarshbalak@gmail.com",
-        password: "adarshBalaki123",
-      });
-      console.log(response);
-    } catch (e) {
-      console.log(e);
-    }
-  };
-  temp();
   return (
     <div>
       <Navbar />
