@@ -1,12 +1,10 @@
-import { createContext, useReducer, useContext, useEffect } from "react";
-import Axios from "axios";
+import { createContext, useReducer, useContext } from "react";
 
 const ProductContext = createContext();
 const initialState = {};
-const reducer = async (state, action) => {
+const reducer = (state, action) => {
   switch (action.type) {
     case "FETCH": {
-      //   console.log(action.payload);
       return { ...state, products: action.payload.products };
     }
     default:
@@ -16,10 +14,6 @@ const reducer = async (state, action) => {
 
 const ProductProvider = ({ children }) => {
   const [products, dispatch] = useReducer(reducer, initialState);
-
-  useEffect(() => {
-    console.log(products);
-  }, [products]);
 
   return (
     <ProductContext.Provider value={{ products, dispatch }}>

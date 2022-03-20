@@ -1,8 +1,6 @@
 import React, { useEffect } from "react";
-import Axios from "axios";
 import {
   VerticalCard,
-  products,
   useFilter,
   useProduct,
   filterByCategory,
@@ -13,7 +11,7 @@ import { fetchProducts } from "../../../Util/fetch-products";
 
 function ProductListing() {
   const { filters, dispatch } = useFilter();
-  const { products: products1, dispatch: dispatchProducts } = useProduct();
+  const { products, dispatch: dispatchProducts } = useProduct();
 
   const getSortedData = (state, filteredData) => {
     let updatedData = [...filteredData];
@@ -25,7 +23,7 @@ function ProductListing() {
     return updatedData;
   };
   const getFilteredData = (filters) => {
-    let updatedData = [...products];
+    let updatedData = products.products;
     let equipmentCategory = [];
     let clothesCategory = [];
     let glovesCategory = [];
@@ -60,21 +58,23 @@ function ProductListing() {
     );
     return updatedData;
   };
-  let filteredData = getFilteredData(filters);
-  let sortedData = getSortedData(filters, filteredData);
+  let filteredData = products.products && getFilteredData(filters);
+  let sortedData = products.products && getSortedData(filters, filteredData);
 
   useEffect(() => {
+    // Fetching Data
     (async () => {
       const { data, success, message } = await fetchProducts();
       if (success) {
-        dispatchProducts({ type: "FETCH", payload: { products: data } });
+        dispatchProducts({
+          type: "FETCH",
+          payload: { products: data },
+        });
+      } else {
+        console.log(message);
       }
     })();
   }, []);
-
-  useEffect(() => {
-    console.log(products1.products);
-  }, [products1]);
 
   return (
     <div className="products-container">
