@@ -8,10 +8,11 @@ function PrimaryButton({
   onClick = () => {},
   iconLeft = "",
   iconRight = "",
+  className = "",
 }) {
   return (
     <button
-      className="button button-primary flex-center-horizontal-vertical"
+      className={`button button-primary flex-center-horizontal-vertical ${className}`}
       onClick={onClick}
     >
       {iconLeft !== "" ? iconLeft : <></>}

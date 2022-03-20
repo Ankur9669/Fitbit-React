@@ -5,10 +5,11 @@ function SecondaryButton({
   onClick = () => {},
   iconLeft = "",
   iconRight = "",
+  className = "",
 }) {
   return (
     <button
-      className="button button-outline-secondary flex-center-horizontal-vertical"
+      className={`button button-outline-secondary flex-center-horizontal-vertical ${className}`}
       onClick={onClick}
     >
       {iconLeft !== "" ? iconLeft : <></>}

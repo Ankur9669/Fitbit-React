@@ -1,4 +1,4 @@
-import { MdAddShoppingCart } from "../../Assets/icons";
+import { MdAddShoppingCart, AiFillHeart } from "../../Assets/icons";
 import { PrimaryButton } from "../Navbar";
 import SecondaryButton from "../Buttons/SecondaryButton";
 import { useReducer } from "react";
@@ -7,6 +7,7 @@ import { useCart } from "../../Context/cart-context";
 
 export {
   MdAddShoppingCart,
+  AiFillHeart,
   PrimaryButton,
   SecondaryButton,
   useReducer,
