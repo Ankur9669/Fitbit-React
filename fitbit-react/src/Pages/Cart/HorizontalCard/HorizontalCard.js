@@ -8,7 +8,7 @@ import {
 import "./horizontalcard.css";
 function HorizontalCard({
   product: {
-    productId,
+    _id,
     productTitle,
     discountedPrice,
     realPrice,

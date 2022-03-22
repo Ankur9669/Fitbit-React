@@ -1,6 +1,6 @@
 const wishListProducts = [
   {
-    productId: "101",
+    _id: "101",
     productTitle: "Pedal Resistant Elastic",
     discountedPrice: "200",
     realPrice: "300",
@@ -14,7 +14,7 @@ const wishListProducts = [
     quantity: 1,
   },
   {
-    productId: "108",
+    _id: "108",
     productTitle: "Reebok Resistant Tube",
     discountedPrice: "500",
     realPrice: "799",
@@ -28,7 +28,7 @@ const wishListProducts = [
     quantity: 1,
   },
   {
-    productId: "102",
+    _id: "102",
     productTitle: "Hand Gloves",
     discountedPrice: "320",
     realPrice: "430",

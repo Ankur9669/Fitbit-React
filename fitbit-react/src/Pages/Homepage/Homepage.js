@@ -3,6 +3,7 @@ import { Navbar, Footer, HeroSection, NewArrivalsSection } from "./index";
 import "./homepage.css";
 import FeaturedProductsSection from "./FeaturedProducts/FeaturedProductsSection";
 import FeaturedBrands from "./FeaturedBrands/FeaturedBrands";
+import Axios from "axios";
 function Homepage() {
   return (
     <div>

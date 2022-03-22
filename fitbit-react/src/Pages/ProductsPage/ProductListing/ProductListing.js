@@ -1,15 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   VerticalCard,
-  products,
   useFilter,
+  useProduct,
   filterByCategory,
   sortByHighToLow,
   sortByLowToHigh,
 } from "../index";
+import { fetchProducts } from "../../../Util/fetch-products";
 
 function ProductListing() {
   const { filters, dispatch } = useFilter();
+  const { products, dispatch: dispatchProducts } = useProduct();
 
   const getSortedData = (state, filteredData) => {
     let updatedData = [...filteredData];
@@ -21,7 +23,7 @@ function ProductListing() {
     return updatedData;
   };
   const getFilteredData = (filters) => {
-    let updatedData = [...products];
+    let updatedData = products.products;
     let equipmentCategory = [];
     let clothesCategory = [];
     let glovesCategory = [];
@@ -56,13 +58,29 @@ function ProductListing() {
     );
     return updatedData;
   };
-  let filteredData = getFilteredData(filters);
-  let sortedData = getSortedData(filters, filteredData);
+  let filteredData = products.products && getFilteredData(filters);
+  let sortedData = products.products && getSortedData(filters, filteredData);
+
+  useEffect(() => {
+    // Fetching Data
+    (async () => {
+      const { data, success, message } = await fetchProducts();
+      if (success) {
+        dispatchProducts({
+          type: "FETCH",
+          payload: { products: data },
+        });
+      } else {
+        console.log(message);
+      }
+    })();
+  }, []);
+
   return (
     <div className="products-container">
       <div className="spacer-1"></div>
       {sortedData?.map((product) => (
-        <VerticalCard key={product?.productId} product={product} />
+        <VerticalCard key={product?._id} product={product} />
       ))}
     </div>
   );
