@@ -4,7 +4,7 @@ import SecondaryButton from "../Buttons/SecondaryButton";
 import { useReducer } from "react";
 import RatingBar from "../RatingBar/RatingBar";
 import { useCart } from "../../Context/cart-context";
-
+import { addToCart } from "../../Util/add-to-cart";
 export {
   MdAddShoppingCart,
   AiFillHeart,
@@ -13,4 +13,5 @@ export {
   useReducer,
   RatingBar,
   useCart,
+  addToCart,
 };

@@ -4,6 +4,7 @@ import {
   IoIosAddCircle,
   PrimaryButton,
   SecondaryButton,
+  removeFromCart,
 } from "./index";
 import "./horizontalcard.css";
 function HorizontalCard({
@@ -18,9 +19,12 @@ function HorizontalCard({
     rating,
     inStock,
     fastDelivery,
-    quantity,
+    qty,
   },
 }) {
+  const token =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiIyMWM3MmY1OC1jNTIzLTQwZGUtODBjNS03MTc5NmZhZGY5ZjUiLCJlbWFpbCI6ImFkYXJzaGJhbGFrQGdtYWlsLmNvbSIsImlhdCI6MTY0Nzc3NDM4OX0.OzZVopq6Zj7iUf8MmNSk50SUs9MzfTXtR-Uenl5B8b8";
+
   return (
     <div className="card card-horizontal my-cart-card">
       <div className="image-container">
@@ -53,7 +57,7 @@ function HorizontalCard({
             <button className="quantity-btn">
               <AiFillMinusCircle style={{ fontSize: "1.7rem" }} />
             </button>
-            <span className="quantity-info">{quantity}</span>
+            <span className="quantity-info">{qty}</span>
             <button className="quantity-btn">
               <IoIosAddCircle style={{ fontSize: "1.8rem" }} />
             </button>
@@ -68,6 +72,10 @@ function HorizontalCard({
           <SecondaryButton
             buttonText={"Remove From Cart"}
             className={"my-cart-cta-btn"}
+            onClick={async () => {
+              const cart = await removeFromCart(_id, token);
+              dispatch({ type: "SET_CART", payload: { value: cart.cart } });
+            }}
           />
         </div>
       </div>
