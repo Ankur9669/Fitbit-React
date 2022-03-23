@@ -8,6 +8,11 @@ import {
   useCart,
 } from "./index";
 import "./horizontalcard.css";
+import { token } from "../../../Util/token";
+import {
+  increaseProductCountInCart,
+  updateProductCountInCart,
+} from "../../../Util/increase-product-in-cart";
 function HorizontalCard({
   product: {
     _id,
@@ -23,10 +28,16 @@ function HorizontalCard({
     qty,
   },
 }) {
-  const token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiIyMWM3MmY1OC1jNTIzLTQwZGUtODBjNS03MTc5NmZhZGY5ZjUiLCJlbWFpbCI6ImFkYXJzaGJhbGFrQGdtYWlsLmNvbSIsImlhdCI6MTY0Nzc3NDM4OX0.OzZVopq6Zj7iUf8MmNSk50SUs9MzfTXtR-Uenl5B8b8";
-
   const { cart, dispatch } = useCart();
+
+  const findIfProductExistsInCardAndUpdate = async (productId, type) => {
+    let isPresent = cart.some((cartItem) => cartItem._id === productId);
+
+    if (isPresent) {
+      const cart = await updateProductCountInCart(productId, type);
+      dispatch({ type: "SET_CART", payload: { value: cart.cart } });
+    }
+  };
   return (
     <div className="card card-horizontal my-cart-card">
       <div className="image-container">
@@ -56,11 +67,22 @@ function HorizontalCard({
             className="quantity-btn-container"
             style={{ marginLeft: "-9px" }}
           >
-            <button className="quantity-btn">
+            <button
+              className="quantity-btn"
+              disabled={qty === 1 ? true : false}
+              onClick={() =>
+                findIfProductExistsInCardAndUpdate(_id, "decrement")
+              }
+            >
               <AiFillMinusCircle style={{ fontSize: "1.7rem" }} />
             </button>
             <span className="quantity-info">{qty}</span>
-            <button className="quantity-btn">
+            <button
+              className="quantity-btn"
+              onClick={() =>
+                findIfProductExistsInCardAndUpdate(_id, "increment")
+              }
+            >
               <IoIosAddCircle style={{ fontSize: "1.8rem" }} />
             </button>
           </div>
