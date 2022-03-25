@@ -20,7 +20,7 @@ function SummaryCard() {
               <span>-&#8377;180</span>
             </div>
             <div className="font-medium weight-normal primary-text-color price-details-item margin-vertical-sm">
-              <span>Delivary Charges</span>
+              <span>Delivery Charges</span>
               <span>&#8377;40</span>
             </div>
           </div>
