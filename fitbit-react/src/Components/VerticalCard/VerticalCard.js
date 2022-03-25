@@ -8,10 +8,12 @@ import {
   useReducer,
   RatingBar,
   useCart,
+  addToCart,
 } from "./index";
-
-function VerticalCard({
-  product: {
+import Axios from "axios";
+function VerticalCard({ product }) {
+  const { cart, dispatch } = useCart();
+  const {
     _id,
     productTitle,
     discountedPrice,
@@ -22,24 +24,11 @@ function VerticalCard({
     inStock,
     fastDelivery,
     rating,
-  },
-}) {
-  const { cartReducer } = useCart();
+  } = product;
 
-  const [cart, dispatch] = useReducer(cartReducer, []);
-  const addToCart = () => {
-    dispatch({
-      type: "ADD_TO_CART",
-      payload: {
-        _id: _id,
-        productTitle: productTitle,
-        discountedPrice: discountedPrice,
-        realPrice: realPrice,
-        discountPercent: discountPercent,
-        productImageUrl: productImageUrl,
-      },
-    });
-  };
+  const token =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiIyMWM3MmY1OC1jNTIzLTQwZGUtODBjNS03MTc5NmZhZGY5ZjUiLCJlbWFpbCI6ImFkYXJzaGJhbGFrQGdtYWlsLmNvbSIsImlhdCI6MTY0Nzc3NDM4OX0.OzZVopq6Zj7iUf8MmNSk50SUs9MzfTXtR-Uenl5B8b8";
+
   const removefromCart = () => {
     dispatch({
       type: "REMOVE_FROM_CART",
@@ -89,7 +78,14 @@ function VerticalCard({
               />
             }
           />
-          <SecondaryButton buttonText={"Add to cart"} onClick={addToCart} />
+          <SecondaryButton
+            buttonText={"Add to cart"}
+            onClick={async () => {
+              const cart = await addToCart(product, token);
+              dispatch({ type: "SET_CART", payload: { value: cart.cart } });
+            }}
+            //This Token would be removed when implementing signup login
+          />
         </div>
       </div>
     </a>

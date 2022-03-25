@@ -4,8 +4,15 @@ import {
   IoIosAddCircle,
   PrimaryButton,
   SecondaryButton,
+  removeFromCart,
+  useCart,
 } from "./index";
 import "./horizontalcard.css";
+import { token } from "../../../Util/token";
+import {
+  increaseProductCountInCart,
+  updateProductCountInCart,
+} from "../../../Util/increase-product-in-cart";
 function HorizontalCard({
   product: {
     _id,
@@ -18,9 +25,19 @@ function HorizontalCard({
     rating,
     inStock,
     fastDelivery,
-    quantity,
+    qty,
   },
 }) {
+  const { cart, dispatch } = useCart();
+
+  const findIfProductExistsInCardAndUpdate = async (productId, type) => {
+    let isPresent = cart.some((cartItem) => cartItem._id === productId);
+
+    if (isPresent) {
+      const cart = await updateProductCountInCart(productId, type);
+      dispatch({ type: "SET_CART", payload: { value: cart.cart } });
+    }
+  };
   return (
     <div className="card card-horizontal my-cart-card">
       <div className="image-container">
@@ -50,11 +67,22 @@ function HorizontalCard({
             className="quantity-btn-container"
             style={{ marginLeft: "-9px" }}
           >
-            <button className="quantity-btn">
+            <button
+              className="quantity-btn"
+              disabled={qty === 1 ? true : false}
+              onClick={() =>
+                findIfProductExistsInCardAndUpdate(_id, "decrement")
+              }
+            >
               <AiFillMinusCircle style={{ fontSize: "1.7rem" }} />
             </button>
-            <span className="quantity-info">{quantity}</span>
-            <button className="quantity-btn">
+            <span className="quantity-info">{qty}</span>
+            <button
+              className="quantity-btn"
+              onClick={() =>
+                findIfProductExistsInCardAndUpdate(_id, "increment")
+              }
+            >
               <IoIosAddCircle style={{ fontSize: "1.8rem" }} />
             </button>
           </div>
@@ -68,6 +96,11 @@ function HorizontalCard({
           <SecondaryButton
             buttonText={"Remove From Cart"}
             className={"my-cart-cta-btn"}
+            onClick={async () => {
+              const cart = await removeFromCart(_id, token);
+              // console.log(cart.cart);
+              dispatch({ type: "SET_CART", payload: { value: cart.cart } });
+            }}
           />
         </div>
       </div>

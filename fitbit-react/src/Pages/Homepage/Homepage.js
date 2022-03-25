@@ -5,6 +5,13 @@ import FeaturedProductsSection from "./FeaturedProducts/FeaturedProductsSection"
 import FeaturedBrands from "./FeaturedBrands/FeaturedBrands";
 import Axios from "axios";
 function Homepage() {
+  //To remove
+
+  // Axios.post("/api/auth/login", {
+  //   email: "adarshbalak@gmail.com",
+  //   password: "adarshBalaki123",
+  // }).then((res) => console.log(res));
+
   return (
     <div>
       <Navbar />

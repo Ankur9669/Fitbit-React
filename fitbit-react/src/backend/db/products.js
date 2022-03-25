@@ -8,7 +8,7 @@ import { v4 as uuid } from "uuid";
 // Don't change _id and categoryName
 export const products = [
   {
-    _id: "101",
+    _id: uuid(),
     productTitle: "Pedal Resistant Elastic",
     discountedPrice: "200",
     realPrice: "300",
@@ -21,7 +21,7 @@ export const products = [
     fastDelivery: true,
   },
   {
-    _id: "108",
+    _id: uuid(),
     productTitle: "Reebok Resistant Tube",
     discountedPrice: "500",
     realPrice: "799",
@@ -34,7 +34,7 @@ export const products = [
     fastDelivery: false,
   },
   {
-    _id: "102",
+    _id: uuid(),
     productTitle: "Hand Gloves",
     discountedPrice: "320",
     realPrice: "430",
@@ -47,7 +47,7 @@ export const products = [
     fastDelivery: true,
   },
   {
-    _id: "103",
+    _id: uuid(),
     productTitle: "Iron Kettlebell",
     discountedPrice: "450",
     realPrice: "515",
@@ -60,7 +60,7 @@ export const products = [
     fastDelivery: false,
   },
   {
-    _id: "104",
+    _id: uuid(),
     productTitle: "Indoor Cycling Bike",
     discountedPrice: "14999",
     realPrice: "16599",
@@ -73,7 +73,7 @@ export const products = [
     fastDelivery: true,
   },
   {
-    _id: "105",
+    _id: uuid(),
     productTitle: "Abs Exercise Equipment",
     discountedPrice: "16999",
     realPrice: "20000",
@@ -86,7 +86,7 @@ export const products = [
     fastDelivery: false,
   },
   {
-    _id: "110",
+    _id: uuid(),
     productTitle: "Dual Adjustable Pulley",
     discountedPrice: "25799",
     realPrice: "30999",
@@ -99,7 +99,7 @@ export const products = [
     fastDelivery: false,
   },
   {
-    _id: "106",
+    _id: uuid(),
     productTitle: "T-Shirts",
     discountedPrice: "499",
     realPrice: "699",
@@ -112,7 +112,7 @@ export const products = [
     fastDelivery: true,
   },
   {
-    _id: "107",
+    _id: uuid(),
     productTitle: "Sports Suit",
     discountedPrice: "1099",
     realPrice: "3999",
@@ -125,7 +125,7 @@ export const products = [
     fastDelivery: false,
   },
   {
-    _id: "111",
+    _id: uuid(),
     productTitle: "Full T shirt",
     discountedPrice: "1299",
     realPrice: "4999",
@@ -138,7 +138,7 @@ export const products = [
     fastDelivery: true,
   },
   {
-    _id: "109",
+    _id: uuid(),
     productTitle: "Colored Top",
     discountedPrice: "799",
     realPrice: "1099",

@@ -1,7 +1,8 @@
 import React from "react";
 import { PrimaryButton } from "../../../Components/Navbar";
-
+import { useCart } from "../../../Context/cart-context";
 function SummaryCard() {
+  const { cart, dispatch } = useCart();
   return (
     <div className="card card-vertical price-details-card">
       <div className="wrapper">
@@ -11,7 +12,7 @@ function SummaryCard() {
           </h5>
           <div className="price-details-section">
             <div className="font-medium weight-normal primary-text-color price-details-item margin-vertical-sm">
-              <span>Price (2 Items)</span>
+              <span>Price ({`${cart.length} items`})</span>
               <span>&#8377;2000</span>
             </div>
             <div className="font-medium weight-normal primary-text-color price-details-item margin-vertical-sm">
@@ -19,7 +20,7 @@ function SummaryCard() {
               <span>-&#8377;180</span>
             </div>
             <div className="font-medium weight-normal primary-text-color price-details-item margin-vertical-sm">
-              <span>Delivary Charges</span>
+              <span>Delivery Charges</span>
               <span>&#8377;40</span>
             </div>
           </div>

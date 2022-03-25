@@ -5,10 +5,13 @@ import {
   HorizontalCard,
   cartProducts,
   SummaryCard,
+  useCart,
 } from "./index";
 import "./cart.css";
 
 function Cart() {
+  const { cart, dispatch } = useCart();
+  // console.log(cart);
   return (
     <div>
       <Navbar />
@@ -18,7 +21,7 @@ function Cart() {
         <div className="spacer-3"></div>
         <div className="mycart-container grid-50-50">
           <div className="mycart-items-container">
-            {cartProducts.map((cartProduct) => {
+            {cart?.map((cartProduct) => {
               return (
                 <HorizontalCard product={cartProduct} key={cartProduct._id} />
               );
