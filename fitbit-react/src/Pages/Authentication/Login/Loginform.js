@@ -57,7 +57,7 @@ function Loginform() {
           <span>
             <input type="checkbox" value="Remember Box" id="remember-box" />
             <label
-              for="remember-box"
+              htmlFor="remember-box"
               className="font-medium remember-me-checkbox"
             >
               Remember Me
