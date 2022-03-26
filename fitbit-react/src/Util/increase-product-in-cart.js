@@ -17,7 +17,7 @@ const increaseProductCountInCart = async (productId) => {
     );
     return response.data;
   } catch (e) {
-    console.error(e);
+    console.log(e);
   }
 };
 
@@ -38,7 +38,7 @@ const updateProductCountInCart = async (productId, type) => {
     );
     return response.data;
   } catch (e) {
-    console.error(e);
+    console.log(e);
   }
 };
 export { increaseProductCountInCart, updateProductCountInCart };

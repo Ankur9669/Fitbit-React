@@ -5,6 +5,8 @@ import { useReducer } from "react";
 import RatingBar from "../RatingBar/RatingBar";
 import { useCart } from "../../Context/cart-context";
 import { addToCart } from "../../Util/add-to-cart";
+import { useUser } from "../../Context/user-context";
+import { useNavigate } from "react-router-dom";
 export {
   MdAddShoppingCart,
   AiFillHeart,
@@ -13,5 +15,7 @@ export {
   useReducer,
   RatingBar,
   useCart,
+  useUser,
   addToCart,
+  useNavigate,
 };

@@ -8,11 +8,15 @@ import {
   useReducer,
   RatingBar,
   useCart,
+  useUser,
   addToCart,
+  useNavigate,
 } from "./index";
-import Axios from "axios";
+
 function VerticalCard({ product }) {
   const { cart, dispatch } = useCart();
+  const { user, dispatchUser } = useUser();
+  const navigate = useNavigate();
   const {
     _id,
     productTitle,
@@ -26,17 +30,11 @@ function VerticalCard({ product }) {
     rating,
   } = product;
 
-  const token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiIyMWM3MmY1OC1jNTIzLTQwZGUtODBjNS03MTc5NmZhZGY5ZjUiLCJlbWFpbCI6ImFkYXJzaGJhbGFrQGdtYWlsLmNvbSIsImlhdCI6MTY0Nzc3NDM4OX0.OzZVopq6Zj7iUf8MmNSk50SUs9MzfTXtR-Uenl5B8b8";
-
-  const removefromCart = () => {
-    dispatch({
-      type: "REMOVE_FROM_CART",
-      payload: {
-        _id: _id,
-      },
-    });
+  // Function to check if product exists in cart
+  const findIfProductExistInCart = (productId) => {
+    return cart.some((cartItem) => cartItem._id === productId);
   };
+
   return (
     <a className="card card-vertical card-hover">
       <div className="image-container">
@@ -80,11 +78,20 @@ function VerticalCard({ product }) {
           />
           <SecondaryButton
             buttonText={"Add to cart"}
-            onClick={async () => {
-              const cart = await addToCart(product, token);
-              dispatch({ type: "SET_CART", payload: { value: cart.cart } });
-            }}
-            //This Token would be removed when implementing signup login
+            onClick={
+              user.isUserLoggedIn
+                ? async () => {
+                    const productExistsInCart = findIfProductExistInCart(_id);
+                    if (!productExistsInCart) {
+                      const cart = await addToCart(product);
+                      dispatch({
+                        type: "SET_CART",
+                        payload: { value: cart.cart },
+                      });
+                    }
+                  }
+                : () => navigate("/login")
+            }
           />
         </div>
       </div>

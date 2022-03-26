@@ -8,6 +8,7 @@ import { Route, Routes } from "react-router-dom";
 import MockMan from "mockman-js";
 import Login from "./Pages/Authentication/Login/Login";
 import ForgotPassword from "./Pages/Authentication/ForgotPassword/ForgotPassword";
+
 function App() {
   return (
     <div className="App">

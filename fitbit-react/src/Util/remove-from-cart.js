@@ -1,6 +1,7 @@
 import Axios from "axios";
 
-const removeFromCart = async (_id, token) => {
+const removeFromCart = async (_id) => {
+  const token = localStorage.getItem("token");
   try {
     const response = await Axios.delete(`/api/user/cart/${_id}`, {
       headers: {

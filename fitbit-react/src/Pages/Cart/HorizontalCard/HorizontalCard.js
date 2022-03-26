@@ -9,10 +9,7 @@ import {
 } from "./index";
 import "./horizontalcard.css";
 import { token } from "../../../Util/token";
-import {
-  increaseProductCountInCart,
-  updateProductCountInCart,
-} from "../../../Util/increase-product-in-cart";
+import { updateProductCountInCart } from "../../../Util/update-product-in-cart";
 function HorizontalCard({
   product: {
     _id,
@@ -97,7 +94,7 @@ function HorizontalCard({
             buttonText={"Remove From Cart"}
             className={"my-cart-cta-btn"}
             onClick={async () => {
-              const cart = await removeFromCart(_id, token);
+              const cart = await removeFromCart(_id);
               // console.log(cart.cart);
               dispatch({ type: "SET_CART", payload: { value: cart.cart } });
             }}
