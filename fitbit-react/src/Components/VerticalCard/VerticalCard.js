@@ -13,7 +13,6 @@ import {
   useNavigate,
 } from "./index";
 
-import Axios from "axios";
 function VerticalCard({ product }) {
   const { cart, dispatch } = useCart();
   const { user, dispatchUser } = useUser();
@@ -31,14 +30,11 @@ function VerticalCard({ product }) {
     rating,
   } = product;
 
-  // const removefromCart = () => {
-  //   dispatch({
-  //     type: "REMOVE_FROM_CART",
-  //     payload: {
-  //       _id: _id,
-  //     },
-  //   });
-  // };
+  // Function to check if product exists in cart
+  const findIfProductExistInCart = (productId) => {
+    return cart.some((cartItem) => cartItem._id === productId);
+  };
+
   return (
     <a className="card card-vertical card-hover">
       <div className="image-container">
@@ -85,15 +81,17 @@ function VerticalCard({ product }) {
             onClick={
               user.isUserLoggedIn
                 ? async () => {
-                    const cart = await addToCart(product);
-                    dispatch({
-                      type: "SET_CART",
-                      payload: { value: cart.cart },
-                    });
+                    const productExistsInCart = findIfProductExistInCart(_id);
+                    if (!productExistsInCart) {
+                      const cart = await addToCart(product);
+                      dispatch({
+                        type: "SET_CART",
+                        payload: { value: cart.cart },
+                      });
+                    }
                   }
                 : () => navigate("/login")
             }
-            //This Token would be removed when implementing signup login
           />
         </div>
       </div>

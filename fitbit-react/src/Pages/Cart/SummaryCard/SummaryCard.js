@@ -2,7 +2,10 @@ import React from "react";
 import { PrimaryButton } from "../../../Components/Navbar";
 import { useCart } from "../../../Context/cart-context";
 function SummaryCard() {
-  const { cart, dispatch } = useCart();
+  const { cart, dispatch, totalPrice } = useCart();
+  const discountPrice = 180;
+  const deliveryCharges = 40;
+  const priceToPay = totalPrice - discountPrice + deliveryCharges;
   return (
     <div className="card card-vertical price-details-card">
       <div className="wrapper">
@@ -13,21 +16,21 @@ function SummaryCard() {
           <div className="price-details-section">
             <div className="font-medium weight-normal primary-text-color price-details-item margin-vertical-sm">
               <span>Price ({`${cart.length} items`})</span>
-              <span>&#8377;2000</span>
+              <span>&#8377;{totalPrice}</span>
             </div>
             <div className="font-medium weight-normal primary-text-color price-details-item margin-vertical-sm">
               <span>Discount</span>
-              <span>-&#8377;180</span>
+              <span>-&#8377;{discountPrice}</span>
             </div>
             <div className="font-medium weight-normal primary-text-color price-details-item margin-vertical-sm">
               <span>Delivery Charges</span>
-              <span>&#8377;40</span>
+              <span>&#8377;{deliveryCharges}</span>
             </div>
           </div>
           <div className="price-details-section">
             <div className="font-medium weight-semi-bold primary-text-color price-details-item margin-vertical-sm">
               <span>TOTAL AMOUNT</span>
-              <span>&#8377;1860</span>
+              <span>&#8377;{priceToPay}</span>
             </div>
           </div>
           <div className="price-details-section">
