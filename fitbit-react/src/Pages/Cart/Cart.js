@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Navbar,
   Footer,
@@ -9,11 +9,19 @@ import {
 } from "./index";
 import "./cart.css";
 import { PrimaryButton } from "./HorizontalCard";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useUser } from "../../Context/user-context";
 
 function Cart() {
   const { cart, dispatch } = useCart();
+  const { user, dispatchUser } = useUser();
+  const navigate = useNavigate();
   // console.log(cart);
+
+  useEffect(() => {
+    !user.isUserLoggedIn && navigate("/login");
+  }, []);
+
   return (
     <div>
       <Navbar />

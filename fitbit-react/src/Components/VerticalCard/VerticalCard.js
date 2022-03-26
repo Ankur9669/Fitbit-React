@@ -8,11 +8,16 @@ import {
   useReducer,
   RatingBar,
   useCart,
+  useUser,
   addToCart,
+  useNavigate,
 } from "./index";
+
 import Axios from "axios";
 function VerticalCard({ product }) {
   const { cart, dispatch } = useCart();
+  const { user, dispatchUser } = useUser();
+  const navigate = useNavigate();
   const {
     _id,
     productTitle,
@@ -80,10 +85,17 @@ function VerticalCard({ product }) {
           />
           <SecondaryButton
             buttonText={"Add to cart"}
-            onClick={async () => {
-              const cart = await addToCart(product, token);
-              dispatch({ type: "SET_CART", payload: { value: cart.cart } });
-            }}
+            onClick={
+              user.isUserLoggedIn
+                ? async () => {
+                    const cart = await addToCart(product, token);
+                    dispatch({
+                      type: "SET_CART",
+                      payload: { value: cart.cart },
+                    });
+                  }
+                : () => navigate("/login")
+            }
             //This Token would be removed when implementing signup login
           />
         </div>

@@ -7,6 +7,9 @@ import {
 import { PrimaryButton, SecondaryButton } from "../../Cart/HorizontalCard";
 import { Link } from "react-router-dom";
 import "../authentication.css";
+import Axios from "axios";
+import { useUser } from "../../../Context/user-context";
+
 function SignupForm() {
   const [formDetails, setFormDetails] = useState({
     firstName: "",
@@ -15,6 +18,35 @@ function SignupForm() {
     password: "",
   });
   const [isPasswordVisible, setPasswordVisible] = useState(false);
+  const { user, dispatchUser } = useUser();
+
+  const onSubmitForm = (e) => {
+    //TODO VALIDATIONS
+    e.preventDefault();
+    signUpUser();
+  };
+
+  const signUpUser = async () => {
+    try {
+      const response = await Axios.post("/api/auth/signup", {
+        firstName: formDetails.firstName,
+        lastName: formDetails.lastName,
+        email: formDetails.email,
+        password: formDetails.password,
+      });
+
+      const token = response.data.encodedToken;
+      localStorage.setItem("token", token);
+
+      dispatchUser({
+        type: "LOGIN",
+        payload: { value: response.data.createdUser },
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <div className="authentication-form-container">
       <form className="authentication-form">
@@ -32,6 +64,7 @@ function SignupForm() {
             onChange={(e) =>
               setFormDetails({ ...formDetails, firstName: e.target.value })
             }
+            required
           />
         </div>
 
@@ -43,6 +76,7 @@ function SignupForm() {
             onChange={(e) =>
               setFormDetails({ ...formDetails, lastName: e.target.value })
             }
+            required
           />
         </div>
 
@@ -54,6 +88,7 @@ function SignupForm() {
             onChange={(e) =>
               setFormDetails({ ...formDetails, email: e.target.value })
             }
+            required
           />
           <AiOutlineMail className="mail-icon" />
         </div>
@@ -65,6 +100,7 @@ function SignupForm() {
             onChange={(e) =>
               setFormDetails({ ...formDetails, password: e.target.value })
             }
+            required
           />
           {isPasswordVisible ? (
             <AiFillEye
@@ -82,6 +118,7 @@ function SignupForm() {
         <PrimaryButton
           buttonText="Create New Account"
           className="form-cta-button"
+          onClick={(e) => onSubmitForm(e)}
         />
 
         <Link to="/login">

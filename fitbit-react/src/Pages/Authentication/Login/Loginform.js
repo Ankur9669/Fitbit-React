@@ -5,13 +5,87 @@ import {
   AiFillEye,
 } from "../../../Assets/icons";
 import { PrimaryButton, SecondaryButton } from "../../Cart/HorizontalCard";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import Axios from "axios";
+import { useUser } from "../../../Context/user-context";
+import { useCart } from "../../../Context/cart-context";
+
 function Loginform() {
   const [formDetails, setFormDetails] = useState({
     email: "",
     password: "",
   });
   const [isPasswordVisible, setPasswordVisible] = useState(false);
+  const { user, dispatchUser } = useUser();
+  const { cart, dispatch: dispatchCart } = useCart();
+  const navigate = useNavigate();
+
+  const onSubmitForm = (e) => {
+    //TODO VALIDATIONS
+    e.preventDefault();
+    loginUser();
+  };
+  const loginUser = async () => {
+    try {
+      const response = await Axios.post("/api/auth/login", {
+        email: formDetails.email,
+        password: formDetails.password,
+      });
+
+      // console.log(response);
+      const token = response.data.encodedToken;
+      localStorage.setItem("token", token);
+
+      dispatchUser({
+        type: "LOGIN",
+        payload: { value: response.data.foundUser },
+      });
+
+      dispatchCart({
+        type: "SET_CART",
+        payload: {
+          value: response.data.foundUser.cart,
+        },
+      });
+
+      navigate("/");
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const loginAsGuest = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await Axios.post("/api/auth/login", {
+        email: "adarshbalika@gmail.com",
+        password: "adarshBalika123",
+      });
+
+      console.log(response);
+      const token = response.data.encodedToken;
+      localStorage.setItem("token", token);
+
+      dispatchUser({
+        type: "LOGIN",
+        payload: { value: response.data.foundUser },
+      });
+
+      dispatchCart({
+        type: "SET_CART",
+        payload: {
+          value: response.data.foundUser.cart,
+        },
+      });
+
+      //TODO set wishlist here
+
+      navigate("/");
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <div className="authentication-form-container">
       <form className="authentication-form">
@@ -29,6 +103,7 @@ function Loginform() {
             onChange={(e) =>
               setFormDetails({ ...formDetails, email: e.target.value })
             }
+            required
           />
           <AiOutlineMail className="mail-icon" />
         </div>
@@ -40,6 +115,7 @@ function Loginform() {
             onChange={(e) =>
               setFormDetails({ ...formDetails, password: e.target.value })
             }
+            required
           />
           {isPasswordVisible ? (
             <AiFillEye
@@ -70,7 +146,19 @@ function Loginform() {
             Forgot Password
           </Link>
         </div>
-        <PrimaryButton buttonText="Login" className="form-cta-button" />
+
+        <PrimaryButton
+          buttonText="Login As Guest"
+          className="form-cta-button"
+          onClick={(e) => loginAsGuest(e)}
+        />
+
+        <PrimaryButton
+          buttonText="Login"
+          className="form-cta-button"
+          onClick={(e) => onSubmitForm(e)}
+        />
+
         <Link to="/signup">
           <SecondaryButton
             buttonText="SignUp With Us"
