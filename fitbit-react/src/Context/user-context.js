@@ -12,7 +12,7 @@ const reducer = (state, action) => {
       return { ...state, user: action.payload.value, isUserLoggedIn: true };
 
     case "LOGOUT":
-      return { ...state, user: action.payload.value, isUserLoggedIn: false };
+      return initialState;
   }
 };
 const UserProvider = ({ children }) => {

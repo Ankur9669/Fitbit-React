@@ -1,12 +1,14 @@
 import Axios from "axios";
 
-const addToCart = async (product) => {
+const updateProductCountInCart = async (productId, type) => {
   const token = localStorage.getItem("token");
   try {
     const response = await Axios.post(
-      "/api/user/cart",
+      `/api/user/cart/${productId}`,
       {
-        product,
+        action: {
+          type: type,
+        },
       },
       {
         headers: {
@@ -16,10 +18,7 @@ const addToCart = async (product) => {
     );
     return response.data;
   } catch (e) {
-    //TODO Implement Toast Here
     console.error(e);
   }
-  return [];
 };
-
-export { addToCart };
+export { updateProductCountInCart };

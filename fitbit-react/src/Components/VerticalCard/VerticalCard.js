@@ -31,17 +31,14 @@ function VerticalCard({ product }) {
     rating,
   } = product;
 
-  const token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiIyMWM3MmY1OC1jNTIzLTQwZGUtODBjNS03MTc5NmZhZGY5ZjUiLCJlbWFpbCI6ImFkYXJzaGJhbGFrQGdtYWlsLmNvbSIsImlhdCI6MTY0Nzc3NDM4OX0.OzZVopq6Zj7iUf8MmNSk50SUs9MzfTXtR-Uenl5B8b8";
-
-  const removefromCart = () => {
-    dispatch({
-      type: "REMOVE_FROM_CART",
-      payload: {
-        _id: _id,
-      },
-    });
-  };
+  // const removefromCart = () => {
+  //   dispatch({
+  //     type: "REMOVE_FROM_CART",
+  //     payload: {
+  //       _id: _id,
+  //     },
+  //   });
+  // };
   return (
     <a className="card card-vertical card-hover">
       <div className="image-container">
@@ -88,7 +85,7 @@ function VerticalCard({ product }) {
             onClick={
               user.isUserLoggedIn
                 ? async () => {
-                    const cart = await addToCart(product, token);
+                    const cart = await addToCart(product);
                     dispatch({
                       type: "SET_CART",
                       payload: { value: cart.cart },
