@@ -10,7 +10,7 @@ const removeFromCart = async (_id, token) => {
     return response.data;
   } catch (e) {
     //TODO Implement Toast Here
-    console.log(e);
+    console.error(e);
   }
   return [];
 };

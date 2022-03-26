@@ -14,7 +14,10 @@ function Navbar() {
 
       <div className="nav-items-container-end">
         <div className="login-search-bar-container">
-          <PrimaryButton buttonText={"Login"} />
+          <Link to="/login">
+            <PrimaryButton buttonText={"Login"} />
+          </Link>
+
           <SearchBar />
         </div>
         <NavbarIcons />
