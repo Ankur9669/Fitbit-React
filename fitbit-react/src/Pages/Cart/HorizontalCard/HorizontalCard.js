@@ -8,7 +8,8 @@ import {
   useCart,
   useWishList,
   addToWishList,
-  findIfProductExistInWishList,
+  removeFromWishList,
+  findIfProductExistsInArray,
 } from "./index";
 import "./horizontalcard.css";
 import { updateProductCountInCart } from "../../../Util/update-product-in-cart";
@@ -39,7 +40,7 @@ function HorizontalCard({ product }) {
     }
   };
 
-  let ifProductExistsInWishList = findIfProductExistInWishList(wishlist, _id);
+  let ifProductExistsInWishList = findIfProductExistsInArray(wishlist, _id);
 
   return (
     <div className="card card-horizontal my-cart-card">
@@ -93,16 +94,23 @@ function HorizontalCard({ product }) {
 
         <div className="btn-container my-cart-cta-btn-container">
           <PrimaryButton
-            buttonText={"Move to Wishlist"}
+            buttonText={
+              ifProductExistsInWishList
+                ? "Remove from Wishlist"
+                : "Move to Wishlist"
+            }
             className={"my-cart-cta-btn"}
             onClick={async () => {
+              let wishList = [];
               if (!ifProductExistsInWishList) {
-                const wishList = await addToWishList(product);
-                dispatchWishList({
-                  type: "SET_WISHLIST",
-                  payload: { value: wishList.wishlist },
-                });
+                wishList = await addToWishList(product);
+              } else {
+                wishList = await removeFromWishList(_id);
               }
+              dispatchWishList({
+                type: "SET_WISHLIST",
+                payload: { value: wishList.wishlist },
+              });
             }}
           />
           <SecondaryButton

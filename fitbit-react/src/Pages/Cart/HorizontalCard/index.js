@@ -6,7 +6,8 @@ import { removeFromCart } from "../../../Util/remove-from-cart";
 import { useCart } from "../../../Context/cart-context";
 import { useWishList } from "../../../Context/wishlist-context";
 import { addToWishList } from "../../../Util/add-to-wishlist";
-import { findIfProductExistInWishList } from "../../../Util/find-if-product-exists-in-wishlist";
+import { removeFromWishList } from "../../../Util/remove-from-wishlist";
+import { findIfProductExistsInArray } from "../../../Util/find-if-product-exists-in-array";
 export {
   AiFillMinusCircle,
   IoIosAddCircle,
@@ -16,5 +17,6 @@ export {
   useCart,
   useWishList,
   addToWishList,
-  findIfProductExistInWishList,
+  removeFromWishList,
+  findIfProductExistsInArray,
 };
