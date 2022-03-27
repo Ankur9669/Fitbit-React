@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./verticalcard.css";
 import {
   MdAddShoppingCart,
@@ -14,10 +14,13 @@ import {
 } from "./index";
 
 import Axios from "axios";
+import { useWishList } from "../../Context/wishlist-context";
 function VerticalCard({ product }) {
   const { cart, dispatch } = useCart();
   const { user, dispatchUser } = useUser();
+  const { wishlist, dispatchWishList } = useWishList();
   const navigate = useNavigate();
+  const [isLiked, setIsLiked] = useState(false);
   const {
     _id,
     productTitle,
@@ -36,6 +39,11 @@ function VerticalCard({ product }) {
     return cart.some((cartItem) => cartItem._id === productId);
   };
 
+  // Function to check if product exists in wishlist
+  const findIfProductExistInWishList = () => {
+    return wishlist.some((wishListItem) => wishListItem._id === _id);
+  };
+
   return (
     <a className="card card-vertical card-hover">
       <div className="image-container">
@@ -50,7 +58,26 @@ function VerticalCard({ product }) {
         <div className="text-container">
           <h5 className="font-medium-large weight-semi-bold primary-text-color card-vertical-heading">
             {productTitle}
-            <AiFillHeart style={{ fontSize: "1.7rem" }} />
+            <AiFillHeart
+              style={{ fontSize: "1.7rem", color: "red" }}
+              onClick={
+                user.isUserLoggedIn
+                  ? async () => {
+                      const wishList = await addToCart(product);
+                      console.log(wishList);
+                      dispatchWishList({
+                        type: "SET_WISHLIST",
+                        payload: { value: wishList.wishList },
+                      });
+                    }
+                  : () => navigate("/login")
+              }
+            />
+            {/* {isLiked ? (
+              <AiFillHeart style={{ fontSize: "1.7rem", color: "red" }} />
+            ) : (
+              <AiFillHeart style={{ fontSize: "1.7rem" }} />
+            )} */}
           </h5>
           <div className="price-container">
             <p className="font-medium inline-block weight-semi-bold primary-text-color">
