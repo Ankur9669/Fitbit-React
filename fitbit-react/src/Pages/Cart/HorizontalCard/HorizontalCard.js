@@ -6,12 +6,15 @@ import {
   SecondaryButton,
   removeFromCart,
   useCart,
+  useWishList,
+  addToWishList,
+  findIfProductExistInWishList,
 } from "./index";
 import "./horizontalcard.css";
-import { token } from "../../../Util/token";
 import { updateProductCountInCart } from "../../../Util/update-product-in-cart";
-function HorizontalCard({
-  product: {
+
+function HorizontalCard({ product }) {
+  const {
     _id,
     productTitle,
     discountedPrice,
@@ -23,9 +26,9 @@ function HorizontalCard({
     inStock,
     fastDelivery,
     qty,
-  },
-}) {
+  } = product;
   const { cart, dispatch } = useCart();
+  const { wishlist, dispatchWishList } = useWishList();
 
   const findIfProductExistsInCardAndUpdate = async (productId, type) => {
     let isPresent = cart.some((cartItem) => cartItem._id === productId);
@@ -35,6 +38,9 @@ function HorizontalCard({
       dispatch({ type: "SET_CART", payload: { value: cart.cart } });
     }
   };
+
+  let ifProductExistsInWishList = findIfProductExistInWishList(wishlist, _id);
+
   return (
     <div className="card card-horizontal my-cart-card">
       <div className="image-container">
@@ -89,13 +95,21 @@ function HorizontalCard({
           <PrimaryButton
             buttonText={"Move to Wishlist"}
             className={"my-cart-cta-btn"}
+            onClick={async () => {
+              if (!ifProductExistsInWishList) {
+                const wishList = await addToWishList(product);
+                dispatchWishList({
+                  type: "SET_WISHLIST",
+                  payload: { value: wishList.wishlist },
+                });
+              }
+            }}
           />
           <SecondaryButton
             buttonText={"Remove From Cart"}
             className={"my-cart-cta-btn"}
             onClick={async () => {
               const cart = await removeFromCart(_id);
-              // console.log(cart.cart);
               dispatch({ type: "SET_CART", payload: { value: cart.cart } });
             }}
           />

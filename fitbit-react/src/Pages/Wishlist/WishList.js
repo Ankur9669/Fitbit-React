@@ -1,9 +1,10 @@
 import React from "react";
 import VerticalCard from "../../Components/VerticalCard/VerticalCard";
-import { wishListProducts } from "../../Temp/wishlist-products";
+import { useWishList } from "../../Context/wishlist-context";
 import { Navbar, Footer, AiFillHeart } from "./index";
 import "./wishlist.css";
 function WishList() {
+  const { wishlist } = useWishList();
   return (
     <div>
       <Navbar />
@@ -12,7 +13,7 @@ function WishList() {
         <h3 class="h2 centered-text">My WishList</h3>
         <div class="spacer-3"></div>
         <div class="wishlist-products-container">
-          {wishListProducts.map((wishListProduct) => {
+          {wishlist?.map((wishListProduct) => {
             return (
               <VerticalCard
                 key={wishListProduct?._id}

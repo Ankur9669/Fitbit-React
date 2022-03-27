@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./verticalcard.css";
 import {
   MdAddShoppingCart,
@@ -11,16 +11,18 @@ import {
   useUser,
   addToCart,
   useNavigate,
+  findIfProductExistInWishList,
 } from "./index";
-
-import Axios from "axios";
 import { useWishList } from "../../Context/wishlist-context";
+import { addToWishList } from "../../Util/add-to-wishlist";
+import { removeFromWishList } from "../../Util/remove-from-wishlist";
+
 function VerticalCard({ product }) {
   const { cart, dispatch } = useCart();
   const { user, dispatchUser } = useUser();
   const { wishlist, dispatchWishList } = useWishList();
   const navigate = useNavigate();
-  const [isLiked, setIsLiked] = useState(false);
+
   const {
     _id,
     productTitle,
@@ -39,10 +41,7 @@ function VerticalCard({ product }) {
     return cart.some((cartItem) => cartItem._id === productId);
   };
 
-  // Function to check if product exists in wishlist
-  const findIfProductExistInWishList = () => {
-    return wishlist.some((wishListItem) => wishListItem._id === _id);
-  };
+  let ifProductExistsInWishList = findIfProductExistInWishList(wishlist, _id);
 
   return (
     <a className="card card-vertical card-hover">
@@ -59,15 +58,23 @@ function VerticalCard({ product }) {
           <h5 className="font-medium-large weight-semi-bold primary-text-color card-vertical-heading">
             {productTitle}
             <AiFillHeart
-              style={{ fontSize: "1.7rem", color: "red" }}
+              style={
+                ifProductExistsInWishList
+                  ? { fontSize: "1.7rem", color: "red" }
+                  : { fontSize: "1.7rem" }
+              }
               onClick={
                 user.isUserLoggedIn
                   ? async () => {
-                      const wishList = await addToCart(product);
-                      console.log(wishList);
+                      let wishList = [];
+                      if (!ifProductExistsInWishList) {
+                        wishList = await addToWishList(product);
+                      } else {
+                        wishList = await removeFromWishList(_id);
+                      }
                       dispatchWishList({
                         type: "SET_WISHLIST",
-                        payload: { value: wishList.wishList },
+                        payload: { value: wishList.wishlist },
                       });
                     }
                   : () => navigate("/login")

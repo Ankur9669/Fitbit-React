@@ -1,9 +1,10 @@
-const wishListReducer = (cart, action) => {
+const wishListReducer = (wishlist, action) => {
   switch (action.type) {
     case "SET_WISHLIST":
-      return action.payload.value;
+      console.log(action.payload.value);
+      return [...action.payload.value];
     default:
-      return cart;
+      return wishlist;
   }
 };
 export { wishListReducer };

@@ -7,6 +7,7 @@ import { useCart } from "../../Context/cart-context";
 import { addToCart } from "../../Util/add-to-cart";
 import { useUser } from "../../Context/user-context";
 import { useNavigate } from "react-router-dom";
+import { findIfProductExistInWishList } from "../../Util/find-if-product-exists-in-wishlist";
 export {
   MdAddShoppingCart,
   AiFillHeart,
@@ -18,4 +19,5 @@ export {
   useUser,
   addToCart,
   useNavigate,
+  findIfProductExistInWishList,
 };
