@@ -13,6 +13,7 @@ import {
   useNavigate,
 } from "./index";
 
+import Axios from "axios";
 function VerticalCard({ product }) {
   const { cart, dispatch } = useCart();
   const { user, dispatchUser } = useUser();
