@@ -8,10 +8,27 @@ import { Route, Routes } from "react-router-dom";
 import MockMan from "mockman-js";
 import Login from "./Pages/Authentication/Login/Login";
 import ForgotPassword from "./Pages/Authentication/ForgotPassword/ForgotPassword";
+import { useToast } from "./Context/toast-context";
+import Toasts from "./Util/Toasts/Toasts";
+import { v4 as uuid } from "uuid";
 
 function App() {
+  const { dispatchToast } = useToast();
   return (
     <div className="App">
+      <Toasts />
+      <button
+        onClick={() =>
+          dispatchToast({
+            type: "ADD_TOAST",
+            payload: {
+              value: { id: uuid(), title: "Test", description: "HAHAHAHAHAH" },
+            },
+          })
+        }
+      >
+        Add Toasts
+      </button>
       <Routes>
         <Route index element={<Homepage />}></Route>
         <Route path="products" element={<ProductPage />}></Route>
