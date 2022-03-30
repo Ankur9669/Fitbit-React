@@ -39,13 +39,37 @@ function VerticalCard({ product }) {
     rating,
   } = product;
 
-  // Function to check if product exists in cart
-  // const findIfProductExistInCart = (productId) => {
-  //   return cart.some((cartItem) => cartItem._id === productId);
-  // };
+  const ifProductExistInCart = findIfProductExistsInArray(cart, _id);
+  const ifProductExistsInWishList = findIfProductExistsInArray(wishlist, _id);
 
-  let ifProductExistInCart = findIfProductExistsInArray(cart, _id);
-  let ifProductExistsInWishList = findIfProductExistsInArray(wishlist, _id);
+  const redirectToLoginPage = () => {
+    navigate("/login");
+  };
+  const updateCart = async () => {
+    let cart = [];
+    if (!ifProductExistInCart) {
+      cart = await addToCart(product);
+    } else {
+      cart = await removeFromCart(_id);
+    }
+    dispatch({
+      type: "SET_CART",
+      payload: { value: cart.cart },
+    });
+  };
+
+  const updateWishList = async () => {
+    let wishList = [];
+    if (!ifProductExistsInWishList) {
+      wishList = await addToWishList(product);
+    } else {
+      wishList = await removeFromWishList(_id);
+    }
+    dispatchWishList({
+      type: "SET_WISHLIST",
+      payload: { value: wishList.wishlist },
+    });
+  };
 
   return (
     <a className="card card-vertical card-hover">
@@ -68,20 +92,7 @@ function VerticalCard({ product }) {
                   : { fontSize: "1.7rem" }
               }
               onClick={
-                user.isUserLoggedIn
-                  ? async () => {
-                      let wishList = [];
-                      if (!ifProductExistsInWishList) {
-                        wishList = await addToWishList(product);
-                      } else {
-                        wishList = await removeFromWishList(_id);
-                      }
-                      dispatchWishList({
-                        type: "SET_WISHLIST",
-                        payload: { value: wishList.wishlist },
-                      });
-                    }
-                  : () => navigate("/login")
+                user.isUserLoggedIn ? updateWishList : redirectToLoginPage
               }
             />
           </h5>
@@ -114,22 +125,7 @@ function VerticalCard({ product }) {
             buttonText={
               ifProductExistInCart ? "Remove from cart" : "Add to Cart"
             }
-            onClick={
-              user.isUserLoggedIn
-                ? async () => {
-                    let cart = [];
-                    if (!ifProductExistInCart) {
-                      cart = await addToCart(product);
-                    } else {
-                      cart = await removeFromCart(_id);
-                    }
-                    dispatch({
-                      type: "SET_CART",
-                      payload: { value: cart.cart },
-                    });
-                  }
-                : () => navigate("/login")
-            }
+            onClick={user.isUserLoggedIn ? updateCart : redirectToLoginPage}
           />
         </div>
       </div>
