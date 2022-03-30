@@ -9,7 +9,6 @@ const reducer = (state, action) => {
       return action.payload;
 
     case "ADD_TOAST":
-      console.log(action.payload.value);
       return [...state, action.payload.value];
 
     default:

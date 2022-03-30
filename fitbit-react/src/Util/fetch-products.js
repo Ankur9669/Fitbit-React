@@ -4,7 +4,6 @@ const fetchProducts = async () => {
     const response = await Axios.get("api/products");
     const products = response?.data?.products;
 
-    // console.log(products);
     return {
       data: products,
       success: true,

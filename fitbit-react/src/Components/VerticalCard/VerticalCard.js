@@ -9,11 +9,13 @@ import {
   RatingBar,
   useCart,
   useUser,
+  useToast,
   addToCart,
   removeFromCart,
   useNavigate,
   findIfProductExistInWishList,
   findIfProductExistsInArray,
+  uuid,
 } from "./index";
 import { useWishList } from "../../Context/wishlist-context";
 import { addToWishList } from "../../Util/add-to-wishlist";
@@ -24,6 +26,7 @@ function VerticalCard({ product }) {
   const { cart, dispatch } = useCart();
   const { user, dispatchUser } = useUser();
   const { wishlist, dispatchWishList } = useWishList();
+  const { dispatchToast } = useToast();
   const navigate = useNavigate();
 
   const {
@@ -45,12 +48,35 @@ function VerticalCard({ product }) {
   const redirectToLoginPage = () => {
     navigate("/login");
   };
+
+  const showToast = (title, type) => {
+    dispatchToast({
+      type: "ADD_TOAST",
+      payload: {
+        value: { id: uuid(), title: title, type: type },
+      },
+    });
+  };
+
+  // Function to update cart
   const updateCart = async () => {
     let cart = [];
     if (!ifProductExistInCart) {
-      cart = await addToCart(product);
+      const { data, success, message } = await addToCart(product);
+      if (success) {
+        cart = data;
+        showToast(message, "SUCCESS");
+      } else {
+        showToast(message, "ERROR");
+      }
     } else {
-      cart = await removeFromCart(_id);
+      const { data, success, message } = await removeFromCart(_id);
+      if (success) {
+        cart = data;
+        showToast(message, "SUCCESS");
+      } else {
+        showToast(message, "ERROR");
+      }
     }
     dispatch({
       type: "SET_CART",
@@ -58,12 +84,26 @@ function VerticalCard({ product }) {
     });
   };
 
+  // Function to update wishlist
   const updateWishList = async () => {
     let wishList = [];
     if (!ifProductExistsInWishList) {
-      wishList = await addToWishList(product);
+      const { data, success, message } = await addToWishList(product);
+      if (success) {
+        console.log(data);
+        wishList = data;
+        showToast(message, "SUCCESS");
+      } else {
+        showToast(message, "ERROR");
+      }
     } else {
-      wishList = await removeFromWishList(_id);
+      const { data, success, message } = await removeFromWishList(_id);
+      if (success) {
+        wishList = data;
+        showToast(message, "SUCCESS");
+      } else {
+        showToast(message, "ERROR");
+      }
     }
     dispatchWishList({
       type: "SET_WISHLIST",

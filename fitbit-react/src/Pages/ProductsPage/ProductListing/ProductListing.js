@@ -6,12 +6,15 @@ import {
   filterByCategory,
   sortByHighToLow,
   sortByLowToHigh,
+  useToast,
+  uuid,
 } from "../index";
 import { fetchProducts } from "../../../Util/fetch-products";
 
 function ProductListing() {
   const { filters, dispatch } = useFilter();
   const { products, dispatch: dispatchProducts } = useProduct();
+  const { dispatchToast } = useToast();
 
   const getSortedData = (state, filteredData) => {
     let updatedData = [...filteredData];
@@ -71,7 +74,13 @@ function ProductListing() {
           payload: { products: data },
         });
       } else {
-        console.log(message);
+        //TODO: Find a Better Way to show toasts
+        dispatchToast({
+          type: "ADD_TOAST",
+          payload: {
+            value: { id: uuid(), title: "Something Went Wrong", type: "ERROR" },
+          },
+        });
       }
     })();
   }, []);
