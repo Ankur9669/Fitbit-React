@@ -19,6 +19,7 @@ import { useWishList } from "../../Context/wishlist-context";
 import { addToWishList } from "../../Util/add-to-wishlist";
 import { removeFromWishList } from "../../Util/remove-from-wishlist";
 
+import Axios from "axios";
 function VerticalCard({ product }) {
   const { cart, dispatch } = useCart();
   const { user, dispatchUser } = useUser();
