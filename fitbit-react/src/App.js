@@ -17,18 +17,18 @@ function App() {
   return (
     <div className="App">
       <Toasts />
-      <button
+      {/* <button
         onClick={() =>
           dispatchToast({
             type: "ADD_TOAST",
             payload: {
-              value: { id: uuid(), title: "Test", description: "HAHAHAHAHAH" },
+              value: { id: uuid(), title: "Test", type: "SUCCESS" },
             },
           })
         }
       >
         Add Toasts
-      </button>
+      </button> */}
       <Routes>
         <Route index element={<Homepage />}></Route>
         <Route path="products" element={<ProductPage />}></Route>

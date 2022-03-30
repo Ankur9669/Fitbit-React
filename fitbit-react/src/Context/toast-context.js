@@ -6,12 +6,12 @@ const initialState = [];
 const reducer = (state, action) => {
   switch (action.type) {
     case "SET_LIST":
-      console.log(action.payload.value);
       return action.payload;
 
     case "ADD_TOAST":
       console.log(action.payload.value);
       return [...state, action.payload.value];
+
     default:
       return state;
   }
