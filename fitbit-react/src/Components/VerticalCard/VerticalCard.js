@@ -16,12 +16,11 @@ import {
   findIfProductExistInWishList,
   findIfProductExistsInArray,
   uuid,
+  addToWishList,
+  removeFromWishList,
+  useWishList,
 } from "./index";
-import { useWishList } from "../../Context/wishlist-context";
-import { addToWishList } from "../../Util/add-to-wishlist";
-import { removeFromWishList } from "../../Util/remove-from-wishlist";
 
-import Axios from "axios";
 function VerticalCard({ product }) {
   const { cart, dispatch } = useCart();
   const { user, dispatchUser } = useUser();
@@ -46,9 +45,11 @@ function VerticalCard({ product }) {
   const ifProductExistsInWishList = findIfProductExistsInArray(wishlist, _id);
 
   const redirectToLoginPage = () => {
+    showToast("Please Login First", "ERROR");
     navigate("/login");
   };
 
+  // Function to show Toast
   const showToast = (title, type) => {
     dispatchToast({
       type: "ADD_TOAST",
@@ -90,7 +91,6 @@ function VerticalCard({ product }) {
     if (!ifProductExistsInWishList) {
       const { data, success, message } = await addToWishList(product);
       if (success) {
-        console.log(data);
         wishList = data;
         showToast(message, "SUCCESS");
       } else {

@@ -10,6 +10,9 @@ import {
   addToWishList,
   removeFromWishList,
   findIfProductExistsInArray,
+  useToast,
+  useUser,
+  uuid,
 } from "./index";
 import "./horizontalcard.css";
 import { updateProductCountInCart } from "../../../Util/update-product-in-cart";
@@ -30,13 +33,90 @@ function HorizontalCard({ product }) {
   } = product;
   const { cart, dispatch } = useCart();
   const { wishlist, dispatchWishList } = useWishList();
+  const { dispatchToast } = useToast();
+  const { user, dispatchUser } = useUser();
+
+  // Function to show Toast
+  const showToast = (title, type) => {
+    dispatchToast({
+      type: "ADD_TOAST",
+      payload: {
+        value: { id: uuid(), title: title, type: type },
+      },
+    });
+  };
+
+  const redirectToLoginPage = () => {
+    showToast("Please Login First", "ERROR");
+    navigate("/login");
+  };
+
+  // Function to update cart
+  const updateCart = async () => {
+    let cart = [];
+    if (!ifProductExistInCart) {
+      const { data, success, message } = await addToCart(product);
+      if (success) {
+        cart = data;
+        showToast(message, "SUCCESS");
+      } else {
+        showToast(message, "ERROR");
+      }
+    } else {
+      const { data, success, message } = await removeFromCart(_id);
+      if (success) {
+        cart = data;
+        showToast(message, "SUCCESS");
+      } else {
+        showToast(message, "ERROR");
+      }
+    }
+    dispatch({
+      type: "SET_CART",
+      payload: { value: cart.cart },
+    });
+  };
+
+  // Function to update wishlist
+  const updateWishList = async () => {
+    let wishList = [];
+    if (!ifProductExistsInWishList) {
+      const { data, success, message } = await addToWishList(product);
+      if (success) {
+        wishList = data;
+        showToast(message, "SUCCESS");
+      } else {
+        showToast(message, "ERROR");
+      }
+    } else {
+      const { data, success, message } = await removeFromWishList(_id);
+      if (success) {
+        wishList = data;
+        showToast(message, "SUCCESS");
+      } else {
+        showToast(message, "ERROR");
+      }
+    }
+    dispatchWishList({
+      type: "SET_WISHLIST",
+      payload: { value: wishList.wishlist },
+    });
+  };
 
   const findIfProductExistsInCardAndUpdate = async (productId, type) => {
     let isPresent = cart.some((cartItem) => cartItem._id === productId);
 
     if (isPresent) {
-      const cart = await updateProductCountInCart(productId, type);
-      dispatch({ type: "SET_CART", payload: { value: cart.cart } });
+      const { data, success, message } = await updateProductCountInCart(
+        productId,
+        type
+      );
+      if (success) {
+        dispatch({ type: "SET_CART", payload: { value: data.cart } });
+        showToast(message, "SUCCESS");
+      } else {
+        showToast(message, "ERROR");
+      }
     }
   };
 
@@ -100,26 +180,12 @@ function HorizontalCard({ product }) {
                 : "Move to Wishlist"
             }
             className={"my-cart-cta-btn"}
-            onClick={async () => {
-              let wishList = [];
-              if (!ifProductExistsInWishList) {
-                wishList = await addToWishList(product);
-              } else {
-                wishList = await removeFromWishList(_id);
-              }
-              dispatchWishList({
-                type: "SET_WISHLIST",
-                payload: { value: wishList.wishlist },
-              });
-            }}
+            onClick={user.isUserLoggedIn ? updateWishList : redirectToLoginPage}
           />
           <SecondaryButton
             buttonText={"Remove From Cart"}
             className={"my-cart-cta-btn"}
-            onClick={async () => {
-              const cart = await removeFromCart(_id);
-              dispatch({ type: "SET_CART", payload: { value: cart.cart } });
-            }}
+            onClick={user.isUserLoggedIn ? updateCart : redirectToLoginPage}
           />
         </div>
       </div>

@@ -10,8 +10,11 @@ import { removeFromCart } from "../../Util/remove-from-cart";
 import { useUser } from "../../Context/user-context";
 import { useNavigate } from "react-router-dom";
 import { v4 as uuid } from "uuid";
-
 import { findIfProductExistsInArray } from "../../Util/find-if-product-exists-in-array";
+import { addToWishList } from "../../Util/add-to-wishlist";
+import { removeFromWishList } from "../../Util/remove-from-wishlist";
+import { useWishList } from "../../Context/wishlist-context";
+
 export {
   MdAddShoppingCart,
   AiFillHeart,
@@ -27,4 +30,7 @@ export {
   useNavigate,
   findIfProductExistsInArray,
   uuid,
+  addToWishList,
+  removeFromWishList,
+  useWishList,
 };

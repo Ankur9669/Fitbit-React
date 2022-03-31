@@ -16,9 +16,17 @@ const updateProductCountInCart = async (productId, type) => {
         },
       }
     );
-    return response.data;
+    return {
+      data: response.data,
+      success: true,
+      message: "Item Updated",
+    };
   } catch (e) {
-    console.error(e);
+    return {
+      data: response.data,
+      success: false,
+      message: `Error ${e}`,
+    };
   }
 };
 export { updateProductCountInCart };
