@@ -30,20 +30,26 @@ function Toasts() {
     };
   }, [toastList]);
 
+  const getToastByType = (type) => {
+    switch (type) {
+      case "SUCCESS":
+        return "toast-success";
+
+      case "ERROR":
+        return "toast-error";
+
+      case "WARNING":
+        return "toast-warning";
+
+      default:
+        return "toast-success";
+    }
+  };
   return (
     <div className="toasts-container">
       {toastList.map((toast) => {
         return (
-          <div
-            key={toast.id}
-            className={`toast ${
-              toast.type === "SUCCESS"
-                ? "toast-success"
-                : toast.type === "ERROR"
-                ? "toast-error"
-                : "toast-warning"
-            }`}
-          >
+          <div key={toast.id} className={`toast ${getToastByType(toast.type)}`}>
             <p className="toast-text">{toast?.title}</p>
             <AiFillCloseSquare
               className="toast-close-icon"
