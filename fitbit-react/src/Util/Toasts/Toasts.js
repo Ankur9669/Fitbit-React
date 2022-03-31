@@ -16,26 +16,18 @@ function Toasts() {
   };
 
   useEffect(() => {
-    // if (toastList.length > 0) {
-    //   const intervalId = setInterval(() => {
-    //     console.log("Inside", toastList);
-    //     const lastToastElement = toastList[toastList.length - 1];
-    //     deleteToast(lastToastElement.id);
-
-    //     if (toastList.length === 0 && intervalId != "") {
-    //       clearInterval(intervalId);
-    //     }
-    //   }, 100000);
-    // }
-
+    let timeoutId;
     if (toastList.length > 0) {
-      setTimeout(() => {
+      timeoutId = setTimeout(() => {
         dispatchToast({
           type: "SET_LIST",
           payload: [],
         });
       }, 3000);
     }
+    return () => {
+      clearTimeout(timeoutId);
+    };
   }, [toastList]);
 
   return (
