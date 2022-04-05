@@ -11,7 +11,6 @@ import {
   useUser,
   useToast,
   addToCart,
-  removeFromCart,
   useNavigate,
   findIfProductExistInWishList,
   findIfProductExistsInArray,
@@ -27,7 +26,6 @@ function VerticalCard({ product }) {
   const { wishlist, dispatchWishList } = useWishList();
   const { dispatchToast, showToast } = useToast();
   const navigate = useNavigate();
-
   const {
     _id,
     productTitle,
@@ -115,16 +113,7 @@ function VerticalCard({ product }) {
         <div className="text-container">
           <h5 className="font-medium-large weight-semi-bold primary-text-color card-vertical-heading">
             {productTitle}
-            <AiFillHeart
-              style={
-                ifProductExistsInWishList
-                  ? { fontSize: "1.7rem", color: "red" }
-                  : { fontSize: "1.7rem" }
-              }
-              onClick={
-                user.isUserLoggedIn ? updateWishList : redirectToLoginPage
-              }
-            />
+            <AiFillHeart style={{ fontSize: "1.7rem" }} />
           </h5>
           <div className="price-container">
             <p className="font-medium inline-block weight-semi-bold primary-text-color">
@@ -152,10 +141,21 @@ function VerticalCard({ product }) {
             }
           />
           <SecondaryButton
-            buttonText={
-              ifProductExistInCart ? "Remove from cart" : "Add to Cart"
+            buttonText={"Add to cart"}
+            onClick={
+              user.isUserLoggedIn
+                ? async () => {
+                    const productExistsInCart = findIfProductExistInCart(_id);
+                    if (!productExistsInCart) {
+                      const cart = await addToCart(product);
+                      dispatch({
+                        type: "SET_CART",
+                        payload: { value: cart.cart },
+                      });
+                    }
+                  }
+                : () => navigate("/login")
             }
-            onClick={user.isUserLoggedIn ? updateCart : redirectToLoginPage}
           />
         </div>
       </div>

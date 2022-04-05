@@ -15,10 +15,10 @@ import {
   uuid,
 } from "./index";
 import "./horizontalcard.css";
+import { token } from "../../../Util/token";
 import { updateProductCountInCart } from "../../../Util/update-product-in-cart";
-
-function HorizontalCard({ product }) {
-  const {
+function HorizontalCard({
+  product: {
     _id,
     productTitle,
     discountedPrice,
@@ -30,7 +30,8 @@ function HorizontalCard({ product }) {
     inStock,
     fastDelivery,
     qty,
-  } = product;
+  },
+}) {
   const { cart, dispatch } = useCart();
   const { wishlist, dispatchWishList } = useWishList();
   const { dispatchToast } = useToast();
@@ -119,9 +120,6 @@ function HorizontalCard({ product }) {
       }
     }
   };
-
-  let ifProductExistsInWishList = findIfProductExistsInArray(wishlist, _id);
-
   return (
     <div className="card card-horizontal my-cart-card">
       <div className="image-container">
@@ -174,11 +172,7 @@ function HorizontalCard({ product }) {
 
         <div className="btn-container my-cart-cta-btn-container">
           <PrimaryButton
-            buttonText={
-              ifProductExistsInWishList
-                ? "Remove from Wishlist"
-                : "Move to Wishlist"
-            }
+            buttonText={"Move to Wishlist"}
             className={"my-cart-cta-btn"}
             onClick={user.isUserLoggedIn ? updateWishList : redirectToLoginPage}
           />
