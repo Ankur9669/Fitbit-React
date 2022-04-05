@@ -4,7 +4,7 @@ const cartReducer = (cart, action) => {
       const newCart = [...action.payload.value];
       return {
         totalPrice: findTotalPrice(newCart),
-        cart: action.payload.value,
+        cart: newCart,
       };
     default:
       return cart;

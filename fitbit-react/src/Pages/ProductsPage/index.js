@@ -7,6 +7,8 @@ import { useFilter } from "../../Context/filter-context";
 import { useProduct } from "../../Context/products-context";
 import { filterByCategory } from "../../Util/filter";
 import { sortByLowToHigh, sortByHighToLow } from "../../Util/sort";
+import { useToast } from "../../Context/toast-context";
+import { v4 as uuid } from "uuid";
 export {
   Navbar,
   Footer,
@@ -15,6 +17,8 @@ export {
   products,
   useFilter,
   useProduct,
+  useToast,
+  uuid,
   filterByCategory,
   sortByHighToLow,
   sortByLowToHigh,
