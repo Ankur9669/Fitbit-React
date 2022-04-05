@@ -4,6 +4,7 @@ import "./homepage.css";
 import FeaturedProductsSection from "./FeaturedProducts/FeaturedProductsSection";
 import FeaturedBrands from "./FeaturedBrands/FeaturedBrands";
 import Axios from "axios";
+import FeaturedCategories from "./FeaturedCategories/FeaturedCategories";
 function Homepage() {
   //To remove
 
@@ -26,6 +27,11 @@ function Homepage() {
       <div className="spacer-3"></div>
 
       <FeaturedProductsSection />
+
+      <div className="spacer-3"></div>
+      <div className="spacer-3"></div>
+
+      <FeaturedCategories />
 
       <div className="spacer-3"></div>
       <div className="spacer-3"></div>

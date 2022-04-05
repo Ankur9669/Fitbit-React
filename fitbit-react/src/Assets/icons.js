@@ -6,6 +6,7 @@ import {
   AiOutlineMail,
   AiFillEyeInvisible,
   AiFillEye,
+  AiFillCloseSquare,
 } from "react-icons/ai";
 import { FaShoppingCart } from "react-icons/fa";
 import { FaUser } from "react-icons/fa";
@@ -24,6 +25,7 @@ export {
   AiFillStar,
   AiFillMinusCircle,
   AiFillHeart,
+  AiFillCloseSquare,
   AiOutlineMail,
   AiFillEyeInvisible,
   AiFillEye,

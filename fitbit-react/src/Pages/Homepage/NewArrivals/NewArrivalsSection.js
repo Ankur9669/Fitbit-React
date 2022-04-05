@@ -11,11 +11,13 @@ function NewArrivalsSection() {
           imageUrl={
             "https://cdn.shopify.com/s/files/1/0610/2882/7370/files/banner-v1-img1.jpg?v=1637419106"
           }
+          text={"New Arrivals"}
         />
         <NewArrivalCard
           imageUrl={
             "https://cdn.shopify.com/s/files/1/0610/2882/7370/files/banner-v1-img2.jpg?v=1637420182"
           }
+          text={"New Arrivals"}
         />
       </section>
     </>

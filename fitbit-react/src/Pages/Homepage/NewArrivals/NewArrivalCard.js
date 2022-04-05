@@ -1,11 +1,12 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-function NewArrivalCard({ imageUrl }) {
+function NewArrivalCard({ imageUrl, text }) {
   return (
-    <a href="products.html" className="card card-only-image card-new-arrival">
+    <Link to="/products" className="card card-only-image card-new-arrival">
       <div className="text-overlay">
         <div className="text-overlay-text-container">
-          <p className="font-medium-large weight-semi-bold">New Arrival</p>
+          <p className="font-medium-large weight-semi-bold">{text}</p>
           <p className="font-large secondary-text-color weight-semi-bold">
             JUST FOR YOU
           </p>
@@ -19,7 +20,7 @@ function NewArrivalCard({ imageUrl }) {
           loading="lazy"
         />
       </div>
-    </a>
+    </Link>
   );
 }
 

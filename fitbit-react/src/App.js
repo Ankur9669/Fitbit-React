@@ -8,10 +8,12 @@ import { Route, Routes } from "react-router-dom";
 import MockMan from "mockman-js";
 import Login from "./Pages/Authentication/Login/Login";
 import ForgotPassword from "./Pages/Authentication/ForgotPassword/ForgotPassword";
+import Toasts from "./Util/Toasts/Toasts";
 
 function App() {
   return (
     <div className="App">
+      <Toasts />
       <Routes>
         <Route index element={<Homepage />}></Route>
         <Route path="products" element={<ProductPage />}></Route>
