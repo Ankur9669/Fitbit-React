@@ -25,7 +25,7 @@ function VerticalCard({ product }) {
   const { cart, dispatch } = useCart();
   const { user, dispatchUser } = useUser();
   const { wishlist, dispatchWishList } = useWishList();
-  const { dispatchToast } = useToast();
+  const { dispatchToast, showToast } = useToast();
   const navigate = useNavigate();
 
   const {
@@ -47,16 +47,6 @@ function VerticalCard({ product }) {
   const redirectToLoginPage = () => {
     showToast("Please Login First", "ERROR");
     navigate("/login");
-  };
-
-  // Function to show Toast
-  const showToast = (title, type) => {
-    dispatchToast({
-      type: "ADD_TOAST",
-      payload: {
-        value: { id: uuid(), title: title, type: type },
-      },
-    });
   };
 
   // Function to update cart
