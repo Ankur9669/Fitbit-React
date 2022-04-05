@@ -6,6 +6,7 @@ import {
   SecondaryButton,
   removeFromCart,
   useCart,
+<<<<<<< HEAD
   useWishList,
   addToWishList,
   removeFromWishList,
@@ -13,6 +14,8 @@ import {
   useToast,
   useUser,
   uuid,
+=======
+>>>>>>> parent of b460ecf (Wish list functionality (#14))
 } from "./index";
 import "./horizontalcard.css";
 import { token } from "../../../Util/token";
@@ -33,6 +36,7 @@ function HorizontalCard({
   },
 }) {
   const { cart, dispatch } = useCart();
+<<<<<<< HEAD
   const { wishlist, dispatchWishList } = useWishList();
   const { dispatchToast } = useToast();
   const { user, dispatchUser } = useUser();
@@ -103,6 +107,8 @@ function HorizontalCard({
       payload: { value: wishList.wishlist },
     });
   };
+=======
+>>>>>>> parent of b460ecf (Wish list functionality (#14))
 
   const findIfProductExistsInCardAndUpdate = async (productId, type) => {
     let isPresent = cart.some((cartItem) => cartItem._id === productId);
@@ -174,12 +180,23 @@ function HorizontalCard({
           <PrimaryButton
             buttonText={"Move to Wishlist"}
             className={"my-cart-cta-btn"}
+<<<<<<< HEAD
             onClick={user.isUserLoggedIn ? updateWishList : redirectToLoginPage}
+=======
+>>>>>>> parent of b460ecf (Wish list functionality (#14))
           />
           <SecondaryButton
             buttonText={"Remove From Cart"}
             className={"my-cart-cta-btn"}
+<<<<<<< HEAD
             onClick={user.isUserLoggedIn ? updateCart : redirectToLoginPage}
+=======
+            onClick={async () => {
+              const cart = await removeFromCart(_id);
+              // console.log(cart.cart);
+              dispatch({ type: "SET_CART", payload: { value: cart.cart } });
+            }}
+>>>>>>> parent of b460ecf (Wish list functionality (#14))
           />
         </div>
       </div>

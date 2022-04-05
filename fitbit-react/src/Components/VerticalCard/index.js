@@ -8,12 +8,15 @@ import { useToast } from "../../Context/toast-context";
 import { addToCart } from "../../Util/add-to-cart";
 import { useUser } from "../../Context/user-context";
 import { useNavigate } from "react-router-dom";
+<<<<<<< HEAD
 import { v4 as uuid } from "uuid";
 import { findIfProductExistsInArray } from "../../Util/find-if-product-exists-in-array";
 import { addToWishList } from "../../Util/add-to-wishlist";
 import { removeFromWishList } from "../../Util/remove-from-wishlist";
 import { useWishList } from "../../Context/wishlist-context";
 
+=======
+>>>>>>> parent of b460ecf (Wish list functionality (#14))
 export {
   MdAddShoppingCart,
   AiFillHeart,
@@ -26,9 +29,12 @@ export {
   useToast,
   addToCart,
   useNavigate,
+<<<<<<< HEAD
   findIfProductExistsInArray,
   uuid,
   addToWishList,
   removeFromWishList,
   useWishList,
+=======
+>>>>>>> parent of b460ecf (Wish list functionality (#14))
 };

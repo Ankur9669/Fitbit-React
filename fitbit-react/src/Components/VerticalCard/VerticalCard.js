@@ -12,19 +12,25 @@ import {
   useToast,
   addToCart,
   useNavigate,
+<<<<<<< HEAD
   findIfProductExistInWishList,
   findIfProductExistsInArray,
   uuid,
   addToWishList,
   removeFromWishList,
   useWishList,
+=======
+>>>>>>> parent of b460ecf (Wish list functionality (#14))
 } from "./index";
 
 function VerticalCard({ product }) {
   const { cart, dispatch } = useCart();
   const { user, dispatchUser } = useUser();
+<<<<<<< HEAD
   const { wishlist, dispatchWishList } = useWishList();
   const { dispatchToast, showToast } = useToast();
+=======
+>>>>>>> parent of b460ecf (Wish list functionality (#14))
   const navigate = useNavigate();
   const {
     _id,
@@ -39,6 +45,7 @@ function VerticalCard({ product }) {
     rating,
   } = product;
 
+<<<<<<< HEAD
   const ifProductExistInCart = findIfProductExistsInArray(cart, _id);
   const ifProductExistsInWishList = findIfProductExistsInArray(wishlist, _id);
 
@@ -97,6 +104,11 @@ function VerticalCard({ product }) {
       type: "SET_WISHLIST",
       payload: { value: wishList.wishlist },
     });
+=======
+  // Function to check if product exists in cart
+  const findIfProductExistInCart = (productId) => {
+    return cart.some((cartItem) => cartItem._id === productId);
+>>>>>>> parent of b460ecf (Wish list functionality (#14))
   };
 
   return (
