@@ -50,13 +50,9 @@ function Cart() {
         ) : (
           <div className="empty-cart-container">
             <img src="/images/empty-cart.svg" className="empty-cart-img"></img>
-            <p className="weight-semi-bold font-large centered-text">
-              Your Cart is Empty
-            </p>
+            <p className="weight-semi-bold font-large">Your Cart is Empty</p>
             <div className="spacer-1"></div>
-            <p className="weight-normal font-medium centered-text">
-              Add Some Items Now
-            </p>
+            <p className="weight-normal font-medium">Add Some Items Now</p>
             <div className="spacer-1"></div>
             <Link to="/products">
               <PrimaryButton buttonText="Add Items" />

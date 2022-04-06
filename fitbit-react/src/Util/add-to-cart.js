@@ -14,10 +14,18 @@ const addToCart = async (product) => {
         },
       }
     );
-    return response.data;
+    return {
+      data: response.data,
+      success: true,
+      message: "Item Added To Cart",
+    };
   } catch (e) {
-    //TODO Implement Toast Here
-    console.error(e);
+    //TODO Implement Toast
+    return {
+      data: "",
+      success: false,
+      message: "Could'nt Add Item",
+    };
   }
   return [];
 };

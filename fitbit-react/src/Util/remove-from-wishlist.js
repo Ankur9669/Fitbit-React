@@ -8,10 +8,19 @@ const removeFromWishList = async (_id) => {
         authorization: token,
       },
     });
-    return response.data;
+
+    return {
+      data: response.data,
+      success: true,
+      message: "Item Removed From WishList",
+    };
   } catch (e) {
     //TODO Implement Toast Here
-    console.error(e);
+    return {
+      data: "",
+      success: false,
+      message: `Error ${e}`,
+    };
   }
   return [];
 };

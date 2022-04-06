@@ -6,11 +6,14 @@ import {
   filterByCategory,
   sortByHighToLow,
   sortByLowToHigh,
+  useToast,
+  uuid,
 } from "../index";
 
 function ProductListing() {
   const { filters, dispatch } = useFilter();
   const { products, dispatch: dispatchProducts } = useProduct();
+  const { dispatchToast } = useToast();
 
   const getSortedData = (state, filteredData) => {
     let updatedData = [...filteredData];

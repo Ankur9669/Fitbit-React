@@ -9,23 +9,29 @@ import {
   RatingBar,
   useCart,
   useUser,
+  useToast,
   addToCart,
-  removeFromCart,
   useNavigate,
+<<<<<<< HEAD
   findIfProductExistInWishList,
   findIfProductExistsInArray,
+  uuid,
+  addToWishList,
+  removeFromWishList,
+  useWishList,
+=======
+>>>>>>> parent of b460ecf (Wish list functionality (#14))
 } from "./index";
-import { useWishList } from "../../Context/wishlist-context";
-import { addToWishList } from "../../Util/add-to-wishlist";
-import { removeFromWishList } from "../../Util/remove-from-wishlist";
 
-import Axios from "axios";
 function VerticalCard({ product }) {
   const { cart, dispatch } = useCart();
   const { user, dispatchUser } = useUser();
+<<<<<<< HEAD
   const { wishlist, dispatchWishList } = useWishList();
+  const { dispatchToast, showToast } = useToast();
+=======
+>>>>>>> parent of b460ecf (Wish list functionality (#14))
   const navigate = useNavigate();
-
   const {
     _id,
     productTitle,
@@ -39,18 +45,34 @@ function VerticalCard({ product }) {
     rating,
   } = product;
 
+<<<<<<< HEAD
   const ifProductExistInCart = findIfProductExistsInArray(cart, _id);
   const ifProductExistsInWishList = findIfProductExistsInArray(wishlist, _id);
 
   const redirectToLoginPage = () => {
+    showToast("Please Login First", "ERROR");
     navigate("/login");
   };
+
+  // Function to update cart
   const updateCart = async () => {
     let cart = [];
     if (!ifProductExistInCart) {
-      cart = await addToCart(product);
+      const { data, success, message } = await addToCart(product);
+      if (success) {
+        cart = data;
+        showToast(message, "SUCCESS");
+      } else {
+        showToast(message, "ERROR");
+      }
     } else {
-      cart = await removeFromCart(_id);
+      const { data, success, message } = await removeFromCart(_id);
+      if (success) {
+        cart = data;
+        showToast(message, "SUCCESS");
+      } else {
+        showToast(message, "ERROR");
+      }
     }
     dispatch({
       type: "SET_CART",
@@ -58,17 +80,35 @@ function VerticalCard({ product }) {
     });
   };
 
+  // Function to update wishlist
   const updateWishList = async () => {
     let wishList = [];
     if (!ifProductExistsInWishList) {
-      wishList = await addToWishList(product);
+      const { data, success, message } = await addToWishList(product);
+      if (success) {
+        wishList = data;
+        showToast(message, "SUCCESS");
+      } else {
+        showToast(message, "ERROR");
+      }
     } else {
-      wishList = await removeFromWishList(_id);
+      const { data, success, message } = await removeFromWishList(_id);
+      if (success) {
+        wishList = data;
+        showToast(message, "SUCCESS");
+      } else {
+        showToast(message, "ERROR");
+      }
     }
     dispatchWishList({
       type: "SET_WISHLIST",
       payload: { value: wishList.wishlist },
     });
+=======
+  // Function to check if product exists in cart
+  const findIfProductExistInCart = (productId) => {
+    return cart.some((cartItem) => cartItem._id === productId);
+>>>>>>> parent of b460ecf (Wish list functionality (#14))
   };
 
   return (
@@ -85,16 +125,7 @@ function VerticalCard({ product }) {
         <div className="text-container">
           <h5 className="font-medium-large weight-semi-bold primary-text-color card-vertical-heading">
             {productTitle}
-            <AiFillHeart
-              style={
-                ifProductExistsInWishList
-                  ? { fontSize: "1.7rem", color: "red" }
-                  : { fontSize: "1.7rem" }
-              }
-              onClick={
-                user.isUserLoggedIn ? updateWishList : redirectToLoginPage
-              }
-            />
+            <AiFillHeart style={{ fontSize: "1.7rem" }} />
           </h5>
           <div className="price-container">
             <p className="font-medium inline-block weight-semi-bold primary-text-color">
@@ -122,10 +153,21 @@ function VerticalCard({ product }) {
             }
           />
           <SecondaryButton
-            buttonText={
-              ifProductExistInCart ? "Remove from cart" : "Add to Cart"
+            buttonText={"Add to cart"}
+            onClick={
+              user.isUserLoggedIn
+                ? async () => {
+                    const productExistsInCart = findIfProductExistInCart(_id);
+                    if (!productExistsInCart) {
+                      const cart = await addToCart(product);
+                      dispatch({
+                        type: "SET_CART",
+                        payload: { value: cart.cart },
+                      });
+                    }
+                  }
+                : () => navigate("/login")
             }
-            onClick={user.isUserLoggedIn ? updateCart : redirectToLoginPage}
           />
         </div>
       </div>

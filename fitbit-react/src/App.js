@@ -10,6 +10,7 @@ import Login from "./Pages/Authentication/Login/Login";
 import ForgotPassword from "./Pages/Authentication/ForgotPassword/ForgotPassword";
 import Toasts from "./Util/Toasts/Toasts";
 
+
 function App() {
   return (
     <div className="App">

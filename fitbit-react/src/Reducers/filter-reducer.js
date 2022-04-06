@@ -33,6 +33,8 @@ const filterReducer = (state, action) => {
       };
     case "RESET":
       return { ...initialState };
+    default:
+      throw new Error();
   }
 };
 export { filterReducer };
