@@ -57,6 +57,7 @@ function VerticalCard({ product }) {
       cart = await removeFromCart(_id);
       showToast("Item Removed From Cart", "SUCCESS");
     }
+    console.log(cart);
     dispatch({
       type: "SET_CART",
       payload: { value: cart.cart },
@@ -140,21 +141,10 @@ function VerticalCard({ product }) {
             onClick={handleBuyNowClick}
           />
           <SecondaryButton
-            buttonText={"Add to cart"}
-            onClick={
-              user.isUserLoggedIn
-                ? async () => {
-                    const productExistsInCart = findIfProductExistInCart(_id);
-                    if (!productExistsInCart) {
-                      const cart = await addToCart(product);
-                      dispatch({
-                        type: "SET_CART",
-                        payload: { value: cart.cart },
-                      });
-                    }
-                  }
-                : () => navigate("/login")
+            buttonText={
+              ifProductExistInCart ? "Remove from cart" : "Add to Cart"
             }
+            onClick={user.isUserLoggedIn ? updateCart : redirectToLoginPage}
           />
         </div>
       </div>

@@ -1,4 +1,5 @@
 const cartReducer = (cart, action) => {
+  console.log(action.payload);
   switch (action.type) {
     case "SET_CART":
       const newCart = [...action.payload.value];
