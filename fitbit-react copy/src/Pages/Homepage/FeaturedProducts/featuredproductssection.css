@@ -1,0 +1,18 @@
+.featured-products-section {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+.card-vertical{
+    max-width: 25rem;
+    width: 100%;
+}
+@media only screen and (max-width: 345px){
+    .card-vertical {
+        margin: 0 2rem;
+    }
+    .card-vertical .image-container {
+        height: fit-content;
+    }
+}

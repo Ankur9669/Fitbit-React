@@ -1,0 +1,56 @@
+.hero-section{
+    position: relative;
+    max-height: 43.7rem;
+}
+.hero-section img{
+    max-height: 43.7rem;
+}
+.shop-btn{
+    display: inline-block;
+    margin: 0.8rem 0;
+}
+.hero-section a{
+    display: flex;
+    justify-content: center;
+}
+.overlay-container{
+    position: absolute;
+    left: 25%;
+    top: 35%;
+}
+.overlay-container h1{
+    animation: infinite;
+    animation-name: move;
+    animation-duration: 3.5s; 
+}
+@media only screen and (max-width: 960px){
+    .overlay-container{
+        left: 15%;
+        top: 25%;
+    }   
+    .overlay-container h1{
+        font-size: 3rem;
+    }
+}
+@media only screen and (max-width: 730px){
+    .overlay-container{
+        left: 5%;
+        top: 20%;
+    }   
+    .hero-section{
+        position: relative;
+        min-height: 50vh;
+    }
+    .hero-section img{
+        min-height: 50vh;
+    }
+}
+@media only screen and (max-width: 450px){
+    .overlay-container h1{
+        font-size: 2rem;
+    }  
+}
+@keyframes move {
+    0%   {margin-left:50px;}
+    100% {margin-left: 0px;}
+}

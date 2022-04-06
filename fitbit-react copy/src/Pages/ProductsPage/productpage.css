@@ -1,0 +1,19 @@
+.products-section{
+    display: grid;
+    grid-template-columns: 19rem auto;
+    position: relative;
+    margin: 0rem;
+}
+.products-container{
+    min-height: 100vh;
+    grid-column: 2 / 3;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    gap: 3rem;
+}
+@media only screen and (max-width: 800px){
+    .products-container{
+        grid-column: 1 / 3;
+    }
+}

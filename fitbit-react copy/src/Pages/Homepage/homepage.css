@@ -1,0 +1,37 @@
+.home-section-width{
+    max-width: 87.5rem;
+    margin: auto;
+}
+.home-section-heading{
+    position: relative;
+    width: fit-content;
+    margin: auto;
+    margin-bottom: 1rem;
+}
+.home-section-heading::after{
+    content: "";
+    width: 6rem;
+    background-color: var(--primary-color);
+    height: 4px;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    bottom: -12px;
+    border-radius: 1rem;
+}
+.section-wrapper{
+    background-color: var(--primary-color);
+}
+@media only screen and (max-width: 1240px){
+    .spacer-3{
+        height: 2rem;
+    }
+}
+@media only screen and (max-width: 450px){
+    .home-section-heading{
+        font-size: 2rem;
+    }
+    .spacer-3{
+        height: 1rem;
+    }
+}
