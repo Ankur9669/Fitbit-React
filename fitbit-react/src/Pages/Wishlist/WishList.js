@@ -3,7 +3,18 @@ import VerticalCard from "../../Components/VerticalCard/VerticalCard";
 import { wishListProducts } from "../../Temp/wishlist-products";
 import { Navbar, Footer, AiFillHeart } from "./index";
 import "./wishlist.css";
+import { useDocumentTitle } from "../../Util/change-document-title";
+
 function WishList() {
+  const { wishlist } = useWishList();
+  const { user } = useUser();
+  const navigate = useNavigate();
+  useDocumentTitle("FiTbiT-WishList");
+
+  useEffect(() => {
+    !user.isUserLoggedIn && navigate("/login");
+  }, []);
+
   return (
     <div>
       <Navbar />

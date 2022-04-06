@@ -19,12 +19,16 @@ import {
   removeFromWishList,
   useWishList,
 } from "./index";
+import { useWishList } from "../../Context/wishlist-context";
+import { addToWishList } from "../../Util/add-to-wishlist";
+import { removeFromWishList } from "../../Util/remove-from-wishlist";
+import { useToast } from "../../Context/toast-context";
 
 function VerticalCard({ product }) {
   const { cart, dispatch } = useCart();
   const { user, dispatchUser } = useUser();
   const { wishlist, dispatchWishList } = useWishList();
-  const { dispatchToast, showToast } = useToast();
+  const { showToast } = useToast();
   const navigate = useNavigate();
   const {
     _id,
@@ -43,7 +47,7 @@ function VerticalCard({ product }) {
   const ifProductExistsInWishList = findIfProductExistsInArray(wishlist, _id);
 
   const redirectToLoginPage = () => {
-    showToast("Please Login First", "ERROR");
+    showToast("Please Login First", "SUCCESS");
     navigate("/login");
   };
 
@@ -51,21 +55,11 @@ function VerticalCard({ product }) {
   const updateCart = async () => {
     let cart = [];
     if (!ifProductExistInCart) {
-      const { data, success, message } = await addToCart(product);
-      if (success) {
-        cart = data;
-        showToast(message, "SUCCESS");
-      } else {
-        showToast(message, "ERROR");
-      }
+      cart = await addToCart(product);
+      showToast("Item Added To Cart", "SUCCESS");
     } else {
-      const { data, success, message } = await removeFromCart(_id);
-      if (success) {
-        cart = data;
-        showToast(message, "SUCCESS");
-      } else {
-        showToast(message, "ERROR");
-      }
+      cart = await removeFromCart(_id);
+      showToast("Item Removed From Cart", "SUCCESS");
     }
     dispatch({
       type: "SET_CART",
@@ -77,21 +71,11 @@ function VerticalCard({ product }) {
   const updateWishList = async () => {
     let wishList = [];
     if (!ifProductExistsInWishList) {
-      const { data, success, message } = await addToWishList(product);
-      if (success) {
-        wishList = data;
-        showToast(message, "SUCCESS");
-      } else {
-        showToast(message, "ERROR");
-      }
+      wishList = await addToWishList(product);
+      showToast("Item Added To WishList", "SUCCESS");
     } else {
-      const { data, success, message } = await removeFromWishList(_id);
-      if (success) {
-        wishList = data;
-        showToast(message, "SUCCESS");
-      } else {
-        showToast(message, "ERROR");
-      }
+      wishList = await removeFromWishList(_id);
+      showToast("Item Removed From WishList", "SUCCESS");
     }
     dispatchWishList({
       type: "SET_WISHLIST",
@@ -99,8 +83,17 @@ function VerticalCard({ product }) {
     });
   };
 
+  const handleBuyNowClick = async () => {
+    if (user.isUserLoggedIn) {
+      await updateCart();
+      navigate("/cart");
+    } else {
+      redirectToLoginPage();
+    }
+  };
+
   return (
-    <a className="card card-vertical card-hover">
+    <div className="card card-vertical card-hover">
       <div className="image-container">
         <img
           alt="reebok-resistant-tube"
@@ -139,6 +132,7 @@ function VerticalCard({ product }) {
                 style={{ fontSize: "1.3rem", marginRight: "3px" }}
               />
             }
+            onClick={handleBuyNowClick}
           />
           <SecondaryButton
             buttonText={"Add to cart"}
@@ -159,7 +153,7 @@ function VerticalCard({ product }) {
           />
         </div>
       </div>
-    </a>
+    </div>
   );
 }
 

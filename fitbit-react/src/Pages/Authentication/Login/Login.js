@@ -1,9 +1,11 @@
 import React from "react";
 import Navbar from "../../../Components/Navbar/Navbar";
+import { useDocumentTitle } from "../../../Util/change-document-title";
 import AuthenticationBackground from "../AuthenticationBackground";
 import Loginform from "./Loginform";
 
 function Login() {
+  useDocumentTitle("FiTbiT-Login");
   return (
     <div>
       <Navbar />

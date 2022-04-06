@@ -11,11 +11,13 @@ import "./cart.css";
 import { PrimaryButton } from "./HorizontalCard";
 import { Link, useNavigate } from "react-router-dom";
 import { useUser } from "../../Context/user-context";
+import { useDocumentTitle } from "../../Util/change-document-title";
 
 function Cart() {
   const { cart, dispatch } = useCart();
   const { user, dispatchUser } = useUser();
   const navigate = useNavigate();
+  useDocumentTitle("FiTbiT-Cart");
   // console.log(cart);
 
   useEffect(() => {

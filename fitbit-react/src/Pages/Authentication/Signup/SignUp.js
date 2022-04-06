@@ -10,7 +10,10 @@ import {
 } from "../../../Assets/icons";
 import SignupForm from "./SignupForm";
 import AuthenticationBackground from "../AuthenticationBackground";
+import { useDocumentTitle } from "../../../Util/change-document-title";
+
 function SignUp() {
+  useDocumentTitle("FiTbiT-SignUp");
   return (
     <div>
       <Navbar />
