@@ -1,7 +1,18 @@
 import React from "react";
 import "./featuredproductssection.css";
 import FeaturedProductsCard from "./FeaturedProductsCard";
+import { useProduct } from "../../../Context/products-context";
+
 function FeaturedProductsSection() {
+  const { products } = useProduct();
+
+  let productsToShow = products?.products;
+
+  const featuredProducts =
+    productsToShow != undefined
+      ? [productsToShow?.[0], productsToShow?.[1], productsToShow?.[2]]
+      : [];
+
   return (
     <div>
       <h2 className="h3 centered-text home-section-heading">
@@ -9,36 +20,15 @@ function FeaturedProductsSection() {
       </h2>
       <div className="spacer-3"></div>
       <section className="featured-products-section home-section-width">
-        <FeaturedProductsCard
-          imageUrl={
-            "https://cdn.shopify.com/s/files/1/0610/2882/7370/products/product38.jpg?v=1636690872"
-          }
-          cardTitle={"Reebok Resistant Tube"}
-          price={"200"}
-          discountedPrice={"300"}
-          discountPercent="11"
-          redirectUrl={""}
-        />
-        <FeaturedProductsCard
-          imageUrl={
-            "https://cdn.shopify.com/s/files/1/0610/2882/7370/products/product38.jpg?v=1636690872"
-          }
-          cardTitle={"Reebok Resistant Tube"}
-          price={"200"}
-          discountedPrice={"300"}
-          discountPercent="11"
-          redirectUrl={""}
-        />
-        <FeaturedProductsCard
-          imageUrl={
-            "https://cdn.shopify.com/s/files/1/0610/2882/7370/products/product38.jpg?v=1636690872"
-          }
-          cardTitle={"Reebok Resistant Tube"}
-          price={"200"}
-          discountedPrice={"300"}
-          discountPercent="11"
-          redirectUrl={""}
-        />
+        {featuredProducts !== undefined &&
+          featuredProducts.map((featuredProduct) => {
+            return (
+              <FeaturedProductsCard
+                product={featuredProduct}
+                redirectUrl="/products"
+              />
+            );
+          })}
       </section>
     </div>
   );
