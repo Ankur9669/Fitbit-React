@@ -1,12 +1,13 @@
 import { createContext, useReducer, useContext } from "react";
 import { toastReducer } from "../Reducers/toast-reducer";
+import { v4 as uuid } from "uuid";
 const ToastContext = createContext();
 
 const initialState = [];
 const ToastProvider = ({ children }) => {
-  const showToast = (title, type) => {
-    const { dispatchToast } = useToast();
+  const [toastList, dispatchToast] = useReducer(toastReducer, initialState);
 
+  const showToast = (title, type) => {
     dispatchToast({
       type: "ADD_TOAST",
       payload: {
@@ -14,7 +15,6 @@ const ToastProvider = ({ children }) => {
       },
     });
   };
-  const [toastList, dispatchToast] = useReducer(toastReducer, initialState);
   return (
     <ToastContext.Provider value={{ toastList, dispatchToast, showToast }}>
       {children}

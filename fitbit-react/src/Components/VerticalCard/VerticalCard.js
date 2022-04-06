@@ -18,12 +18,13 @@ import {
 import { useWishList } from "../../Context/wishlist-context";
 import { addToWishList } from "../../Util/add-to-wishlist";
 import { removeFromWishList } from "../../Util/remove-from-wishlist";
+import { useToast } from "../../Context/toast-context";
 
-import Axios from "axios";
 function VerticalCard({ product }) {
   const { cart, dispatch } = useCart();
   const { user, dispatchUser } = useUser();
   const { wishlist, dispatchWishList } = useWishList();
+  const { showToast } = useToast();
   const navigate = useNavigate();
 
   const {
@@ -43,14 +44,17 @@ function VerticalCard({ product }) {
   const ifProductExistsInWishList = findIfProductExistsInArray(wishlist, _id);
 
   const redirectToLoginPage = () => {
+    showToast("Please Login First", "SUCCESS");
     navigate("/login");
   };
   const updateCart = async () => {
     let cart = [];
     if (!ifProductExistInCart) {
       cart = await addToCart(product);
+      showToast("Item Added To Cart", "SUCCESS");
     } else {
       cart = await removeFromCart(_id);
+      showToast("Item Removed From Cart", "SUCCESS");
     }
     dispatch({
       type: "SET_CART",
@@ -62,8 +66,10 @@ function VerticalCard({ product }) {
     let wishList = [];
     if (!ifProductExistsInWishList) {
       wishList = await addToWishList(product);
+      showToast("Item Added To WishList", "SUCCESS");
     } else {
       wishList = await removeFromWishList(_id);
+      showToast("Item Removed From WishList", "SUCCESS");
     }
     dispatchWishList({
       type: "SET_WISHLIST",
@@ -71,8 +77,17 @@ function VerticalCard({ product }) {
     });
   };
 
+  const handleBuyNowClick = async () => {
+    if (user.isUserLoggedIn) {
+      await updateCart();
+      navigate("/cart");
+    } else {
+      redirectToLoginPage();
+    }
+  };
+
   return (
-    <a className="card card-vertical card-hover">
+    <div className="card card-vertical card-hover">
       <div className="image-container">
         <img
           alt="reebok-resistant-tube"
@@ -120,6 +135,7 @@ function VerticalCard({ product }) {
                 style={{ fontSize: "1.3rem", marginRight: "3px" }}
               />
             }
+            onClick={handleBuyNowClick}
           />
           <SecondaryButton
             buttonText={
@@ -129,7 +145,7 @@ function VerticalCard({ product }) {
           />
         </div>
       </div>
-    </a>
+    </div>
   );
 }
 
