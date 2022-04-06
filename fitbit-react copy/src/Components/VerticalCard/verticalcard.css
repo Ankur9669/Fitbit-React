@@ -1,0 +1,26 @@
+.card{
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+}
+.card-vertical {
+    max-width: 25rem;
+    width: 100%;
+}
+.card-hover{
+    cursor: pointer;
+    transition: 0.3s;
+}
+.card-hover:hover{
+    box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
+}
+.discount-percent {
+    font-weight: 550;
+    margin-left: 0.2rem;
+}
+@media only screen and (max-width: 345px){
+    .card-vertical{
+        margin: 0 2rem;
+    }
+    .card-vertical .image-container {
+        height: fit-content;
+    }
+}

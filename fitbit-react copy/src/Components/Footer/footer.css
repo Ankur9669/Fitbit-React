@@ -1,0 +1,23 @@
+footer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--primary-color);
+    width: 100%;
+    min-height: 12.5rem;
+    color: var(--color-white);
+}
+.footer-icons-container{
+    display: flex;
+    justify-content: space-around;
+    width: 16rem;
+    margin: 1rem 0;
+}
+.footer-icons-container .footer-icon{
+    font-size: 2.5rem;
+    cursor: pointer;
+}
+.footer-icons-container .footer-icon:hover{
+    transform: scale(1.1);
+}

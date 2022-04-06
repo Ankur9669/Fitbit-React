@@ -1,0 +1,32 @@
+.navbar{
+    box-shadow: 0px 5px 3px 0px var(--navbar-shadow);
+}
+.navbar-icons-container{
+    min-width: 11rem;
+}
+
+.quantity-btn-container{
+    display: flex;
+    align-items: center;
+    margin: 1rem 0;
+}
+.quantity-btn{
+    cursor: pointer;
+    background-color: transparent;
+}
+.quantity-info{
+    display: inline-block;
+    border: 1px solid var(--color-gray);
+    font-size: 1.3rem;
+    padding: 2px 1rem;
+    margin: 0 0.5rem;
+}
+.quantity-btn i{
+    font-size: 2rem;
+}
+.navbar-icon{
+    font-size: 2.2rem;
+}
+.hamburger-icon{
+    font-size: 2.4rem;
+}
