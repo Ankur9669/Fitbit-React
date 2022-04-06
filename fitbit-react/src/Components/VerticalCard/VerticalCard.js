@@ -102,7 +102,16 @@ function VerticalCard({ product }) {
         <div className="text-container">
           <h5 className="font-medium-large weight-semi-bold primary-text-color card-vertical-heading">
             {productTitle}
-            <AiFillHeart style={{ fontSize: "1.7rem" }} />
+            <AiFillHeart
+              style={
+                ifProductExistsInWishList
+                  ? { fontSize: "1.7rem", color: "red" }
+                  : { fontSize: "1.7rem" }
+              }
+              onClick={
+                user.isUserLoggedIn ? updateWishList : redirectToLoginPage
+              }
+            />
           </h5>
           <div className="price-container">
             <p className="font-medium inline-block weight-semi-bold primary-text-color">
