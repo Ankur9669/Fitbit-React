@@ -1,9 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function NewArrivalCard({ imageUrl, text }) {
+function NewArrivalCard({
+  imageUrl = "",
+  text = "",
+  value = "",
+  handleOnCardClick = () => {},
+}) {
   return (
-    <Link to="/products" className="card card-only-image card-new-arrival">
+    <div
+      className="card card-only-image card-new-arrival"
+      onClick={() => handleOnCardClick(value)}
+    >
       <div className="text-overlay">
         <div className="text-overlay-text-container">
           <p className="font-medium-large weight-semi-bold">{text}</p>
@@ -20,7 +28,7 @@ function NewArrivalCard({ imageUrl, text }) {
           loading="lazy"
         />
       </div>
-    </Link>
+    </div>
   );
 }
 

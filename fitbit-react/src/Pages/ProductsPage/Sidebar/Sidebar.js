@@ -71,6 +71,24 @@ function Sidebar() {
             <li className="sidebar-filter-item">
               <input
                 type="checkbox"
+                name="all"
+                id="all"
+                className="sidebar-filter-input"
+                checked={filters.categories.all}
+                onChange={(e) =>
+                  dispatch({
+                    type: "FILTER_BY",
+                    payload: { value: e.target.checked, key: "all" },
+                  })
+                }
+              />
+              <label htmlFor="all" className="sidebar-filter-label">
+                All
+              </label>
+            </li>
+            <li className="sidebar-filter-item">
+              <input
+                type="checkbox"
                 name="equipment"
                 id="equipment"
                 className="sidebar-filter-input"
@@ -166,7 +184,7 @@ function Sidebar() {
                 }
               />
               <label htmlFor="4-stars" className="sidebar-filter-label">
-                4 Stars
+                4 Stars and above
               </label>
             </li>
             <li className="sidebar-filter-item">
@@ -186,7 +204,7 @@ function Sidebar() {
                 }
               />
               <label htmlFor="3-stars" className="sidebar-filter-label">
-                3 Stars
+                3 Stars and above
               </label>
             </li>
             <li className="sidebar-filter-item">
@@ -206,7 +224,7 @@ function Sidebar() {
                 }
               />
               <label htmlFor="2-stars" className="sidebar-filter-label">
-                2 Stars
+                2 Stars and above
               </label>
             </li>
             <li className="sidebar-filter-item">
@@ -226,7 +244,7 @@ function Sidebar() {
                 }
               />
               <label htmlFor="1-star" className="sidebar-filter-label">
-                1 Star
+                1 Star and above
               </label>
             </li>
           </ul>

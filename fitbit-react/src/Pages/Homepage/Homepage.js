@@ -1,18 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Navbar, Footer, HeroSection, NewArrivalsSection } from "./index";
 import "./homepage.css";
 import FeaturedProductsSection from "./FeaturedProducts/FeaturedProductsSection";
 import FeaturedBrands from "./FeaturedBrands/FeaturedBrands";
-import Axios from "axios";
+
+import { useDocumentTitle } from "../../Util/change-document-title";
 import FeaturedCategories from "./FeaturedCategories/FeaturedCategories";
 function Homepage() {
-  //To remove
-
-  // Axios.post("/api/auth/login", {
-  //   email: "adarshbalak@gmail.com",
-  //   password: "adarshBalaki123",
-  // }).then((res) => console.log(res));
-
+  // For scrolling to top
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    useDocumentTitle("FiTBiT-HomePage");
+  }, []);
   return (
     <div>
       <Navbar />

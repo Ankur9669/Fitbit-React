@@ -5,7 +5,7 @@ const sortByHighToLow = (products) => {
   return products;
 };
 const sortByLowToHigh = (products) => {
-  [...products].sort((a, b) => a.discountedPrice - b.discountedPrice);
+  products.sort((a, b) => a.discountedPrice - b.discountedPrice);
   return products;
 };
 export { sortByHighToLow, sortByLowToHigh };

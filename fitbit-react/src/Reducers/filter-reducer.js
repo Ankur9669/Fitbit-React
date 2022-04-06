@@ -1,10 +1,11 @@
 const initialState = {
   sortBy: "lowToHigh",
   categories: {
-    equipments: true,
-    clothes: true,
-    handGloves: true,
-    dumbells: true,
+    all: true,
+    equipments: false,
+    clothes: false,
+    handGloves: false,
+    dumbells: false,
   },
   includeOutOfStock: true,
   fastDelivery: false,
@@ -12,6 +13,7 @@ const initialState = {
 };
 
 const filterReducer = (state, action) => {
+  console.log(action.type);
   switch (action.type) {
     case "SORT_BY":
       return { ...state, sortBy: action.payload.value };
@@ -20,6 +22,7 @@ const filterReducer = (state, action) => {
         ...state,
         categories: {
           ...state.categories,
+          all: action.payload.key === "all" ? action.payload.value : false,
           [action.payload.key]: action.payload.value,
         },
       };

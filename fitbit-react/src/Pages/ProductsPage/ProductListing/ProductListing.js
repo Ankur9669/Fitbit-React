@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import {
   VerticalCard,
   useFilter,
@@ -7,7 +7,6 @@ import {
   sortByHighToLow,
   sortByLowToHigh,
 } from "../index";
-import { fetchProducts } from "../../../Util/fetch-products";
 
 function ProductListing() {
   const { filters, dispatch } = useFilter();
@@ -29,24 +28,27 @@ function ProductListing() {
     let glovesCategory = [];
     let dumbellsCategory = [];
 
-    if (filters.categories.equipments) {
-      equipmentCategory = filterByCategory(updatedData, "equipment");
+    if (!filters.categories.all) {
+      if (filters.categories.equipments) {
+        equipmentCategory = filterByCategory(updatedData, "equipment");
+      }
+      if (filters.categories.clothes) {
+        clothesCategory = filterByCategory(updatedData, "clothes");
+      }
+      if (filters.categories.handGloves) {
+        glovesCategory = filterByCategory(updatedData, "gloves");
+      }
+      if (filters.categories.dumbells) {
+        dumbellsCategory = filterByCategory(updatedData, "dumbells");
+      }
+      updatedData = [
+        ...equipmentCategory,
+        ...clothesCategory,
+        ...glovesCategory,
+        ...dumbellsCategory,
+      ];
     }
-    if (filters.categories.clothes) {
-      clothesCategory = filterByCategory(updatedData, "clothes");
-    }
-    if (filters.categories.handGloves) {
-      glovesCategory = filterByCategory(updatedData, "gloves");
-    }
-    if (filters.categories.dumbells) {
-      dumbellsCategory = filterByCategory(updatedData, "dumbells");
-    }
-    updatedData = [
-      ...equipmentCategory,
-      ...clothesCategory,
-      ...glovesCategory,
-      ...dumbellsCategory,
-    ];
+
     if (!filters.includeOutOfStock) {
       updatedData = updatedData.filter((data) => data.inStock === true);
     }
@@ -60,21 +62,6 @@ function ProductListing() {
   };
   let filteredData = products.products && getFilteredData(filters);
   let sortedData = products.products && getSortedData(filters, filteredData);
-
-  useEffect(() => {
-    // Fetching Data
-    (async () => {
-      const { data, success, message } = await fetchProducts();
-      if (success) {
-        dispatchProducts({
-          type: "FETCH",
-          payload: { products: data },
-        });
-      } else {
-        console.log(message);
-      }
-    })();
-  }, []);
 
   return (
     <div className="products-container">

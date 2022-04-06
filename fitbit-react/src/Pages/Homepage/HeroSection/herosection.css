@@ -37,6 +37,13 @@
         left: 5%;
         top: 20%;
     }   
+    .hero-section{
+        position: relative;
+        min-height: 50vh;
+    }
+    .hero-section img{
+        min-height: 50vh;
+    }
 }
 @media only screen and (max-width: 450px){
     .overlay-container h1{

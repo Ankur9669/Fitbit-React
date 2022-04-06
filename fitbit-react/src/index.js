@@ -18,7 +18,6 @@ ReactDOM.render(
   <React.StrictMode>
     <Router>
       <ToastProvider>
-        {" "}
         <UserProvider>
           <ProductProvider>
             <FilterProvider>

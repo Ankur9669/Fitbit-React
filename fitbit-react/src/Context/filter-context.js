@@ -4,10 +4,11 @@ const FilterContext = createContext();
 const initialState = {
   sortBy: "lowToHigh",
   categories: {
-    equipments: true,
-    clothes: true,
-    handGloves: true,
-    dumbells: true,
+    all: true,
+    equipments: false,
+    clothes: false,
+    handGloves: false,
+    dumbells: false,
   },
   includeOutOfStock: true,
   fastDelivery: false,
