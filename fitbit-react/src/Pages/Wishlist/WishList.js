@@ -6,11 +6,13 @@ import { useWishList } from "../../Context/wishlist-context";
 import { Navbar, Footer, AiFillHeart, PrimaryButton } from "./index";
 import { Link } from "react-router-dom";
 import "./wishlist.css";
+import { useDocumentTitle } from "../../Util/change-document-title";
 
 function WishList() {
   const { wishlist } = useWishList();
   const { user } = useUser();
   const navigate = useNavigate();
+  useDocumentTitle("FiTbiT-WishList");
 
   useEffect(() => {
     !user.isUserLoggedIn && navigate("/login");
