@@ -29,7 +29,6 @@ export {
   AiOutlineMail,
   AiFillEyeInvisible,
   AiFillEye,
-  AiFillCloseSquare,
   FaShoppingCart,
   FaUser,
   GrMenu,
