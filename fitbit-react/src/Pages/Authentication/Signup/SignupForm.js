@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import "../authentication.css";
 import Axios from "axios";
 import { useUser } from "../../../Context/user-context";
+import { useToast } from "../../../Context/toast-context";
 
 function SignupForm() {
   const [formDetails, setFormDetails] = useState({
@@ -19,6 +20,7 @@ function SignupForm() {
   });
   const [isPasswordVisible, setPasswordVisible] = useState(false);
   const { user, dispatchUser } = useUser();
+  const { showToast } = useToast();
 
   const onSubmitForm = (e) => {
     //TODO VALIDATIONS
@@ -27,6 +29,15 @@ function SignupForm() {
   };
 
   const signUpUser = async () => {
+    if (
+      formDetails.email === "" ||
+      formDetails.firstName === "" ||
+      formDetails.lastName === "" ||
+      formDetails.password === ""
+    ) {
+      showToast("Please Enter the details first", "ERROR");
+      return;
+    }
     try {
       const response = await Axios.post("/api/auth/signup", {
         firstName: formDetails.firstName,
