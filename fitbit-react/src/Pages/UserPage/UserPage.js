@@ -15,7 +15,7 @@ const UserPage = () => {
     if (!user.isUserLoggedIn) {
       navigate("/login");
     }
-  }, []);
+  }, [user.isUserLoggedIn]);
 
   const handleDisableButtonClick = () => {
     showToast("Coming Soon...", "INFO");

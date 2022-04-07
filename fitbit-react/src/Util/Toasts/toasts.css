@@ -13,7 +13,7 @@
 }
 .toast-info{
     background-color: var(--blue);
-    color: white;
+    color: var(--color-white);
 }
 .toast-close-icon{
     cursor: pointer;
