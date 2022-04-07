@@ -11,6 +11,10 @@
 .toast-text{
     flex: 1;
 }
+.toast-info{
+    background-color: var(--blue);
+    color: white;
+}
 .toast-close-icon{
     cursor: pointer;
     font-size: 1.3rem;

@@ -41,6 +41,9 @@ function Toasts() {
       case "WARNING":
         return "toast-warning";
 
+      case "INFO":
+        return "toast-info";
+
       default:
         return "toast-success";
     }

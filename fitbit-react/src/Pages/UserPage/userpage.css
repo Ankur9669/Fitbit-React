@@ -1,0 +1,79 @@
+.profile-container{
+    min-height: 70vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.profile{
+    width: 100%;
+    max-width: 50rem;
+    margin: 2rem;
+    padding: 1rem;
+    border: 2px solid var(--primary-color);
+    border-radius: 5px;
+}
+.profile-btn-container{
+    display: flex;
+    justify-content: center;
+    margin: 0 2rem;
+    padding: 0 0 1rem 0;
+    border-bottom: 2px solid var(--primary-color);
+}
+.profile-btn-wrapper{
+    width: 15.6rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+.profile-btn-wrapper button{
+    width: 7.5rem;
+    margin: 0.5rem 0;
+}
+.profile-btn-wrapper a{
+    display: flex;
+    justify-content: center;
+    width: 7.5rem;
+    margin: 0.5rem 0;
+}
+.user-profile-container{
+    display: grid;
+    grid-template-columns: 14.3rem 1fr;
+    margin-top: 1rem;
+}
+.user-info-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 28.1rem;
+}
+.user-info-item{
+    display: flex;
+    justify-content: space-between;
+    margin: 0.4rem;
+}
+
+/* Address Item */
+.address-item{
+    margin: 1rem 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--gray-color);
+}
+.address-btn-container{
+    margin: 0.5rem 0;
+}
+@media only screen and (max-width: 720px){
+    .user-profile-container{
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto;
+        justify-content: center;
+        margin: 2rem;
+    }   
+    .user-image-container{
+        display: flex;
+        justify-content: center;
+    }
+    .user-info-container{
+        max-width: 100%;
+    }
+}
