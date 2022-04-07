@@ -13,6 +13,7 @@ import {
 } from "./index";
 import "./horizontalcard.css";
 import { updateProductCountInCart } from "../../../Util/update-product-in-cart";
+import { useToast } from "../../../Context/toast-context";
 
 function HorizontalCard({ product }) {
   const {
@@ -30,6 +31,9 @@ function HorizontalCard({ product }) {
   } = product;
   const { cart, dispatch } = useCart();
   const { wishlist, dispatchWishList } = useWishList();
+  const { showToast } = useToast();
+
+  let ifProductExistsInWishList = findIfProductExistsInArray(wishlist, _id);
 
   const findIfProductExistsInCardAndUpdate = async (productId, type) => {
     let isPresent = cart.some((cartItem) => cartItem._id === productId);
@@ -37,10 +41,24 @@ function HorizontalCard({ product }) {
     if (isPresent) {
       const cart = await updateProductCountInCart(productId, type);
       dispatch({ type: "SET_CART", payload: { value: cart.cart } });
+      showToast("Item Updated", "SUCCESS");
     }
   };
 
-  let ifProductExistsInWishList = findIfProductExistsInArray(wishlist, _id);
+  const updateWishList = async () => {
+    let wishList = [];
+    if (!ifProductExistsInWishList) {
+      wishList = await addToWishList(product);
+      showToast("Item Added To WishList", "SUCCESS");
+    } else {
+      wishList = await removeFromWishList(_id);
+      showToast("Item Removed From WishList", "SUCCESS");
+    }
+    dispatchWishList({
+      type: "SET_WISHLIST",
+      payload: { value: wishList.wishlist },
+    });
+  };
 
   return (
     <div className="card card-horizontal my-cart-card">
@@ -100,18 +118,7 @@ function HorizontalCard({ product }) {
                 : "Move to Wishlist"
             }
             className={"my-cart-cta-btn"}
-            onClick={async () => {
-              let wishList = [];
-              if (!ifProductExistsInWishList) {
-                wishList = await addToWishList(product);
-              } else {
-                wishList = await removeFromWishList(_id);
-              }
-              dispatchWishList({
-                type: "SET_WISHLIST",
-                payload: { value: wishList.wishlist },
-              });
-            }}
+            onClick={updateWishList}
           />
           <SecondaryButton
             buttonText={"Remove From Cart"}

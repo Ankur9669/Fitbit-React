@@ -4,11 +4,16 @@ import {
   AiFillEyeInvisible,
   AiFillEye,
 } from "../../../Assets/icons";
-import { PrimaryButton, SecondaryButton } from "../../Cart/HorizontalCard";
+import {
+  PrimaryButton,
+  SecondaryButton,
+  useWishList,
+} from "../../Cart/HorizontalCard";
 import { Link, useNavigate } from "react-router-dom";
 import Axios from "axios";
 import { useUser } from "../../../Context/user-context";
 import { useCart } from "../../../Context/cart-context";
+import { useToast } from "../../../Context/toast-context";
 
 function Loginform() {
   const [formDetails, setFormDetails] = useState({
@@ -18,6 +23,8 @@ function Loginform() {
   const [isPasswordVisible, setPasswordVisible] = useState(false);
   const { user, dispatchUser } = useUser();
   const { cart, dispatch: dispatchCart } = useCart();
+  const { wishlist, dispatchWishList } = useWishList();
+  const { showToast } = useToast();
   const navigate = useNavigate();
 
   const onSubmitForm = (e) => {
@@ -48,6 +55,12 @@ function Loginform() {
         },
       });
 
+      dispatchWishList({
+        type: "SET_WISHLIST",
+        payload: { value: response.data.foundUser.wishlist },
+      });
+
+      showToast("Logged In Successfully", "SUCCESS");
       navigate("/");
     } catch (error) {
       console.error(error);
@@ -62,7 +75,6 @@ function Loginform() {
         password: "adarshBalika123",
       });
 
-      console.log(response);
       const token = response.data.encodedToken;
       localStorage.setItem("token", token);
 
@@ -78,8 +90,12 @@ function Loginform() {
         },
       });
 
-      //TODO set wishlist here
+      dispatchWishList({
+        type: "SET_WISHLIST",
+        payload: { value: response.data.foundUser.wishlist },
+      });
 
+      showToast("Logged In Successfully", "SUCCESS");
       navigate("/");
     } catch (error) {
       console.error(error);
