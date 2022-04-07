@@ -7,13 +7,16 @@ function Footer() {
     <footer>
       <p className="font-medium-large">Made with ♥ by Ankur Gupta</p>
       <div className="footer-icons-container">
-        <a href="#">
+        <a href="https://github.com/Ankur9669" target="_blank">
           <BsGithub className="footer-icon" />
         </a>
-        <a href="#">
+        <a
+          href="https://www.linkedin.com/in/ankur-gupta-0805a11a7/"
+          target="_blank"
+        >
           <BsLinkedin className="footer-icon" />
         </a>
-        <a href="#">
+        <a href="https://twitter.com/a2beff5d6b694ad" target="_blank">
           <BsTwitter className="footer-icon" />
         </a>
       </div>
