@@ -9,6 +9,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Axios from "axios";
 import { useUser } from "../../../Context/user-context";
 import { useCart } from "../../../Context/cart-context";
+import { useToast } from "../../../Context/toast-context";
 
 function Loginform() {
   const [formDetails, setFormDetails] = useState({
@@ -19,6 +20,7 @@ function Loginform() {
   const { user, dispatchUser } = useUser();
   const { cart, dispatch: dispatchCart } = useCart();
   const navigate = useNavigate();
+  const { showToast } = useToast();
 
   const onSubmitForm = (e) => {
     //TODO VALIDATIONS
@@ -26,6 +28,10 @@ function Loginform() {
     loginUser();
   };
   const loginUser = async () => {
+    if (formDetails.email === "" || formDetails.password === "") {
+      showToast("Please Enter the details first", "ERROR");
+      return;
+    }
     try {
       const response = await Axios.post("/api/auth/login", {
         email: formDetails.email,

@@ -16,7 +16,7 @@ function WishList() {
 
   useEffect(() => {
     !user.isUserLoggedIn && navigate("/login");
-  }, []);
+  }, [user.isUserLoggedIn]);
 
   return (
     <div>
