@@ -5,7 +5,7 @@ import {
   AiFillEye,
 } from "../../../Assets/icons";
 import { PrimaryButton, SecondaryButton } from "../../Cart/HorizontalCard";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../authentication.css";
 import Axios from "axios";
 import { useUser } from "../../../Context/user-context";
@@ -21,6 +21,7 @@ function SignupForm() {
   const [isPasswordVisible, setPasswordVisible] = useState(false);
   const { user, dispatchUser } = useUser();
   const { showToast } = useToast();
+  const navigate = useNavigate();
 
   const onSubmitForm = (e) => {
     //TODO VALIDATIONS
@@ -53,6 +54,7 @@ function SignupForm() {
         type: "LOGIN",
         payload: { value: response.data.createdUser },
       });
+      navigate("/");
     } catch (error) {
       console.error(error);
     }
