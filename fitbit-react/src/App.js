@@ -9,6 +9,7 @@ import MockMan from "mockman-js";
 import Login from "./Pages/Authentication/Login/Login";
 import ForgotPassword from "./Pages/Authentication/ForgotPassword/ForgotPassword";
 import Toasts from "./Util/Toasts/Toasts";
+import UserPage from "./Pages/UserPage/UserPage";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path="signup" element={<SignUp />}></Route>
         <Route path="login" element={<Login />}></Route>
         <Route path="forgotpassword" element={<ForgotPassword />}></Route>
+        <Route path="user" element={<UserPage />}></Route>
         <Route path="mockman" element={<MockMan />}></Route>
       </Routes>
     </div>

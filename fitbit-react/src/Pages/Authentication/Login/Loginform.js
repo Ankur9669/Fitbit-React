@@ -26,6 +26,7 @@ function Loginform() {
   const { wishlist, dispatchWishList } = useWishList();
   const { showToast } = useToast();
   const navigate = useNavigate();
+  const { showToast } = useToast();
 
   const onSubmitForm = (e) => {
     //TODO VALIDATIONS
@@ -33,6 +34,10 @@ function Loginform() {
     loginUser();
   };
   const loginUser = async () => {
+    if (formDetails.email === "" || formDetails.password === "") {
+      showToast("Please Enter the details first", "ERROR");
+      return;
+    }
     try {
       const response = await Axios.post("/api/auth/login", {
         email: formDetails.email,

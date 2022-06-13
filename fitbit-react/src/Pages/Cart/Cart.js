@@ -18,11 +18,10 @@ function Cart() {
   const { user, dispatchUser } = useUser();
   const navigate = useNavigate();
   useDocumentTitle("FiTbiT-Cart");
-  // console.log(cart);
 
   useEffect(() => {
     !user.isUserLoggedIn && navigate("/login");
-  }, []);
+  }, [user.isUserLoggedIn]);
 
   return (
     <div>

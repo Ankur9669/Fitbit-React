@@ -16,9 +16,9 @@ function NavbarIcons() {
         <FaShoppingCart className="navbar-icon" />
         <span className="number-badge number-badge-md">{cart.length}</span>
       </Link>
-      <a href="userprofile.html">
+      <Link to="/user">
         <FaUser className="navbar-icon" />
-      </a>
+      </Link>
     </div>
   );
 }
