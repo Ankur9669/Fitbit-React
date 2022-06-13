@@ -26,7 +26,6 @@ function Loginform() {
   const { wishlist, dispatchWishList } = useWishList();
   const { showToast } = useToast();
   const navigate = useNavigate();
-  const { showToast } = useToast();
 
   const onSubmitForm = (e) => {
     //TODO VALIDATIONS
