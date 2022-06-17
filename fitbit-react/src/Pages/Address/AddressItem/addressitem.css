@@ -9,7 +9,7 @@
 }
 .address-item-icons {
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
 }
 .address-item-icon {
     cursor: pointer;
