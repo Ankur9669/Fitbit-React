@@ -1,0 +1,8 @@
+.addresses{
+    min-height: 60vh;
+}
+.addresses-container{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}

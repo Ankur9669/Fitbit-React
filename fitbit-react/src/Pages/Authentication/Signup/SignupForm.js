@@ -10,6 +10,9 @@ import "../authentication.css";
 import Axios from "axios";
 import { useUser } from "../../../Context/user-context";
 import { useToast } from "../../../Context/toast-context";
+import { useAddresses } from "../../../Context/address-context";
+import { useCart } from "../../../Context/cart-context";
+import { useWishList } from "../../../Context/wishlist-context";
 
 function SignupForm() {
   const [formDetails, setFormDetails] = useState({
@@ -20,6 +23,10 @@ function SignupForm() {
   });
   const [isPasswordVisible, setPasswordVisible] = useState(false);
   const { user, dispatchUser } = useUser();
+  const { dispatch: dispatchCart } = useCart();
+  const { dispatchWishList } = useWishList();
+  const { dispatchAddresses } = useAddresses();
+
   const { showToast } = useToast();
   const navigate = useNavigate();
 
@@ -54,6 +61,24 @@ function SignupForm() {
         type: "LOGIN",
         payload: { value: response.data.createdUser },
       });
+
+      dispatchCart({
+        type: "SET_CART",
+        payload: {
+          value: response.data.createdUser.cart,
+        },
+      });
+
+      dispatchWishList({
+        type: "SET_WISHLIST",
+        payload: { value: response.data.createdUser.wishlist },
+      });
+
+      dispatchAddresses({
+        type: "SET_ADDRESSES",
+        payload: { value: response.data.foundUser.addresses },
+      });
+
       navigate("/");
     } catch (error) {
       console.error(error);

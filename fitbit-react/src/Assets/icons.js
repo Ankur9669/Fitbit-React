@@ -10,15 +10,16 @@ import {
 } from "react-icons/ai";
 import { FaShoppingCart } from "react-icons/fa";
 import { FaUser } from "react-icons/fa";
-import { GrMenu } from "react-icons/gr";
+import { GrMenu, GrEdit } from "react-icons/gr";
 import {
   BsGithub,
   BsLinkedin,
   BsTwitter,
   BsFillHeartFill,
 } from "react-icons/bs";
-import { MdAddShoppingCart, MdAddBox } from "react-icons/md";
+import { MdAddShoppingCart, MdAddBox, MdModeEditOutline } from "react-icons/md";
 import { IoMdAddCircle } from "react-icons/io";
+import { RiDeleteBin6Fill } from "react-icons/ri";
 
 export {
   AiOutlineHeart,
@@ -32,11 +33,14 @@ export {
   FaShoppingCart,
   FaUser,
   GrMenu,
+  GrEdit,
   BsGithub,
   BsLinkedin,
   BsTwitter,
   MdAddShoppingCart,
   MdAddBox,
+  MdModeEditOutline,
   BsFillHeartFill,
   IoMdAddCircle,
+  RiDeleteBin6Fill,
 };
