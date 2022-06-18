@@ -4,7 +4,7 @@ const addToAddresses = async (address) => {
   const token = localStorage.getItem("token");
   try {
     const response = await Axios.post(
-      "/api/user/cart",
+      "/api/user/address",
       {
         address,
       },

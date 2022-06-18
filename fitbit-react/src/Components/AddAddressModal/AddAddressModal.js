@@ -1,11 +1,17 @@
 import React, { useState } from "react";
 import PrimaryButton from "../../Components/Buttons/PrimaryButton";
+import { addToAddresses } from "../../Util/add-to-addresses";
+import { useToast } from "../../Context/toast-context";
+import { useAddresses } from "../../Context/address-context";
 import "./add-address-modal.css";
 
-function AddAddressModal() {
+function AddAddressModal(props) {
+  const { setaddNewAddressButtonClick } = props;
+  const { showToast } = useToast();
+  const { dispatchAddresses } = useAddresses();
   const [formDetails, setFormDetails] = useState({
     fullName: "",
-    mobileNumber: "",
+    mobile: "",
     pincode: "",
     address: "",
     city: "",
@@ -20,8 +26,16 @@ function AddAddressModal() {
       [e.target.id]: e.target.value,
     });
   };
-  const handleAddAddressClick = (e) => {
+  const handleAddAddressClick = async (e) => {
     e.preventDefault();
+    const { data, success, message } = await addToAddresses(formDetails);
+    if (success) {
+      dispatchAddresses({ type: "SET_ADDRESSES", payload: { value: data } });
+      setaddNewAddressButtonClick(false);
+      showToast("Address Added Successfully", "SUCCESS");
+    } else {
+      showToast("Error in adding address", "ERROR");
+    }
   };
   return (
     <div
@@ -45,12 +59,12 @@ function AddAddressModal() {
           </div>
 
           <div className="add-address-input-container">
-            <label htmlFor="mobileNumber" className="add-address-modal-label">
+            <label htmlFor="mobile" className="add-address-modal-label">
               Mobile Number:
             </label>
             <input
               type="text"
-              id="mobileNumber"
+              id="mobile"
               className="add-address-modal-input"
               value={formDetails.mobileNumber}
               placeholder="Mobile Number"

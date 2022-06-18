@@ -1,19 +1,38 @@
 import React from "react";
 import {
-  GrEdit,
   RiDeleteBin6Fill,
   MdModeEditOutline,
-} from "../../../Assets/icons";
+  removeFromAddresses,
+  editAddress,
+  useToast,
+  useAddresses,
+} from "./index";
 import "./addressitem.css";
 
 function AddressItem(props) {
   const { userAddress } = props;
-  const { name, mobile, pincode, address, city, state } = userAddress;
+  const { name, mobile, pincode, address, city, state, _id } = userAddress;
+  const { showToast } = useToast();
+  const { dispatchAddresses } = useAddresses();
+
+  const handleDeleteIconClick = async () => {
+    const { data, success, message } = await removeFromAddresses(_id);
+    if (success) {
+      dispatchAddresses({ type: "SET_ADDRESSES", payload: { value: data } });
+      showToast("Address removed Successfully", "SUCCESS");
+    } else {
+      showToast(message, "ERROR");
+    }
+  };
+
   return (
     <div className="address-item">
       <div className="address-item-icons">
         <MdModeEditOutline className="address-item-edit-icon address-item-icon" />
-        <RiDeleteBin6Fill className="address-item-delete-icon address-item-icon" />
+        <RiDeleteBin6Fill
+          className="address-item-delete-icon address-item-icon"
+          onClick={handleDeleteIconClick}
+        />
       </div>
       <div className="address-item-content">
         <p className="address-item-content-col-1 font-medium-large weight-bold">

@@ -25,6 +25,7 @@ import {
 import {
   getAllAddressesHandler,
   addItemToAddressesHandler,
+  removeItemFromAddressesHandler,
 } from "./backend/controllers/AddressController";
 import { categories } from "./backend/db/categories";
 import { products } from "./backend/db/products";
@@ -94,8 +95,8 @@ export function makeServer({ environment = "development" } = {}) {
       this.get("/user/addresses", getAllAddressesHandler.bind(this));
       this.post("/user/address", addItemToAddressesHandler.bind(this));
       this.delete(
-        "/user/wishlist/:productId",
-        removeItemFromWishlistHandler.bind(this)
+        "/user/address/:addressId",
+        removeItemFromAddressesHandler.bind(this)
       );
     },
   });

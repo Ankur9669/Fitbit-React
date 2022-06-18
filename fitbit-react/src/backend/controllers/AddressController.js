@@ -68,10 +68,10 @@ export const addItemToAddressesHandler = function (schema, request) {
 
 /**
  * This handler handles removing items to user's cart.
- * send DELETE Request at /api/user/cart/:productId
+ * send DELETE Request at /api/user/address/:addressId
  * */
 
-export const removeItemFromCartHandler = function (schema, request) {
+export const removeItemFromAddressesHandler = function (schema, request) {
   const userId = requiresAuth.call(this, request);
   try {
     if (!userId) {
@@ -83,11 +83,11 @@ export const removeItemFromCartHandler = function (schema, request) {
         }
       );
     }
-    let userCart = schema.users.findBy({ _id: userId }).cart;
-    const productId = request.params.productId;
-    userCart = userCart.filter((item) => item._id !== productId);
-    this.db.users.update({ _id: userId }, { cart: userCart });
-    return new Response(200, {}, { cart: userCart });
+    let userAddresses = schema.users.findBy({ _id: userId }).addresses;
+    const addressId = request.params.addressId;
+    userAddresses = userAddresses.filter((item) => item._id !== addressId);
+    this.db.users.update({ _id: userId }, { addresses: userAddresses });
+    return new Response(200, {}, { addresses: userAddresses });
   } catch (error) {
     return new Response(
       500,

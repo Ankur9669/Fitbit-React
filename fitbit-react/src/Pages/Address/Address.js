@@ -51,7 +51,9 @@ function Address() {
       <div className="spacer-3"></div>
       {isAddNewAddressButtonClick &&
         ReactDOM.createPortal(
-          <AddAddressModal />,
+          <AddAddressModal
+            setaddNewAddressButtonClick={setaddNewAddressButtonClick}
+          />,
           document.getElementById("modal")
         )}
       <Footer />
