@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import Navbar from "../../Components/Navbar/Navbar";
-import Footer from "../../Components/Footer/Footer";
-import { useUser } from "../../Context/user-context";
-import { useDocumentTitle } from "../../Util/change-document-title";
-import AddressItem from "./AddressItem/AddressItem";
-import { useAddresses } from "../../Context/address-context";
-import { getAddresses } from "../../Util/getAddresses";
-import { addToAddresses } from "../../Util/add-to-addresses";
-import PrimaryButton from "../../Components/Buttons/PrimaryButton";
-import AddAddressModal from "../../Components/AddAddressModal/AddAddressModal";
-import ReactDOM from "react-dom";
+import {
+  useNavigate,
+  Navbar,
+  Footer,
+  useUser,
+  useDocumentTitle,
+  AddressItem,
+  useAddresses,
+  PrimaryButton,
+  AddAddressModal,
+  ReactDOM,
+} from "./index";
 import "./address.css";
 
 function Address() {
@@ -44,9 +44,22 @@ function Address() {
         />
         <div className="spacer-3"></div>
         <div className="addresses-container">
-          {addresses.map((address) => (
-            <AddressItem userAddress={address} key={address._id} />
-          ))}
+          {addresses.length > 0 ? (
+            addresses.map((address) => (
+              <AddressItem userAddress={address} key={address._id} />
+            ))
+          ) : (
+            <div className="empty-cart-container">
+              <img
+                src="/images/empty-cart.svg"
+                className="empty-cart-img"
+              ></img>
+              <p className="weight-semi-bold font-large centered-text">
+                Your Don't Have Any addresses
+              </p>
+              <div className="spacer-3"></div>
+            </div>
+          )}
         </div>
       </section>
       <div className="spacer-3"></div>
