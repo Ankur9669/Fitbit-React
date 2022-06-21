@@ -67,7 +67,52 @@ export const addItemToAddressesHandler = function (schema, request) {
 };
 
 /**
- * This handler handles removing items to user's cart.
+ * This handler handles editing items to user's addresses.
+ * send POST Request at /api/user/address/:addressId
+ * */
+
+export const editAddressItemHandler = function (schema, request) {
+  const userId = requiresAuth.call(this, request);
+  try {
+    if (!userId) {
+      new Response(
+        404,
+        {},
+        {
+          errors: ["The email you entered is not Registered. Not Found error"],
+        }
+      );
+    }
+    let userAddresses = schema.users.findBy({ _id: userId }).addresses;
+    const addressId = request.params.addressId;
+    const { address } = JSON.parse(request.requestBody);
+    userAddresses = userAddresses.map((item) => {
+      if (item._id === addressId) {
+        return {
+          _id: uuid(),
+          ...address,
+          createdAt: formatDate(),
+          updatedAt: formatDate(),
+        };
+      }
+      return item;
+    });
+
+    this.db.users.update({ _id: userId }, { addresses: userAddresses });
+    return new Response(200, {}, { addresses: userAddresses });
+  } catch (error) {
+    return new Response(
+      500,
+      {},
+      {
+        error,
+      }
+    );
+  }
+};
+
+/**
+ * This handler handles removing items to user's addresesses.
  * send DELETE Request at /api/user/address/:addressId
  * */
 

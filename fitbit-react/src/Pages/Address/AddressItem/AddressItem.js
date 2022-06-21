@@ -6,10 +6,10 @@ import {
   editAddress,
   useToast,
   useAddresses,
+  EditAddressModal,
+  ReactDOM,
 } from "./index";
 import "./addressitem.css";
-import EditAddressModal from "../../../Components/EditAddressModal/EditAddressModal";
-import ReactDOM from "react-dom";
 
 function AddressItem(props) {
   const { userAddress } = props;

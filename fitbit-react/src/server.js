@@ -26,6 +26,7 @@ import {
   getAllAddressesHandler,
   addItemToAddressesHandler,
   removeItemFromAddressesHandler,
+  editAddressItemHandler,
 } from "./backend/controllers/AddressController";
 import { categories } from "./backend/db/categories";
 import { products } from "./backend/db/products";
@@ -94,6 +95,7 @@ export function makeServer({ environment = "development" } = {}) {
       // address routes
       this.get("/user/addresses", getAllAddressesHandler.bind(this));
       this.post("/user/address", addItemToAddressesHandler.bind(this));
+      this.post("/user/address/:addressId", editAddressItemHandler.bind(this));
       this.delete(
         "/user/address/:addressId",
         removeItemFromAddressesHandler.bind(this)

@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import PrimaryButton from "../../Components/Buttons/PrimaryButton";
-import { addToAddresses } from "../../Util/add-to-addresses";
-import { useToast } from "../../Context/toast-context";
-import { useAddresses } from "../../Context/address-context";
-import { AiOutlineClose } from "../../Assets/icons";
+import {
+  PrimaryButton,
+  addToAddresses,
+  useToast,
+  useAddresses,
+  AiOutlineClose,
+} from "./index";
 import "./add-address-modal.css";
 
 function AddAddressModal(props) {

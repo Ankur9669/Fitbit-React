@@ -3,6 +3,8 @@ import { removeFromAddresses } from "../../../Util/remove-from-addresses";
 import { editAddress } from "../../../Util/edit-address";
 import { useToast } from "../../../Context/toast-context";
 import { useAddresses } from "../../../Context/address-context";
+import EditAddressModal from "../../../Components/EditAddressModal/EditAddressModal";
+import ReactDOM from "react-dom";
 
 export {
   RiDeleteBin6Fill,
@@ -11,4 +13,6 @@ export {
   editAddress,
   useToast,
   useAddresses,
+  EditAddressModal,
+  ReactDOM,
 };

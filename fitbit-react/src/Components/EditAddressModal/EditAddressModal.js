@@ -1,14 +1,17 @@
 import React, { useState } from "react";
-import PrimaryButton from "../../Components/Buttons/PrimaryButton";
-import { useToast } from "../../Context/toast-context";
-import { useAddresses } from "../../Context/address-context";
-import { AiOutlineClose } from "../../Assets/icons";
+import {
+  PrimaryButton,
+  useToast,
+  useAddresses,
+  AiOutlineClose,
+  editAddresses,
+} from "./index";
 import "./edit-address-modal.css";
 
 function EditAddressModal(props) {
   const { setEditButtonClick, userAddress } = props;
+  const { showToast } = useToast();
   const { name, mobile, pincode, address, city, state, _id } = userAddress;
-  console.log(userAddress);
   const [formDetails, setFormDetails] = useState({
     name: name,
     mobile: mobile,
@@ -17,13 +20,32 @@ function EditAddressModal(props) {
     city: city,
     state: state,
   });
+  const { dispatchAddresses } = useAddresses();
+
   const closeModal = () => {
-    // setaddNewAddressButtonClick(false);
+    setEditButtonClick(false);
   };
   const stopPropagation = (e) => {
     e.stopPropagation();
   };
-  const handleEditAddressClick = () => {};
+  const handleFormChange = (e) => {
+    setFormDetails({
+      ...formDetails,
+      [e.target.id]: e.target.value,
+    });
+  };
+  const handleEditAddressClick = async (e) => {
+    e.preventDefault();
+
+    const { data, success, message } = await editAddresses(_id, formDetails);
+    if (success) {
+      dispatchAddresses({ type: "SET_ADDRESSES", payload: { value: data } });
+      setEditButtonClick(false);
+      showToast("Address edited successfully", "SUCCESS");
+    } else {
+      showToast("Error in editing address", "ERROR");
+    }
+  };
 
   return (
     <div className="edit-address-modal" onClick={closeModal}>
