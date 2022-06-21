@@ -53,11 +53,11 @@
 }
 
 /* Address Item */
-.address-item{
+/* .address-item{
     margin: 1rem 2rem;
     padding-bottom: 1rem;
     border-bottom: 2px solid var(--gray-color);
-}
+} */
 .address-btn-container{
     margin: 0.5rem 0;
 }

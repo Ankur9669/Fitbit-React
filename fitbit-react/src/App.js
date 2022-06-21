@@ -10,6 +10,7 @@ import Login from "./Pages/Authentication/Login/Login";
 import ForgotPassword from "./Pages/Authentication/ForgotPassword/ForgotPassword";
 import Toasts from "./Util/Toasts/Toasts";
 import UserPage from "./Pages/UserPage/UserPage";
+import Address from "./Pages/Address/Address";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="cart" element={<Cart />}></Route>
         <Route path="wishlist" element={<WishList />}></Route>
         <Route path="signup" element={<SignUp />}></Route>
+        <Route path="addresses" element={<Address />}></Route>
         <Route path="login" element={<Login />}></Route>
         <Route path="forgotpassword" element={<ForgotPassword />}></Route>
         <Route path="user" element={<UserPage />}></Route>

@@ -13,6 +13,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Axios from "axios";
 import { useUser } from "../../../Context/user-context";
 import { useCart } from "../../../Context/cart-context";
+import { useAddresses } from "../../../Context/address-context";
 import { useToast } from "../../../Context/toast-context";
 
 function Loginform() {
@@ -24,6 +25,7 @@ function Loginform() {
   const { user, dispatchUser } = useUser();
   const { cart, dispatch: dispatchCart } = useCart();
   const { wishlist, dispatchWishList } = useWishList();
+  const { addresses, dispatchAddresses } = useAddresses();
   const { showToast } = useToast();
   const navigate = useNavigate();
 
@@ -43,7 +45,6 @@ function Loginform() {
         password: formDetails.password,
       });
 
-      // console.log(response);
       const token = response.data.encodedToken;
       localStorage.setItem("token", token);
 
@@ -62,6 +63,11 @@ function Loginform() {
       dispatchWishList({
         type: "SET_WISHLIST",
         payload: { value: response.data.foundUser.wishlist },
+      });
+
+      dispatchAddresses({
+        type: "SET_ADDRESSES",
+        payload: { value: response.data.foundUser.addresses },
       });
 
       showToast("Logged In Successfully", "SUCCESS");
@@ -97,6 +103,11 @@ function Loginform() {
       dispatchWishList({
         type: "SET_WISHLIST",
         payload: { value: response.data.foundUser.wishlist },
+      });
+
+      dispatchAddresses({
+        type: "SET_ADDRESSES",
+        payload: { value: response.data.foundUser.addresses },
       });
 
       showToast("Logged In Successfully", "SUCCESS");

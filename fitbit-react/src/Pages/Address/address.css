@@ -1,0 +1,15 @@
+.addresses{
+    min-height: 60vh;
+}
+.addresses-container{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.address-heading {
+    position: relative;
+}
+.address-button {
+   margin-left: auto;
+   margin-right: 2rem;
+}

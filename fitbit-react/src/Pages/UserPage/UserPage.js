@@ -4,6 +4,7 @@ import Footer from "../../Components/Footer/Footer";
 import { useUser } from "../../Context/user-context";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "../../Context/toast-context";
+import { Link } from "react-router-dom";
 import "./userpage.css";
 const UserPage = () => {
   const { user } = useUser();
@@ -28,12 +29,9 @@ const UserPage = () => {
           <div className="profile-btn-container">
             <div className="profile-btn-wrapper">
               <button className="button button-primary">Profile</button>
-              <button
-                className="button button-outline-primary"
-                onClick={handleDisableButtonClick}
-              >
+              <Link to="/addresses" className="button button-outline-primary">
                 Addresses
-              </button>
+              </Link>
             </div>
             <div className="profile-btn-wrapper">
               <button

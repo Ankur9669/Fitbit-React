@@ -22,6 +22,12 @@ import {
   getWishlistItemsHandler,
   removeItemFromWishlistHandler,
 } from "./backend/controllers/WishlistController";
+import {
+  getAllAddressesHandler,
+  addItemToAddressesHandler,
+  removeItemFromAddressesHandler,
+  editAddressItemHandler,
+} from "./backend/controllers/AddressController";
 import { categories } from "./backend/db/categories";
 import { products } from "./backend/db/products";
 import { users } from "./backend/db/users";
@@ -84,6 +90,15 @@ export function makeServer({ environment = "development" } = {}) {
       this.delete(
         "/user/wishlist/:productId",
         removeItemFromWishlistHandler.bind(this)
+      );
+
+      // address routes
+      this.get("/user/addresses", getAllAddressesHandler.bind(this));
+      this.post("/user/address", addItemToAddressesHandler.bind(this));
+      this.post("/user/address/:addressId", editAddressItemHandler.bind(this));
+      this.delete(
+        "/user/address/:addressId",
+        removeItemFromAddressesHandler.bind(this)
       );
     },
   });
