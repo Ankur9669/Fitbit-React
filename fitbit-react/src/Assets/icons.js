@@ -7,10 +7,11 @@ import {
   AiFillEyeInvisible,
   AiFillEye,
   AiFillCloseSquare,
+  AiOutlineClose,
 } from "react-icons/ai";
 import { FaShoppingCart } from "react-icons/fa";
 import { FaUser } from "react-icons/fa";
-import { GrMenu, GrEdit } from "react-icons/gr";
+import { GrMenu, GrEdit, GrFormClose } from "react-icons/gr";
 import {
   BsGithub,
   BsLinkedin,
@@ -24,6 +25,7 @@ import { RiDeleteBin6Fill } from "react-icons/ri";
 export {
   AiOutlineHeart,
   AiFillStar,
+  AiOutlineClose,
   AiFillMinusCircle,
   AiFillHeart,
   AiFillCloseSquare,
@@ -34,6 +36,7 @@ export {
   FaUser,
   GrMenu,
   GrEdit,
+  GrFormClose,
   BsGithub,
   BsLinkedin,
   BsTwitter,

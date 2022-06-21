@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   RiDeleteBin6Fill,
   MdModeEditOutline,
@@ -8,12 +8,15 @@ import {
   useAddresses,
 } from "./index";
 import "./addressitem.css";
+import EditAddressModal from "../../../Components/EditAddressModal/EditAddressModal";
+import ReactDOM from "react-dom";
 
 function AddressItem(props) {
   const { userAddress } = props;
   const { name, mobile, pincode, address, city, state, _id } = userAddress;
   const { showToast } = useToast();
   const { dispatchAddresses } = useAddresses();
+  const [isEditButtonClick, setEditButtonClick] = useState(false);
 
   const handleDeleteIconClick = async () => {
     const { data, success, message } = await removeFromAddresses(_id);
@@ -24,11 +27,17 @@ function AddressItem(props) {
       showToast(message, "ERROR");
     }
   };
+  const handleEditIconClick = async () => {
+    setEditButtonClick(true);
+  };
 
   return (
     <div className="address-item">
       <div className="address-item-icons">
-        <MdModeEditOutline className="address-item-edit-icon address-item-icon" />
+        <MdModeEditOutline
+          className="address-item-edit-icon address-item-icon"
+          onClick={handleEditIconClick}
+        />
         <RiDeleteBin6Fill
           className="address-item-delete-icon address-item-icon"
           onClick={handleDeleteIconClick}
@@ -78,6 +87,14 @@ function AddressItem(props) {
         </p>
         <p className="address-item-content-col-2 font-medium-large">{state}</p>
       </div>
+      {isEditButtonClick &&
+        ReactDOM.createPortal(
+          <EditAddressModal
+            setEditButtonClick={setEditButtonClick}
+            userAddress={userAddress}
+          />,
+          document.getElementById("modal")
+        )}
     </div>
   );
 }

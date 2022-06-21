@@ -18,7 +18,7 @@ function Address() {
   const { addresses, dispatchAddresses } = useAddresses();
   const navigate = useNavigate();
   const [isAddNewAddressButtonClick, setaddNewAddressButtonClick] =
-    useState(true);
+    useState(false);
 
   useDocumentTitle("FiTbiT-Address");
 
@@ -40,6 +40,7 @@ function Address() {
         <PrimaryButton
           buttonText="Add New Address"
           className="address-button"
+          onClick={() => setaddNewAddressButtonClick(true)}
         />
         <div className="spacer-3"></div>
         <div className="addresses-container">
@@ -53,6 +54,7 @@ function Address() {
         ReactDOM.createPortal(
           <AddAddressModal
             setaddNewAddressButtonClick={setaddNewAddressButtonClick}
+            modalType="addAddress"
           />,
           document.getElementById("modal")
         )}

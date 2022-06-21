@@ -1,122 +1,103 @@
 import React, { useState } from "react";
 import PrimaryButton from "../../Components/Buttons/PrimaryButton";
-import { addToAddresses } from "../../Util/add-to-addresses";
 import { useToast } from "../../Context/toast-context";
 import { useAddresses } from "../../Context/address-context";
 import { AiOutlineClose } from "../../Assets/icons";
-import "./add-address-modal.css";
+import "./edit-address-modal.css";
 
-function AddAddressModal(props) {
-  const { setaddNewAddressButtonClick } = props;
-  const { showToast } = useToast();
-  const { dispatchAddresses } = useAddresses();
-
+function EditAddressModal(props) {
+  const { setEditButtonClick, userAddress } = props;
+  const { name, mobile, pincode, address, city, state, _id } = userAddress;
+  console.log(userAddress);
   const [formDetails, setFormDetails] = useState({
-    fullName: "",
-    mobile: "",
-    pincode: "",
-    address: "",
-    city: "",
-    state: "",
+    name: name,
+    mobile: mobile,
+    pincode: pincode,
+    address: address,
+    city: city,
+    state: state,
   });
-
-  const handleFormChange = (e) => {
-    setFormDetails({
-      ...formDetails,
-      [e.target.id]: e.target.value,
-    });
-  };
-  const handleAddAddressClick = async (e) => {
-    e.preventDefault();
-    const { data, success, message } = await addToAddresses(formDetails);
-    if (success) {
-      dispatchAddresses({ type: "SET_ADDRESSES", payload: { value: data } });
-      setaddNewAddressButtonClick(false);
-      showToast("Address Added Successfully", "SUCCESS");
-    } else {
-      showToast("Error in adding address", "ERROR");
-    }
-  };
   const closeModal = () => {
-    setaddNewAddressButtonClick(false);
+    // setaddNewAddressButtonClick(false);
   };
   const stopPropagation = (e) => {
     e.stopPropagation();
   };
+  const handleEditAddressClick = () => {};
 
   return (
-    <div className="add-address-modal" onClick={closeModal}>
-      <div className="add-address-modal-container" onClick={stopPropagation}>
+    <div className="edit-address-modal" onClick={closeModal}>
+      <div className="edit-address-modal-container" onClick={stopPropagation}>
         <AiOutlineClose
           className="address-modal-close-icon"
           onClick={closeModal}
         />
 
-        <form className="add-address-form">
-          <div className="add-address-input-container">
-            <label htmlFor="name" className="add-address-modal-label">
+        <form className="edit-address-form">
+          <div className="edit-address-input-container">
+            <label htmlFor="name" className="edit-address-modal-label">
               Name:
             </label>
             <input
               type="text"
               id="name"
-              className="add-address-modal-input"
+              className="edit-address-modal-input"
               value={formDetails.name}
               placeholder="Name"
               onChange={(e) => handleFormChange(e)}
             />
           </div>
 
-          <div className="add-address-input-container">
-            <label htmlFor="mobile" className="add-address-modal-label">
+          <div className="edit-address-input-container">
+            <label htmlFor="mobile" className="edit-address-modal-label">
               Mobile Number:
             </label>
             <input
               type="text"
               id="mobile"
-              className="add-address-modal-input"
-              value={formDetails.mobileNumber}
+              className="edit-address-modal-input"
+              value={formDetails.mobile}
               placeholder="Mobile Number"
               onChange={(e) => handleFormChange(e)}
             />
           </div>
 
-          <div className="add-address-input-container">
-            <label htmlFor="pincode" className="add-address-modal-label">
+          <div className="edit-address-input-container">
+            <label htmlFor="pincode" className="edit-address-modal-label">
               Pincode
             </label>
             <input
               type="text"
               id="pincode"
-              className="add-address-modal-input"
+              className="edit-address-modal-input"
               value={formDetails.pincode}
               placeholder="Pincode"
               onChange={(e) => handleFormChange(e)}
             />
           </div>
 
-          <div className="add-address-input-container">
-            <label htmlFor="address" className="add-address-modal-label">
+          <div className="edit-address-input-container">
+            <label htmlFor="address" className="edit-address-modal-label">
               Address
             </label>
             <input
               type="text"
               id="address"
-              className="add-address-modal-input"
+              className="edit-address-modal-input"
               value={formDetails.address}
               placeholder="Address"
               onChange={(e) => handleFormChange(e)}
             />
           </div>
 
-          <div className="add-address-input-container">
-            <label htmlFor="city" className="add-address-modal-label">
+          <div className="edit-address-input-container">
+            <label htmlFor="city" className="edit-address-modal-label">
               City
             </label>
             <input
               type="text"
               id="city"
-              className="add-address-modal-input"
+              className="edit-address-modal-input"
               value={formDetails.city}
               placeholder="City"
               onChange={(e) => handleFormChange(e)}
@@ -124,13 +105,13 @@ function AddAddressModal(props) {
           </div>
 
           <div className="add-address-input-container">
-            <label htmlFor="state" className="add-address-modal-label">
+            <label htmlFor="state" className="edit-address-modal-label">
               State
             </label>
             <input
               type="text"
               id="state"
-              className="add-address-modal-input"
+              className="edit-address-modal-input"
               value={formDetails.state}
               placeholder="State"
               onChange={(e) => handleFormChange(e)}
@@ -138,9 +119,9 @@ function AddAddressModal(props) {
           </div>
 
           <PrimaryButton
-            buttonText="Add Address"
+            buttonText="Edit Address"
             className="add-address-button"
-            onClick={handleAddAddressClick}
+            onClick={handleEditAddressClick}
           />
         </form>
       </div>
@@ -148,4 +129,4 @@ function AddAddressModal(props) {
   );
 }
 
-export default AddAddressModal;
+export default EditAddressModal;
