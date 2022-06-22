@@ -1,11 +1,16 @@
 import React from "react";
 import { PrimaryButton } from "../../../Components/Navbar";
 import { useCart } from "../../../Context/cart-context";
+import { Link, useLocation } from "react-router-dom";
+
 function SummaryCard() {
   const { cart, dispatch, totalPrice } = useCart();
   const discountPrice = 180;
   const deliveryCharges = 40;
   const priceToPay = totalPrice - discountPrice + deliveryCharges;
+  const location = useLocation();
+  const { pathname } = location;
+
   return (
     <div className="card card-vertical price-details-card">
       <div className="wrapper">
@@ -39,9 +44,16 @@ function SummaryCard() {
             </p>
           </div>
         </div>
-        <div className="btn-container">
-          <PrimaryButton buttonText={"Buy Now"} />
-        </div>
+
+        {pathname === "/checkout" ? (
+          <div className="btn-container">
+            <PrimaryButton buttonText={"Pay Now"} />
+          </div>
+        ) : (
+          <Link to="/checkout" className="btn-container">
+            <PrimaryButton buttonText={"Checkout"} />
+          </Link>
+        )}
       </div>
     </div>
   );

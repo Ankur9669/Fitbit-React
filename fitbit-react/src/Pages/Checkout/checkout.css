@@ -1,0 +1,83 @@
+.checkout{
+    max-width: 1200px;
+    margin: auto;
+}
+.checkout-container{
+    max-width: 65rem;
+    width: 90%;
+    margin: auto;
+}
+.checkout-orders-container {
+    margin: 1rem 0;
+}
+.checkout-address-container {
+    margin: 1rem 0;
+}
+.checkout-items-container{
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    grid-column: 1 / 2;
+    margin: 0 1rem;
+}
+.checkout-summary-container{
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    grid-column: 2 / 3;
+    margin: 0 1rem;
+}
+
+
+/* Price details Secction css */
+.price-details-card{
+    margin: 2rem 0rem;
+    border-radius: 3px;
+}
+.price-details-card-heading{
+    border-bottom: 2px solid gray;
+    padding-bottom: 0.4rem;
+}
+.price-details-item{
+    display: flex;
+    justify-content: space-between;
+}
+.price-details-section{
+    border-bottom: 2px solid gray;
+}
+.price-details-card .btn-container{
+    display: block;
+    margin: 1rem 0rem 0rem 0rem;
+}
+.price-details-card .btn-container button{
+    width: 100%;
+    margin: 0rem;
+}
+.empty-cart-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; 
+}
+.empty-cart-img{
+    max-width: 400px;
+    max-height: 350px;
+    object-fit: contain;
+}
+@media only screen and (max-width: 1028px){
+    .checkout-container {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    .grid-50-50{
+        grid-template-columns: 100%;
+        grid-template-rows: auto;
+    }
+    .checkout-items-container{
+        grid-column: 1;
+    }
+    .checkout-summary-container{
+        grid-column: 1;
+    }
+}
