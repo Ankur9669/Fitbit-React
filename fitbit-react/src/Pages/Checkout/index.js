@@ -10,6 +10,8 @@ import { Link, useNavigate } from "react-router-dom";
 import PrimaryButton from "../../Components/Buttons/PrimaryButton";
 import SecondaryButton from "../../Components/Buttons/SecondaryButton";
 import { useUser } from "../../Context/user-context";
+import AddAddressModal from "../../Components/AddAddressModal/AddAddressModal";
+import ReactDOM from "react-dom";
 
 export {
   Navbar,
@@ -25,4 +27,6 @@ export {
   PrimaryButton,
   SecondaryButton,
   useUser,
+  AddAddressModal,
+  ReactDOM,
 };

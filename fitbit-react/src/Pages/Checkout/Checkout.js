@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-
+import React, { useState } from "react";
 import {
   Navbar,
   Footer,
@@ -14,6 +13,8 @@ import {
   PrimaryButton,
   SecondaryButton,
   useUser,
+  AddAddressModal,
+  ReactDOM,
 } from "./index";
 import "./checkout.css";
 
@@ -23,6 +24,8 @@ function Checkout() {
   const { user } = useUser();
   const { cart } = useCart();
   const { addresses, dispatchAddresses } = useAddresses();
+  const [isAddNewAddressButtonClick, setaddNewAddressButtonClick] =
+    useState(false);
   const navigate = useNavigate();
   //   useEffect(() => {
   //     !user.isUserLoggedIn && navigate("/login");
@@ -41,7 +44,7 @@ function Checkout() {
                 <div className="checkout-orders-container">
                   <h3 className="font-medium-large">Order Summary</h3>
                   {cart.map((product) => (
-                    <CheckoutProductCard product={product} />
+                    <CheckoutProductCard product={product} key={product._id} />
                   ))}
                 </div>
 
@@ -50,7 +53,10 @@ function Checkout() {
                   {addresses.map((address) => (
                     <AddressItem userAddress={address} key={address._id} />
                   ))}
-                  <SecondaryButton buttonText="Add New Address" />
+                  <SecondaryButton
+                    buttonText="Add New Address"
+                    onClick={() => setaddNewAddressButtonClick(true)}
+                  />
                 </div>
               </div>
               <div className="checkout-summary-container">
@@ -80,6 +86,14 @@ function Checkout() {
           )}
         </>
       </main>
+      {isAddNewAddressButtonClick &&
+        ReactDOM.createPortal(
+          <AddAddressModal
+            setaddNewAddressButtonClick={setaddNewAddressButtonClick}
+            modalType="addAddress"
+          />,
+          document.getElementById("modal")
+        )}
       <Footer />
     </div>
   );
