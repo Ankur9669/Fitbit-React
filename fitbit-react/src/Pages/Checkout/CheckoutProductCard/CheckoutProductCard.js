@@ -30,9 +30,9 @@ function CheckoutProductCard(props) {
           {productTitle}
         </h5>
         <p className="font-large weight-semi-bold primary-text-color">
-          &#8377;{realPrice}&nbsp;
+          &#8377;{discountedPrice}&nbsp;
           <span className="font-medium weight-semi-bold strike-through secondary-text-color">
-            &#8377;{discountedPrice}
+            &#8377;{realPrice}
           </span>
         </p>
         <p className="font-small weight-semi-bold primary-text-color">

@@ -23,7 +23,7 @@ function Checkout() {
 
   const { user } = useUser();
   const { cart } = useCart();
-  const { addresses, dispatchAddresses } = useAddresses();
+  const { addresses } = useAddresses();
   const [isAddNewAddressButtonClick, setaddNewAddressButtonClick] =
     useState(false);
   const navigate = useNavigate();

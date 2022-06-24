@@ -7,8 +7,11 @@ import {
   useToast,
   useAddresses,
   EditAddressModal,
+  useCheckout,
+  MdOutlineRadioButtonChecked,
   ReactDOM,
 } from "./index";
+
 import "./address-item.css";
 
 function AddressItem(props) {
@@ -16,9 +19,17 @@ function AddressItem(props) {
   const { name, mobile, pincode, address, city, state, _id } = userAddress;
   const { showToast } = useToast();
   const { dispatchAddresses } = useAddresses();
+  const { checkoutDetails, dispatchCheckout } = useCheckout();
   const [isEditButtonClick, setEditButtonClick] = useState(false);
 
-  const handleDeleteIconClick = async () => {
+  const handleAddressClick = () => {
+    dispatchCheckout({
+      type: "SET_ADDRESS",
+      payload: { address: userAddress },
+    });
+  };
+  const handleDeleteIconClick = async (e) => {
+    e.stopPropagation();
     const { data, success, message } = await removeFromAddresses(_id);
     if (success) {
       dispatchAddresses({ type: "SET_ADDRESSES", payload: { value: data } });
@@ -27,13 +38,21 @@ function AddressItem(props) {
       showToast(message, "ERROR");
     }
   };
-  const handleEditIconClick = async () => {
+  const handleEditIconClick = async (e) => {
+    e.stopPropagation();
     setEditButtonClick(true);
   };
 
   return (
-    <div className="checkout-address-item">
+    <div className="checkout-address-item" onClick={handleAddressClick}>
       <div className="checkout-address-item-icons">
+        <div className="checkout-address-item-icons-left">
+          {checkoutDetails?.selectedAddress?._id === _id && (
+            <MdOutlineRadioButtonChecked className="checkout-address-item-checked-icon checkout-address-item-icon" />
+          )}
+        </div>
+
+        <div className="checkout-address-item-icons-right"></div>
         <MdModeEditOutline
           className="checkout-address-item-edit-icon checkout-address-item-icon"
           onClick={handleEditIconClick}
