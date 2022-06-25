@@ -11,7 +11,6 @@ import {
   MdOutlineRadioButtonChecked,
   ReactDOM,
 } from "./index";
-
 import "./address-item.css";
 
 function AddressItem(props) {
