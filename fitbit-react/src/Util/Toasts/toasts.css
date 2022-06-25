@@ -1,7 +1,7 @@
 .toasts-container{
     z-index: 1000;
     position: fixed;
-    top: 1rem;
+    bottom: 1rem;
     right: 10px;
 }
 .toast{ 
