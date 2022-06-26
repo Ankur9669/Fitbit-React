@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./verticalcard.css";
 import {
   MdAddShoppingCart,
@@ -26,6 +26,8 @@ function VerticalCard({ product }) {
   const { wishlist, dispatchWishList } = useWishList();
   const { showToast } = useToast();
   const navigate = useNavigate();
+  const [cartLoader, setCartLoader] = useState(false);
+  const [wishListLoader, setWishListLoader] = useState(false);
 
   const {
     _id,
@@ -48,33 +50,41 @@ function VerticalCard({ product }) {
     navigate("/login");
   };
   const updateCart = async () => {
-    let cart = [];
-    if (!ifProductExistInCart) {
-      cart = await addToCart(product);
-      showToast("Item Added To Cart", "SUCCESS");
-    } else {
-      cart = await removeFromCart(_id);
-      showToast("Item Removed From Cart", "SUCCESS");
+    if (cartLoader === false) {
+      setCartLoader((cartLoader) => !cartLoader);
+      let cart = [];
+      if (!ifProductExistInCart) {
+        cart = await addToCart(product);
+        showToast("Item Added To Cart", "SUCCESS");
+      } else {
+        cart = await removeFromCart(_id);
+        showToast("Item Removed From Cart", "SUCCESS");
+      }
+      dispatch({
+        type: "SET_CART",
+        payload: { value: cart.cart },
+      });
+      setCartLoader((cartLoader) => !cartLoader);
     }
-    dispatch({
-      type: "SET_CART",
-      payload: { value: cart.cart },
-    });
   };
 
   const updateWishList = async () => {
-    let wishList = [];
-    if (!ifProductExistsInWishList) {
-      wishList = await addToWishList(product);
-      showToast("Item Added To WishList", "SUCCESS");
-    } else {
-      wishList = await removeFromWishList(_id);
-      showToast("Item Removed From WishList", "SUCCESS");
+    if (wishListLoader === false) {
+      setWishListLoader((wishListLoader) => !wishListLoader);
+      let wishList = [];
+      if (!ifProductExistsInWishList) {
+        wishList = await addToWishList(product);
+        showToast("Item Added To WishList", "SUCCESS");
+      } else {
+        wishList = await removeFromWishList(_id);
+        showToast("Item Removed From WishList", "SUCCESS");
+      }
+      dispatchWishList({
+        type: "SET_WISHLIST",
+        payload: { value: wishList.wishlist },
+      });
+      setWishListLoader((wishListLoader) => !wishListLoader);
     }
-    dispatchWishList({
-      type: "SET_WISHLIST",
-      payload: { value: wishList.wishlist },
-    });
   };
 
   const handleBuyNowClick = async () => {
@@ -142,6 +152,7 @@ function VerticalCard({ product }) {
               ifProductExistInCart ? "Remove from cart" : "Add to Cart"
             }
             onClick={user.isUserLoggedIn ? updateCart : redirectToLoginPage}
+            isLoading={cartLoader}
           />
         </div>
       </div>

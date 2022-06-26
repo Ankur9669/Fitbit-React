@@ -1,4 +1,5 @@
 import "./App.css";
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Homepage from "./Pages/Homepage/Homepage";
 import ProductPage from "./Pages/ProductsPage/ProductPage";
 import Cart from "./Pages/Cart/Cart";
@@ -7,7 +8,6 @@ import SignUp from "./Pages/Authentication/Signup/SignUp";
 import { Route, Routes } from "react-router-dom";
 import MockMan from "mockman-js";
 import Login from "./Pages/Authentication/Login/Login";
-import ForgotPassword from "./Pages/Authentication/ForgotPassword/ForgotPassword";
 import Toasts from "./Util/Toasts/Toasts";
 import UserPage from "./Pages/UserPage/UserPage";
 import Address from "./Pages/Address/Address";
