@@ -3,7 +3,11 @@
 }
 .card-vertical {
     max-width: 25rem;
+    height: max-content;
     width: 100%;
+}
+.card-vertical .image-container{
+    height: 18.75rem;
 }
 .card-hover{
     cursor: pointer;

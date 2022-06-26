@@ -15,6 +15,7 @@ function ProductListing() {
     products,
     dispatch: dispatchProducts,
     areProductsLoading,
+    searchProductString,
   } = useProduct();
 
   const getSortedData = (state, filteredData) => {
@@ -24,7 +25,11 @@ function ProductListing() {
     } else if (state.sortBy === "lowToHigh") {
       sortByLowToHigh(updatedData);
     }
-    return updatedData;
+    return updatedData.filter((product) =>
+      product.productTitle
+        .toLowerCase()
+        .includes(searchProductString.toLowerCase())
+    );
   };
   const getFilteredData = (filters) => {
     let updatedData = products.products;

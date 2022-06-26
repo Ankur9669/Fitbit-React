@@ -22,6 +22,7 @@ const reducer = (state, action) => {
 const ProductProvider = ({ children }) => {
   const [products, dispatch] = useReducer(reducer, initialState);
   const [areProductsLoading, setProductsLoading] = useState(false);
+  const [searchProductString, setSearchProductString] = useState("");
 
   useEffect(() => {
     // Fetching Data
@@ -41,7 +42,15 @@ const ProductProvider = ({ children }) => {
   }, []);
 
   return (
-    <ProductContext.Provider value={{ products, dispatch, areProductsLoading }}>
+    <ProductContext.Provider
+      value={{
+        products,
+        dispatch,
+        areProductsLoading,
+        searchProductString,
+        setSearchProductString,
+      }}
+    >
       {children}
     </ProductContext.Provider>
   );
