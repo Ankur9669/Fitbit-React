@@ -4,6 +4,7 @@ import Footer from "../../Components/Footer/Footer";
 import "./orders.css";
 import OrderSummaryCard from "../../Components/OrderSummaryCard/OrderSummaryCard";
 import CheckoutProductCard from "../Checkout/CheckoutProductCard/CheckoutProductCard";
+import { useDocumentTitle } from "../../Util/change-document-title";
 
 function Orders() {
   const product = {
@@ -20,6 +21,8 @@ function Orders() {
     fastDelivery: "",
     qty: 2,
   };
+  useDocumentTitle("FiTbiT-Orders");
+
   return (
     <div>
       <Navbar />
@@ -31,13 +34,17 @@ function Orders() {
         <div className="orders-content-container grid-50-50">
           <div className="orders-summary-container">
             <OrderSummaryCard />
+            <OrderSummaryCard />
           </div>
           <div className="orders-container">
+            <CheckoutProductCard product={product} />
+            <CheckoutProductCard product={product} />
             <CheckoutProductCard product={product} />
           </div>
         </div>
       </section>
       <div className="spacer-3"></div>
+
       <Footer />
     </div>
   );

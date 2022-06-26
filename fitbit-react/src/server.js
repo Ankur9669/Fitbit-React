@@ -28,6 +28,10 @@ import {
   removeItemFromAddressesHandler,
   editAddressItemHandler,
 } from "./backend/controllers/AddressController";
+import {
+  addItemToOrderHandler,
+  getOrderItemsHandler,
+} from "./backend/controllers/OrderController";
 import { categories } from "./backend/db/categories";
 import { products } from "./backend/db/products";
 import { users } from "./backend/db/users";
@@ -44,6 +48,7 @@ export function makeServer({ environment = "development" } = {}) {
       user: Model,
       cart: Model,
       wishlist: Model,
+      order: Model,
     },
 
     // Runs on the start of the server
@@ -100,6 +105,10 @@ export function makeServer({ environment = "development" } = {}) {
         "/user/address/:addressId",
         removeItemFromAddressesHandler.bind(this)
       );
+
+      // order routes
+      this.get("/user/orders", getOrderItemsHandler.bind(this));
+      this.post("/user/orders", addItemToOrderHandler.bind(this));
     },
   });
 }

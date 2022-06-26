@@ -8,11 +8,10 @@
 }
 .orders-summary-container {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }
-.orders-container {
 
-}
 
 @media only screen and (max-width: 1028px){
     .grid-50-50{

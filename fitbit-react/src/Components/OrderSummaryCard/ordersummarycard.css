@@ -4,6 +4,7 @@
     border-radius: 3px;
     max-width: 25rem;
     width: 100%;
+    height: max-content;
     background-color: var(--color-white);
     padding: 0.5rem;
 }
