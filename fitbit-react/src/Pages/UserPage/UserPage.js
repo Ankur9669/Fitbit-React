@@ -10,13 +10,6 @@ const UserPage = () => {
   const { user } = useUser();
   const { email, firstName, lastName } = user.user;
   const { showToast } = useToast();
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (!user.isUserLoggedIn) {
-      navigate("/login");
-    }
-  }, [user.isUserLoggedIn]);
 
   const handleDisableButtonClick = () => {
     showToast("Coming Soon...", "INFO");

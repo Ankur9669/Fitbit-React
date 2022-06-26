@@ -4,8 +4,9 @@ import { useUser } from "../../Context/user-context";
 
 function RequireAuth({ children }) {
   const { isUserLoggedIn } = useUser();
+
   const location = useLocation();
-  return isUserLoggedIn ? (
+  return !isUserLoggedIn ? (
     children
   ) : (
     <Navigate to="/login" replace state={{ from: location }} />

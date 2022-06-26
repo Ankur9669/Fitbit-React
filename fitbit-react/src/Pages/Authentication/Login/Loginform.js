@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   AiOutlineMail,
   AiFillEyeInvisible,
@@ -15,6 +15,7 @@ import { useUser } from "../../../Context/user-context";
 import { useCart } from "../../../Context/cart-context";
 import { useAddresses } from "../../../Context/address-context";
 import { useToast } from "../../../Context/toast-context";
+import { useLocation } from "react-router-dom";
 
 function Loginform() {
   const [formDetails, setFormDetails] = useState({
@@ -28,6 +29,8 @@ function Loginform() {
   const { addresses, dispatchAddresses } = useAddresses();
   const { showToast } = useToast();
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location?.state?.from?.pathname || "/";
 
   const onSubmitForm = (e) => {
     //TODO VALIDATIONS
@@ -71,7 +74,7 @@ function Loginform() {
       });
 
       showToast("Logged In Successfully", "SUCCESS");
-      navigate("/");
+      navigate(from);
     } catch (error) {
       console.error(error);
     }
@@ -160,7 +163,7 @@ function Loginform() {
             />
           )}
         </div>
-        <div className="checkbox-container">
+        {/* <div className="checkbox-container">
           <span>
             <input type="checkbox" value="Remember Box" id="remember-box" />
             <label
@@ -176,7 +179,7 @@ function Loginform() {
           >
             Forgot Password
           </Link>
-        </div>
+        </div> */}
 
         <PrimaryButton
           buttonText="Login As Guest"

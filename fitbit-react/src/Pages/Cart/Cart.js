@@ -9,19 +9,15 @@ import {
 } from "./index";
 import "./cart.css";
 import { PrimaryButton } from "./HorizontalCard";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useUser } from "../../Context/user-context";
 import { useDocumentTitle } from "../../Util/change-document-title";
 
 function Cart() {
-  const { cart, dispatch } = useCart();
+  const { cart } = useCart();
   const { user, dispatchUser } = useUser();
-  const navigate = useNavigate();
-  useDocumentTitle("FiTbiT-Cart");
 
-  useEffect(() => {
-    !user.isUserLoggedIn && navigate("/login");
-  }, [user.isUserLoggedIn]);
+  useDocumentTitle("FiTbiT-Cart");
 
   return (
     <div>
