@@ -1,0 +1,20 @@
+.order-summary-card {
+    box-shadow: rgb(60 64 67 / 30%) 0px 1px 2px 0px, rgb(60 64 67 / 15%) 0px 2px 6px 2px;
+    margin: 1rem 0rem;
+    border-radius: 3px;
+    max-width: 25rem;
+    width: 100%;
+    height: max-content;
+    background-color: var(--color-white);
+    padding: 0.5rem;
+}
+.order-summary-item {
+    display: flex;
+    margin: 0.5rem 1rem;
+}
+.order-summary-item-detail {
+    margin-left: 1rem;
+}
+.order-summary-address {
+    margin: 0.5rem 1rem;
+}

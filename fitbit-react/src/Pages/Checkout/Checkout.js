@@ -26,10 +26,6 @@ function Checkout() {
   const { addresses } = useAddresses();
   const [isAddNewAddressButtonClick, setaddNewAddressButtonClick] =
     useState(false);
-  const navigate = useNavigate();
-  //   useEffect(() => {
-  //     !user.isUserLoggedIn && navigate("/login");
-  //   }, [user.isUserLoggedIn]);
 
   return (
     <div>

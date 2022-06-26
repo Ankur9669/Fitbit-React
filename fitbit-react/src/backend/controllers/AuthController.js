@@ -104,3 +104,38 @@ export const loginHandler = function (schema, request) {
     );
   }
 };
+
+/**
+ * This handler handles user verification.
+ * send POST Request at /api/auth/verify
+ * body contains {encodedToken}
+ * */
+
+export const verifyUser = function (schema, request) {
+  const { encodedToken } = JSON.parse(request.requestBody);
+  const decodedToken = jwt.verify(
+    encodedToken,
+    process.env.REACT_APP_JWT_SECRET
+  );
+  try {
+    if (decodedToken) {
+      const foundUser = this.db.users.findBy({ email: decodedToken.email });
+      if (foundUser) {
+        return new Response(200, {}, { foundUser });
+      }
+    }
+    return new Response(
+      401,
+      {},
+      { errors: ["The token is invalid. Unauthorized access error."] }
+    );
+  } catch (error) {
+    return new Response(
+      500,
+      {},
+      {
+        error,
+      }
+    );
+  }
+};

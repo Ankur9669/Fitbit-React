@@ -1,22 +1,11 @@
 import React, { useEffect } from "react";
-import Navbar from "../../Components/Navbar/Navbar";
-import Footer from "../../Components/Footer/Footer";
-import { useUser } from "../../Context/user-context";
-import { useNavigate } from "react-router-dom";
-import { useToast } from "../../Context/toast-context";
-import { Link } from "react-router-dom";
+import { Navbar, Footer, useUser, useToast, Link } from "./index";
 import "./userpage.css";
+
 const UserPage = () => {
   const { user } = useUser();
   const { email, firstName, lastName } = user.user;
   const { showToast } = useToast();
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (!user.isUserLoggedIn) {
-      navigate("/login");
-    }
-  }, [user.isUserLoggedIn]);
 
   const handleDisableButtonClick = () => {
     showToast("Coming Soon...", "INFO");
@@ -34,12 +23,10 @@ const UserPage = () => {
               </Link>
             </div>
             <div className="profile-btn-wrapper">
-              <button
-                className="button button-outline-primary"
-                onClick={handleDisableButtonClick}
-              >
+              <Link to="/orders" className="button button-outline-primary">
                 Orders
-              </button>
+              </Link>
+
               <button
                 className="button button-outline-primary"
                 onClick={handleDisableButtonClick}

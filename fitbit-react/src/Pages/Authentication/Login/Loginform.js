@@ -1,20 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
+  Link,
+  useNavigate,
+  Axios,
+  useUser,
+  useCart,
+  useAddresses,
+  useToast,
+  useLocation,
+  useWishList,
   AiOutlineMail,
   AiFillEyeInvisible,
   AiFillEye,
-} from "../../../Assets/icons";
-import {
   PrimaryButton,
   SecondaryButton,
-  useWishList,
-} from "../../Cart/HorizontalCard";
-import { Link, useNavigate } from "react-router-dom";
-import Axios from "axios";
-import { useUser } from "../../../Context/user-context";
-import { useCart } from "../../../Context/cart-context";
-import { useAddresses } from "../../../Context/address-context";
-import { useToast } from "../../../Context/toast-context";
+} from "./index";
 
 function Loginform() {
   const [formDetails, setFormDetails] = useState({
@@ -22,12 +22,14 @@ function Loginform() {
     password: "",
   });
   const [isPasswordVisible, setPasswordVisible] = useState(false);
-  const { user, dispatchUser } = useUser();
-  const { cart, dispatch: dispatchCart } = useCart();
-  const { wishlist, dispatchWishList } = useWishList();
-  const { addresses, dispatchAddresses } = useAddresses();
+  const { dispatchUser } = useUser();
+  const { dispatch: dispatchCart } = useCart();
+  const { dispatchWishList } = useWishList();
+  const { dispatchAddresses } = useAddresses();
   const { showToast } = useToast();
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location?.state?.from?.pathname || "/";
 
   const onSubmitForm = (e) => {
     //TODO VALIDATIONS
@@ -71,7 +73,7 @@ function Loginform() {
       });
 
       showToast("Logged In Successfully", "SUCCESS");
-      navigate("/");
+      navigate(from);
     } catch (error) {
       console.error(error);
     }
@@ -111,7 +113,7 @@ function Loginform() {
       });
 
       showToast("Logged In Successfully", "SUCCESS");
-      navigate("/");
+      navigate(from);
     } catch (error) {
       console.error(error);
     }
@@ -160,7 +162,7 @@ function Loginform() {
             />
           )}
         </div>
-        <div className="checkbox-container">
+        {/* <div className="checkbox-container">
           <span>
             <input type="checkbox" value="Remember Box" id="remember-box" />
             <label
@@ -176,7 +178,7 @@ function Loginform() {
           >
             Forgot Password
           </Link>
-        </div>
+        </div> */}
 
         <PrimaryButton
           buttonText="Login As Guest"

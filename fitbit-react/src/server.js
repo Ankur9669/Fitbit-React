@@ -2,6 +2,7 @@ import { Server, Model, RestSerializer } from "miragejs";
 import {
   loginHandler,
   signupHandler,
+  verifyUser,
 } from "./backend/controllers/AuthController";
 import {
   addItemToCartHandler,
@@ -28,6 +29,10 @@ import {
   removeItemFromAddressesHandler,
   editAddressItemHandler,
 } from "./backend/controllers/AddressController";
+import {
+  addItemToOrderHandler,
+  getOrderItemsHandler,
+} from "./backend/controllers/OrderController";
 import { categories } from "./backend/db/categories";
 import { products } from "./backend/db/products";
 import { users } from "./backend/db/users";
@@ -44,6 +49,7 @@ export function makeServer({ environment = "development" } = {}) {
       user: Model,
       cart: Model,
       wishlist: Model,
+      orders: Model,
     },
 
     // Runs on the start of the server
@@ -55,7 +61,7 @@ export function makeServer({ environment = "development" } = {}) {
       });
 
       users.forEach((item) =>
-        server.create("user", { ...item, cart: [], wishlist: [] })
+        server.create("user", { ...item, cart: [], wishlist: [], orders: [] })
       );
 
       categories.forEach((item) => server.create("category", { ...item }));
@@ -65,6 +71,7 @@ export function makeServer({ environment = "development" } = {}) {
       this.namespace = "api";
       // auth routes (public)
       this.post("/auth/signup", signupHandler.bind(this));
+      this.post("/auth/verify", verifyUser.bind(this));
       this.post("/auth/login", loginHandler.bind(this));
 
       // products routes (public)
@@ -100,6 +107,10 @@ export function makeServer({ environment = "development" } = {}) {
         "/user/address/:addressId",
         removeItemFromAddressesHandler.bind(this)
       );
+
+      // order routes
+      this.get("/user/orders", getOrderItemsHandler.bind(this));
+      this.post("/user/orders", addItemToOrderHandler.bind(this));
     },
   });
 }
