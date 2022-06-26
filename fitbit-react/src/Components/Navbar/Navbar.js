@@ -8,7 +8,7 @@ import { useWishList } from "../../Context/wishlist-context";
 import { useToast } from "../../Context/toast-context";
 
 function Navbar() {
-  const { user, dispatchUser, isUserLoggedIn } = useUser();
+  const { user, dispatchUser } = useUser();
   const { cart, dispatch: dispatchCart } = useCart();
   const { wishList, dispatchWishList } = useWishList();
   const { showToast } = useToast();
@@ -33,7 +33,7 @@ function Navbar() {
 
       <div className="nav-items-container-end">
         <div className="login-search-bar-container">
-          {isUserLoggedIn ? (
+          {!user.isUserLoggedIn ? (
             <Link to="/login">
               <PrimaryButton buttonText={"Login"} />
             </Link>
