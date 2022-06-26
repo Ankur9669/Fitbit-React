@@ -1,7 +1,9 @@
 import React from "react";
 import "./ordersummarycard.css";
 
-function OrderSummaryCard() {
+function OrderSummaryCard(props) {
+  const { address, totalPrice, orderId } = props;
+
   return (
     <div className="order-summary-card">
       <div className="order-summary-item">
@@ -9,7 +11,7 @@ function OrderSummaryCard() {
           Order No:{" "}
         </p>
         <p className="font-medium weight-normal order-summary-item-detail">
-          0bfbaa76-8739-443
+          {orderId}
         </p>
       </div>
 
@@ -18,7 +20,7 @@ function OrderSummaryCard() {
           Order Total:{" "}
         </p>
         <p className="font-medium weight-normal order-summary-item-detail">
-          &#8377;2131
+          &#8377;{totalPrice}
         </p>
       </div>
 
@@ -26,14 +28,12 @@ function OrderSummaryCard() {
         <p className="font-medium weight-bold order-summary-item-title">
           Ship to:{" "}
         </p>
-        <p className="font-medium weight-normal">Jane Doe</p>
+        <p className="font-medium weight-normal">{address.name}</p>
+        <p className="font-medium weight-normal">{address.address}</p>
         <p className="font-medium weight-normal">
-          National Highway 8, Rangpuri
+          {`${address.city}, ${address.state}, ${address.pincode}`}
         </p>
-        <p className="font-medium weight-normal">
-          Bengaluru, Karnataka, 110037
-        </p>
-        <p className="font-medium weight-normal">7598170706</p>
+        <p className="font-medium weight-normal">{address.mobile}</p>
       </div>
     </div>
   );

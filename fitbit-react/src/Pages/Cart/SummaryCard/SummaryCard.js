@@ -7,18 +7,23 @@ import {
   useToast,
   useUser,
   useCheckout,
+  addToOrders,
+  useNavigate,
 } from "./index";
 
 function SummaryCard() {
-  const { cart, totalPrice } = useCart();
+  const { cart, totalPrice, dispatch: dispatchCart } = useCart();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { showToast } = useToast();
+  const { user } = useUser();
   const { checkoutDetails, dispatchCheckout } = useCheckout();
+  const { pathname } = location;
+  const { selectedAddress } = checkoutDetails;
   const discountPrice = 180;
   const deliveryCharges = 40;
   const priceToPay = totalPrice - discountPrice + deliveryCharges;
-  const location = useLocation();
-  const { pathname } = location;
-  const { showToast } = useToast();
-  const { user } = useUser();
+
   const userEmail = user.user.email;
   const userName = `${user.user.firstName} ${user.user.lastName}`;
 
@@ -39,15 +44,21 @@ function SummaryCard() {
     });
   };
 
-  const placeOrder = (orderId) => {
-    dispatchCheckout({
-      type: "SET_ORDERS",
-      payload: {
-        orderId: orderId,
-        orders: cart,
-        totalPrice: totalPrice,
-      },
-    });
+  const placeOrder = async (orderId) => {
+    const order = {
+      orderId: orderId,
+      orders: cart,
+      totalPrice: totalPrice,
+      address: selectedAddress,
+    };
+    const { data, success, message } = await addToOrders(order);
+
+    if (success) {
+      dispatchCart({ type: "SET_CART", payload: { value: [] } });
+      navigate("/orders");
+    } else {
+      showToast(message, "ERROR");
+    }
   };
   const handlePayNowClick = async () => {
     if (checkoutDetails?.selectedAddress?._id == undefined) {

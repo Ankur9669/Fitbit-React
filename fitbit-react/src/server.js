@@ -49,7 +49,7 @@ export function makeServer({ environment = "development" } = {}) {
       user: Model,
       cart: Model,
       wishlist: Model,
-      order: Model,
+      orders: Model,
     },
 
     // Runs on the start of the server
@@ -61,7 +61,7 @@ export function makeServer({ environment = "development" } = {}) {
       });
 
       users.forEach((item) =>
-        server.create("user", { ...item, cart: [], wishlist: [] })
+        server.create("user", { ...item, cart: [], wishlist: [], orders: [] })
       );
 
       categories.forEach((item) => server.create("category", { ...item }));
