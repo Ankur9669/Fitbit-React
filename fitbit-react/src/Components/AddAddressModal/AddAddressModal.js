@@ -22,6 +22,7 @@ function AddAddressModal(props) {
     state: "",
   });
   const [isDummyAddressVisible, setDummyAddressVisible] = useState(true);
+  const [isAddAddressLoading, setAddAddressLoading] = useState(false);
 
   const handleFormChange = (e) => {
     setFormDetails({
@@ -35,13 +36,17 @@ function AddAddressModal(props) {
     if (isAddressValid === false) {
       return;
     }
-    const { data, success, message } = await addToAddresses(formDetails);
-    if (success) {
-      dispatchAddresses({ type: "SET_ADDRESSES", payload: { value: data } });
-      setaddNewAddressButtonClick(false);
-      showToast("Address Added Successfully", "SUCCESS");
-    } else {
-      showToast("Error in adding address", "ERROR");
+    if (!isAddAddressLoading) {
+      setAddAddressLoading(true);
+      const { data, success, message } = await addToAddresses(formDetails);
+      if (success) {
+        dispatchAddresses({ type: "SET_ADDRESSES", payload: { value: data } });
+        setaddNewAddressButtonClick(false);
+        showToast("Address Added Successfully", "SUCCESS");
+      } else {
+        showToast("Error in adding address", "ERROR");
+      }
+      setAddAddressLoading(false);
     }
   };
   const handleAddDummyAddressClick = async (e) => {
@@ -178,20 +183,19 @@ function AddAddressModal(props) {
 
           <div className="add-address-modal-button-container">
             {isDummyAddressVisible && (
-              <button
-                className="address-modal-button button button-primary"
+              <PrimaryButton
+                buttonText="Add Dummy Address"
                 onClick={handleAddDummyAddressClick}
-              >
-                Add Dummy Address
-              </button>
+                className="address-modal-button"
+              />
             )}
 
-            <button
-              className="address-modal-button button button-primary"
+            <PrimaryButton
+              className="address-modal-button"
               onClick={handleAddAddressClick}
-            >
-              Add Address
-            </button>
+              buttonText={"Add Address"}
+              isLoading={isAddAddressLoading}
+            />
           </div>
         </form>
       </div>
