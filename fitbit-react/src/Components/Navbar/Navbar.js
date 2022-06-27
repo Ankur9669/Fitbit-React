@@ -1,7 +1,7 @@
 import React from "react";
 import "./navbar.css";
 import { SearchBar, PrimaryButton, Logo, NavbarIcons, GrMenu } from "./index";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useUser } from "../../Context/user-context";
 import { useCart } from "../../Context/cart-context";
 import { useWishList } from "../../Context/wishlist-context";
@@ -12,6 +12,7 @@ function Navbar() {
   const { cart, dispatch: dispatchCart } = useCart();
   const { wishList, dispatchWishList } = useWishList();
   const { showToast } = useToast();
+  const location = useLocation();
 
   // Logout Functionality
   const logout = () => {
@@ -41,7 +42,7 @@ function Navbar() {
             <PrimaryButton buttonText={"Logout"} onClick={() => logout()} />
           )}
 
-          <SearchBar />
+          {location.pathname === "/products" && <SearchBar />}
         </div>
         <NavbarIcons />
       </div>

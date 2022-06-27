@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { UserProvider } from "../../../Context/user-context";
 import {
   Link,
   useNavigate,
@@ -22,7 +23,7 @@ function Loginform() {
     password: "",
   });
   const [isPasswordVisible, setPasswordVisible] = useState(false);
-  const { dispatchUser } = useUser();
+  const { user, dispatchUser } = useUser();
   const { dispatch: dispatchCart } = useCart();
   const { dispatchWishList } = useWishList();
   const { dispatchAddresses } = useAddresses();
@@ -31,6 +32,11 @@ function Loginform() {
   const location = useLocation();
   const from = location?.state?.from?.pathname || "/";
 
+  useEffect(() => {
+    if (user.isUserLoggedIn) {
+      navigate(from);
+    }
+  }, [user.isUserLoggedIn]);
   const onSubmitForm = (e) => {
     //TODO VALIDATIONS
     e.preventDefault();
@@ -73,7 +79,6 @@ function Loginform() {
       });
 
       showToast("Logged In Successfully", "SUCCESS");
-      navigate(from);
     } catch (error) {
       console.error(error);
     }
@@ -113,7 +118,6 @@ function Loginform() {
       });
 
       showToast("Logged In Successfully", "SUCCESS");
-      navigate(from);
     } catch (error) {
       console.error(error);
     }

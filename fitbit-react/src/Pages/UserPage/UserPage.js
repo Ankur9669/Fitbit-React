@@ -21,18 +21,9 @@ const UserPage = () => {
               <Link to="/addresses" className="button button-outline-primary">
                 Addresses
               </Link>
-            </div>
-            <div className="profile-btn-wrapper">
               <Link to="/orders" className="button button-outline-primary">
                 Orders
               </Link>
-
-              <button
-                className="button button-outline-primary"
-                onClick={handleDisableButtonClick}
-              >
-                Setting
-              </button>
             </div>
           </div>
           <div className="profile-page-content user-profile-container">

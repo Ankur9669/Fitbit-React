@@ -14,11 +14,11 @@ import {
   useNavigate,
   findIfProductExistInWishList,
   findIfProductExistsInArray,
+  useWishList,
+  addToWishList,
+  removeFromWishList,
+  useToast,
 } from "./index";
-import { useWishList } from "../../Context/wishlist-context";
-import { addToWishList } from "../../Util/add-to-wishlist";
-import { removeFromWishList } from "../../Util/remove-from-wishlist";
-import { useToast } from "../../Context/toast-context";
 
 function VerticalCard({ product }) {
   const { cart, dispatch } = useCart();
@@ -47,7 +47,7 @@ function VerticalCard({ product }) {
 
   const redirectToLoginPage = () => {
     showToast("Please Login First", "SUCCESS");
-    navigate("/login");
+    navigate("/cart");
   };
   const updateCart = async () => {
     if (cartLoader === false) {
@@ -117,7 +117,9 @@ function VerticalCard({ product }) {
                   : { fontSize: "1.7rem" }
               }
               onClick={
-                user.isUserLoggedIn ? updateWishList : redirectToLoginPage
+                user.isUserLoggedIn
+                  ? updateWishList
+                  : () => navigate("/wishlist")
               }
             />
           </h5>
