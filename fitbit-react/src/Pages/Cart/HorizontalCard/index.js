@@ -8,6 +8,9 @@ import { useWishList } from "../../../Context/wishlist-context";
 import { addToWishList } from "../../../Util/add-to-wishlist";
 import { removeFromWishList } from "../../../Util/remove-from-wishlist";
 import { findIfProductExistsInArray } from "../../../Util/find-if-product-exists-in-array";
+import { updateProductCountInCart } from "../../../Util/update-product-in-cart";
+import { useToast } from "../../../Context/toast-context";
+
 export {
   AiFillMinusCircle,
   IoIosAddCircle,
@@ -19,4 +22,6 @@ export {
   addToWishList,
   removeFromWishList,
   findIfProductExistsInArray,
+  updateProductCountInCart,
+  useToast,
 };

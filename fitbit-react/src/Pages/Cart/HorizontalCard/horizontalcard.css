@@ -25,6 +25,7 @@
     margin: 0.4rem 0rem;
 }
 .my-cart-cta-btn{
-    display: block;
+    display: flex;
+    justify-content: center;
     width: 100%;
 }
