@@ -21,6 +21,7 @@ function EditAddressModal(props) {
     state: state,
   });
   const { dispatchAddresses } = useAddresses();
+  const [isEditAddressLoading, setEditAddressLoading] = useState(false);
 
   const closeModal = () => {
     setEditButtonClick(false);
@@ -37,13 +38,17 @@ function EditAddressModal(props) {
   const handleEditAddressClick = async (e) => {
     e.preventDefault();
 
-    const { data, success, message } = await editAddresses(_id, formDetails);
-    if (success) {
-      dispatchAddresses({ type: "SET_ADDRESSES", payload: { value: data } });
-      setEditButtonClick(false);
-      showToast("Address edited successfully", "SUCCESS");
-    } else {
-      showToast("Error in editing address", "ERROR");
+    if (!isEditAddressLoading) {
+      setEditAddressLoading(true);
+      const { data, success, message } = await editAddresses(_id, formDetails);
+      if (success) {
+        dispatchAddresses({ type: "SET_ADDRESSES", payload: { value: data } });
+        setEditButtonClick(false);
+        showToast("Address edited successfully", "SUCCESS");
+      } else {
+        showToast("Error in editing address", "ERROR");
+      }
+      setEditAddressLoading(false);
     }
   };
 
@@ -144,6 +149,7 @@ function EditAddressModal(props) {
             buttonText="Edit Address"
             className="add-address-button"
             onClick={handleEditAddressClick}
+            isLoading={isEditAddressLoading}
           />
         </form>
       </div>

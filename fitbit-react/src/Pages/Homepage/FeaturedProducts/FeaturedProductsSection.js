@@ -1,4 +1,5 @@
 import React from "react";
+import { v4 as uuid } from "uuid";
 import "./featuredproductssection.css";
 import FeaturedProductsCard from "./FeaturedProductsCard";
 import { useProduct } from "../../../Context/products-context";
@@ -24,6 +25,7 @@ function FeaturedProductsSection() {
           featuredProducts.map((featuredProduct) => {
             return (
               <FeaturedProductsCard
+                key={uuid()}
                 product={featuredProduct}
                 redirectUrl="/products"
               />

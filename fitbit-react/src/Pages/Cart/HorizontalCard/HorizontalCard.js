@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   AiFillMinusCircle,
   IoIosAddCircle,
@@ -10,10 +10,10 @@ import {
   addToWishList,
   removeFromWishList,
   findIfProductExistsInArray,
+  updateProductCountInCart,
+  useToast,
 } from "./index";
 import "./horizontalcard.css";
-import { updateProductCountInCart } from "../../../Util/update-product-in-cart";
-import { useToast } from "../../../Context/toast-context";
 
 function HorizontalCard({ product }) {
   const {
@@ -32,32 +32,43 @@ function HorizontalCard({ product }) {
   const { cart, dispatch } = useCart();
   const { wishlist, dispatchWishList } = useWishList();
   const { showToast } = useToast();
+  const [isCartLoading, setCartLoading] = useState(false);
+  const [isWishListLoading, setWishListLoading] = useState(false);
+  const [isProductUpdating, setProductUpdating] = useState(false);
 
   let ifProductExistsInWishList = findIfProductExistsInArray(wishlist, _id);
 
   const findIfProductExistsInCardAndUpdate = async (productId, type) => {
-    let isPresent = cart.some((cartItem) => cartItem._id === productId);
+    if (!isProductUpdating) {
+      setProductUpdating(true);
+      let isPresent = cart.some((cartItem) => cartItem._id === productId);
 
-    if (isPresent) {
-      const cart = await updateProductCountInCart(productId, type);
-      dispatch({ type: "SET_CART", payload: { value: cart.cart } });
-      showToast("Item Updated", "SUCCESS");
+      if (isPresent) {
+        const cart = await updateProductCountInCart(productId, type);
+        dispatch({ type: "SET_CART", payload: { value: cart.cart } });
+        showToast("Item Updated", "SUCCESS");
+      }
+      setProductUpdating(false);
     }
   };
 
   const updateWishList = async () => {
-    let wishList = [];
-    if (!ifProductExistsInWishList) {
-      wishList = await addToWishList(product);
-      showToast("Item Added To WishList", "SUCCESS");
-    } else {
-      wishList = await removeFromWishList(_id);
-      showToast("Item Removed From WishList", "SUCCESS");
+    if (!isWishListLoading) {
+      setWishListLoading(true);
+      let wishList = [];
+      if (!ifProductExistsInWishList) {
+        wishList = await addToWishList(product);
+        showToast("Item Added To WishList", "SUCCESS");
+      } else {
+        wishList = await removeFromWishList(_id);
+        showToast("Item Removed From WishList", "SUCCESS");
+      }
+      dispatchWishList({
+        type: "SET_WISHLIST",
+        payload: { value: wishList.wishlist },
+      });
+      setWishListLoading(false);
     }
-    dispatchWishList({
-      type: "SET_WISHLIST",
-      payload: { value: wishList.wishlist },
-    });
   };
 
   return (
@@ -119,14 +130,20 @@ function HorizontalCard({ product }) {
             }
             className={"my-cart-cta-btn"}
             onClick={updateWishList}
+            isLoading={isWishListLoading}
           />
           <SecondaryButton
             buttonText={"Remove From Cart"}
             className={"my-cart-cta-btn"}
             onClick={async () => {
-              const cart = await removeFromCart(_id);
-              dispatch({ type: "SET_CART", payload: { value: cart.cart } });
+              if (!isCartLoading) {
+                setCartLoading(true);
+                const cart = await removeFromCart(_id);
+                dispatch({ type: "SET_CART", payload: { value: cart.cart } });
+                setCartLoading(false);
+              }
             }}
+            isLoading={isCartLoading}
           />
         </div>
       </div>

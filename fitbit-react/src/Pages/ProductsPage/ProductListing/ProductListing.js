@@ -1,4 +1,5 @@
 import React from "react";
+import { ThreeDots } from "react-loader-spinner";
 import {
   VerticalCard,
   useFilter,
@@ -10,7 +11,12 @@ import {
 
 function ProductListing() {
   const { filters, dispatch } = useFilter();
-  const { products, dispatch: dispatchProducts } = useProduct();
+  const {
+    products,
+    dispatch: dispatchProducts,
+    areProductsLoading,
+    searchProductString,
+  } = useProduct();
 
   const getSortedData = (state, filteredData) => {
     let updatedData = [...filteredData];
@@ -19,7 +25,11 @@ function ProductListing() {
     } else if (state.sortBy === "lowToHigh") {
       sortByLowToHigh(updatedData);
     }
-    return updatedData;
+    return updatedData.filter((product) =>
+      product.productTitle
+        .toLowerCase()
+        .includes(searchProductString.toLowerCase())
+    );
   };
   const getFilteredData = (filters) => {
     let updatedData = products.products;
@@ -66,9 +76,13 @@ function ProductListing() {
   return (
     <div className="products-container">
       <div className="spacer-1"></div>
-      {sortedData?.map((product) => (
-        <VerticalCard key={product?._id} product={product} />
-      ))}
+      {areProductsLoading ? (
+        <ThreeDots color="#2d3092" height={"100px"} width={"100px"} />
+      ) : (
+        sortedData?.map((product) => (
+          <VerticalCard key={product?._id} product={product} />
+        ))
+      )}
     </div>
   );
 }

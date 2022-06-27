@@ -1,4 +1,10 @@
-import { createContext, useReducer, useContext, useEffect } from "react";
+import {
+  createContext,
+  useReducer,
+  useContext,
+  useState,
+  useEffect,
+} from "react";
 import { fetchProducts } from "../Util/fetch-products";
 
 const ProductContext = createContext();
@@ -15,10 +21,13 @@ const reducer = (state, action) => {
 
 const ProductProvider = ({ children }) => {
   const [products, dispatch] = useReducer(reducer, initialState);
+  const [areProductsLoading, setProductsLoading] = useState(false);
+  const [searchProductString, setSearchProductString] = useState("");
 
   useEffect(() => {
     // Fetching Data
     (async () => {
+      setProductsLoading(true);
       const { data, success, message } = await fetchProducts();
       if (success) {
         dispatch({
@@ -26,14 +35,22 @@ const ProductProvider = ({ children }) => {
           payload: { products: data },
         });
       } else {
-        console.log(message);
         showToast("Could not fetch products", "ERROR");
       }
+      setProductsLoading(false);
     })();
   }, []);
 
   return (
-    <ProductContext.Provider value={{ products, dispatch }}>
+    <ProductContext.Provider
+      value={{
+        products,
+        dispatch,
+        areProductsLoading,
+        searchProductString,
+        setSearchProductString,
+      }}
+    >
       {children}
     </ProductContext.Provider>
   );

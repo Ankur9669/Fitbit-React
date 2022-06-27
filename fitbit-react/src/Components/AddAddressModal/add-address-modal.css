@@ -40,8 +40,19 @@
     padding: 0.3rem;
     font-family: poppins;
 }
+.add-address-modal-button-container {
+    /* display: flex; */
+    width: 100%;
+    flex-wrap: wrap;
+}
+.address-modal-button {
+    width: 100%;
+    margin: 0.3rem 0;
+}
+.margin-left-1{
+    margin-left: 1rem;
+}
 .add-address-button {
-    margin-left: auto;
     margin-bottom: 1rem;
 }
 .address-modal-close-icon {

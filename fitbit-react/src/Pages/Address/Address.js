@@ -23,10 +23,6 @@ function Address() {
   useDocumentTitle("FiTbiT-Address");
 
   useEffect(() => {
-    !user.isUserLoggedIn && navigate("/login");
-  }, [user.isUserLoggedIn]);
-
-  useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
@@ -36,7 +32,9 @@ function Address() {
       <div className="spacer-3"></div>
 
       <section className="addresses">
-        <h3 className="h2 centered-text address-heading">My Addresses</h3>
+        {addresses.length > 0 && (
+          <h3 className="h2 centered-text address-heading">My Addresses</h3>
+        )}
         <PrimaryButton
           buttonText="Add New Address"
           className="address-button"

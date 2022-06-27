@@ -227,26 +227,6 @@ function Sidebar() {
                 2 Stars and above
               </label>
             </li>
-            <li className="sidebar-filter-item">
-              <input
-                type="radio"
-                name="rating"
-                id="1-star"
-                className="sidebar-filter-input"
-                onClick={() =>
-                  dispatch({
-                    type: "OTHER_FILTERS",
-                    payload: {
-                      value: 1,
-                      key: "rating",
-                    },
-                  })
-                }
-              />
-              <label htmlFor="1-star" className="sidebar-filter-label">
-                1 Star and above
-              </label>
-            </li>
           </ul>
         </div>
         {/* Ratings Filter End  */}
