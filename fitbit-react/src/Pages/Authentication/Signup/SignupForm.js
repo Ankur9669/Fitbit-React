@@ -76,7 +76,7 @@ function SignupForm() {
 
       dispatchAddresses({
         type: "SET_ADDRESSES",
-        payload: { value: response.data.foundUser.addresses },
+        payload: { value: response.data.createdUser.addresses },
       });
 
       navigate("/");

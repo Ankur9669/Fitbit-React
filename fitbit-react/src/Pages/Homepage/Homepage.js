@@ -12,6 +12,7 @@ function Homepage() {
     window.scrollTo(0, 0);
     useDocumentTitle("FiTBiT-HomePage");
   }, []);
+
   return (
     <div>
       <Navbar />
